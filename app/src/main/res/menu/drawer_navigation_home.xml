@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/Drawer_Home"
+            android:icon="@drawable/ic_twotone_home_24"
+            android:title="@string/home" />
+        <item
+            android:id="@+id/Drawer_My_Menu"
+            android:icon="@drawable/ic_twotone_restaurant_menu_24"
+            android:title="@string/my_menu" />
+        <item
+            android:id="@+id/Drawer_My_WishList"
+            android:icon="@drawable/ic_twotone_favorite_24"
+            android:title="@string/my_wishlist" />
+        <item
+            android:id="@+id/Drawer_Discount_and_Offers"
+            android:icon="@drawable/ic_twotone_local_offer_24"
+            android:title="@string/discount_and_offers" />
+
+        <item
+            android:id="@+id/Drawer_Terms_of_Use"
+            android:icon="@drawable/ic_twotone_fact_check_24"
+            android:title="@string/terms_of_use" />
+
+        <item
+            android:icon="@drawable/ic_twotone_policy_24"
+            android:id="@+id/Drawer_Privacy_Policy"
+            android:title="@string/privacy_policy" />
+        <item
+            android:id="@+id/Drawer_Refund_Policy"
+            android:title="Refund Policy" />
+        <item
+            android:icon="@drawable/ic_twotone_share_24"
+            android:id="@+id/Drawer_share_app"
+            android:title="@string/share" />
+
+    </group>
+
+
+    <item android:title="@string/contact_us">
+        <menu>
+            <item
+                android:id="@+id/Drawer_Call_us"
+                android:icon="@drawable/ic_twotone_phone_forwarded_24"
+                android:title="@string/call_us" />
+            <item
+                android:id="@+id/Drawer_Chat_with_us"
+                android:icon="@drawable/ic_twotone_message_24"
+                android:title="@string/chat_with_us" />
+        </menu>
+    </item>
+
+    <group >
+        <item android:title="Profile Action">
+            <menu>
+                <item
+                    android:id="@+id/Drawer_logout"
+                    android:icon="@drawable/ic_twotone_logout_24"
+                    android:title="@string/logout" />
+
+                <item
+                    android:id="@+id/Drawer_Profile"
+                    android:title="@string/your_profile" />
+            </menu>
+        </item>
+    </group>
+</menu>

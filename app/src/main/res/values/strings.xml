@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Foody Home</string>
+    <string name="home">Home</string>
+    <string name="my_menu">My Menu</string>
+    <string name="my_wishlist">My WishList</string>
+    <string name="discount_and_offers">Discount and Offers</string>
+    <string name="logout">Logout</string>
+    <string name="your_profile">Your Profile</string>
+    <string name="share">Share</string>
+    <string name="call_us">Call Us</string>
+    <string name="chat_with_us">Chat with Us</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="terms_of_use">Terms of Use</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="navigation_open">Open Navigation Drawer</string>
+    <string name="navigation_close">Close Navigation Drawer</string>
+    <string name="notifications">Notifications</string>
+    <string name="search">Search</string>
 </resources>

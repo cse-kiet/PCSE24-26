@@ -26,7 +26,7 @@ public class LogoLauncher extends AppCompatActivity {
         SignUP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(LogoLauncher.this,SignUp.class);
+                Intent intent=new Intent(LogoLauncher.this,MainActivity.class);
                 startActivity(intent);
             }
         });
