@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1042709767127",
+    "project_id": "foody-home-8931d",
+    "storage_bucket": "foody-home-8931d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1042709767127:android:41d266becfab73cb5b2192",
+        "android_client_info": {
+          "package_name": "com.example.foodyhomeSS"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1042709767127-36vkjapi03i99ajao63hb7erehos5qfv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDC2RKSOn8XTYDOWo4hocQ1DcIHAvapzAA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1042709767127-36vkjapi03i99ajao63hb7erehos5qfv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
