@@ -7,7 +7,7 @@
     android:id="@+id/drawerLayout"
     tools:context=".MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
@@ -24,10 +24,11 @@
         app:titleTextAppearance="@color/white"
         app:titleTextColor="@color/white" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/drawer_navigation_view"
+        android:layout_marginTop="60dp"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
