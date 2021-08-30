@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodyHome">
-        <activity android:name=".SearchUniversal"></activity>
+        <activity android:name=".SearchUniversal"/>
         <activity android:name=".SignUp" />
         <activity android:name=".Login_1" />
         <activity android:name=".LogoLauncher">

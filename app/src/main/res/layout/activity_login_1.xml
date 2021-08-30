@@ -65,10 +65,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
-                    android:autoSizeTextType="uniform"
+                    app:autoSizeTextType="uniform"
                     android:hint="Email"
+                    android:textColor="#103059"
                     android:textColorHint="#191970"
-                    android:textSize="24dp" />
+                    />
 
 
             </com.google.android.material.card.MaterialCardView>
