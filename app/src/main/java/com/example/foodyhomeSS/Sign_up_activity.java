@@ -1,3 +1,4 @@
+
 package com.example.foodyhomeSS;
 
 import androidx.annotation.NonNull;
@@ -25,29 +26,31 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import static android.content.ContentValues.TAG;
 
-public class Login_1 extends AppCompatActivity {
-    ImageButton  GoogleSignIN ;
+public class Sign_up_activity extends AppCompatActivity {
+    ImageButton GoogleSignIN ;
     Integer RC_SIGN_IN=1;
     FirebaseAuth Auth;
     GoogleSignInClient mGoogleSignInClient;
-    Button Email_SignIn;
+    Button Email_SignUp;
     String Email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_1);
-        Email_SignIn=findViewById(R.id.Sign_in);
+        setContentView(R.layout.activity_sign_up_activity);
+        GoogleSignIN = findViewById(R.id.sign_in_with_google);
+        Email_SignUp =  findViewById(R.id.Sign_up);
+
         createRequest();
         Auth=FirebaseAuth.getInstance();
-        Email_SignIn.setOnClickListener(new View.OnClickListener() {
+        Email_SignUp .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i= new Intent(Login_1.this, MainActivity.class);
+                Intent i= new Intent(Sign_up_activity.this, MainActivity.class);
                 startActivity(i);
                 finish();
             }
         });
-        GoogleSignIN = findViewById(R.id.sign_in_with_google);
         createRequest();
         GoogleSignIN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +59,9 @@ public class Login_1 extends AppCompatActivity {
 
             }
         });
-}
+    }
+
+
 
     private void createRequest() {
         // [START config_signin]
@@ -109,9 +114,8 @@ public class Login_1 extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
-                            Intent i = new Intent(Login_1.this, MainActivity.class);
+                            Intent i = new Intent(Sign_up_activity.this, MainActivity.class);
                             startActivity(i);
-
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
