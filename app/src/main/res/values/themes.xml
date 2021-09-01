@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.FoodyHome" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">#103059</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -15,7 +15,7 @@
         <!--This line changes the color of text in Toolbar-->
         <item name="android:textColorPrimary">@color/Yellow</item>
         <!--This line changes the color of icons in toolbar (back, overflow menu icons)-->
-        <item name="android:textColorSecondary">@color/Yellow</item>
+        <item name="android:textColorSecondary">#FF9800</item>
 
 
     </style>

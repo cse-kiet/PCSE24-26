@@ -5,10 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -23,37 +27,99 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.util.Objects;
+
 import static android.content.ContentValues.TAG;
 
 public class Login_1 extends AppCompatActivity {
-    ImageButton  GoogleSignIN ;
+    ImageButton  GoogleSignIN,EYE ;
     Integer RC_SIGN_IN=1;
     FirebaseAuth Auth;
     GoogleSignInClient mGoogleSignInClient;
-    Button Email_SignIn;
-    String Email;
+    Button Login,Forget_password,NotRegistered;
+    EditText Email;
+    ProgressBar progressBar;
+    EditText Password;
+    String Email_string;
+    String Password_string;
+    Integer test;
+    Integer eyeTimes=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_1);
-        Email_SignIn=findViewById(R.id.Sign_in);
         createRequest();
         Auth=FirebaseAuth.getInstance();
-        Email_SignIn.setOnClickListener(new View.OnClickListener() {
+        EYE=findViewById(R.id.Password_Email_LogIn_Visibility_BUtton);
+        Login=findViewById(R.id.SignIn_With_Email_Login_Button);
+        Email=findViewById(R.id.Email_Login_EditText);
+        progressBar=findViewById(R.id.Progress_Bar_Login_With_Email);
+        Password=findViewById(R.id.Password_Email_LogIn);
+        Forget_password=findViewById(R.id.Forget_Password_LogIn_Email);
+        Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i= new Intent(Login_1.this, MainActivity.class);
-                startActivity(i);
-                finish();
+                Email_string=Email.getText().toString();
+                Password_string=Password.getText().toString();
+                test=1;
+                if (TextUtils.isEmpty(Email_string)){
+                    Email.setError("Email is Required");
+                    test=0;
+                }
+                if (TextUtils.isEmpty(Password_string)){
+                    Password.setError("Password is Required");
+                    test=0;
+                }
+                if (Password_string.length()< 6){
+                    Password.setError("Password > 6 words");
+                    test=0;
+                }
+                if (test==1) {
+                    Login.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.VISIBLE);
+                    Auth.signInWithEmailAndPassword(Email_string,Password_string).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()){
+                                Toast.makeText(Login_1.this, "Welcome FOODY", Toast.LENGTH_SHORT).show();
+                                Intent i= new Intent(Login_1.this,MainActivity.class);
+                                startActivity(i);
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                                finish();
+                            }
+                            else{
+                                Toast.makeText(Login_1.this, "Error! "+ Objects.requireNonNull(task.getException()).getMessage() , Toast.LENGTH_SHORT).show();
+                                progressBar.setVisibility(View.GONE);
+                                Login.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    });
+                }
             }
         });
+        EYE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (eyeTimes%2==0) {
+                    Password.setInputType(InputType.TYPE_CLASS_TEXT);
+                }
+                else {
+                    Password.setInputType(InputType.TYPE_CLASS_TEXT |InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                }
+                eyeTimes=eyeTimes+1;
+
+            }
+        });
+
         GoogleSignIN = findViewById(R.id.sign_in_with_google);
         createRequest();
         GoogleSignIN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signInWithGoogle();
-
             }
         });
 }
@@ -108,13 +174,13 @@ public class Login_1 extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
+                            Toast.makeText(Login_1.this, "Logged In Successfully", Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(Login_1.this, MainActivity.class);
                             startActivity(i);
 
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            Toast.makeText(Login_1.this, "Error!! "+task.getException(), Toast.LENGTH_SHORT).show();
 
                         }
                     }

@@ -16,6 +16,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,13 +24,14 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     Toolbar toolbar;
     ActionBarDrawerToggle toggle;
+    FirebaseAuth Auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar=findViewById(R.id.Toolbar);
         setSupportActionBar(toolbar);
-
+        Auth=FirebaseAuth.getInstance();
         drawerLayout=findViewById(R.id.drawerLayout);
         navigationView=findViewById(R.id.drawer_navigation_view);
         toggle=new ActionBarDrawerToggle(MainActivity.this, drawerLayout, toolbar, R.string.navigation_open, R.string.navigation_close);
@@ -71,6 +73,14 @@ public class MainActivity extends AppCompatActivity {
                     }
                     case R.id.Drawer_Chat_with_us: {
                         Toast.makeText(MainActivity.this, "Chat with Us", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    case R.id.Drawer_logout: {
+                        Auth.signOut();
+                        Toast.makeText(MainActivity.this, "Logged out Successfully", Toast.LENGTH_SHORT).show();
+                        Intent i= new Intent(MainActivity.this,LogoLauncher.class);
+                        startActivity(i);
+                        finish();
                         break;
                     }
                 }

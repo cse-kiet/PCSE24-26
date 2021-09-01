@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1042709767127",
+    "firebase_url": "https://foody-home-8931d-default-rtdb.firebaseio.com",
     "project_id": "foody-home-8931d",
     "storage_bucket": "foody-home-8931d.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "1042709767127-qns00l87knfqgtn6554rh5l7gqo4u8dt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.foodyhomeSS",
+            "certificate_hash": "1a8c6d6b16915b5137f46b37474aaa32cd1d9e85"
+          }
+        },
         {
           "client_id": "1042709767127-36vkjapi03i99ajao63hb7erehos5qfv.apps.googleusercontent.com",
           "client_type": 3

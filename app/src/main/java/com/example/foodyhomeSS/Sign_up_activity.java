@@ -32,6 +32,7 @@ public class Sign_up_activity extends AppCompatActivity {
     FirebaseAuth Auth;
     GoogleSignInClient mGoogleSignInClient;
     Button Email_SignUp;
+    Button AlreadyRegistered;
     String Email;
 
     @Override
@@ -40,13 +41,21 @@ public class Sign_up_activity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_activity);
         GoogleSignIN = findViewById(R.id.sign_in_with_google);
         Email_SignUp =  findViewById(R.id.Sign_up);
-
+        AlreadyRegistered=findViewById(R.id.AlreadyRegistered_SignUP);
         createRequest();
         Auth=FirebaseAuth.getInstance();
         Email_SignUp .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i= new Intent(Sign_up_activity.this, MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        AlreadyRegistered.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(Sign_up_activity.this,Login_1.class);
                 startActivity(i);
                 finish();
             }
@@ -116,9 +125,10 @@ public class Sign_up_activity extends AppCompatActivity {
                             Log.d(TAG, "signInWithCredential:success");
                             Intent i = new Intent(Sign_up_activity.this, MainActivity.class);
                             startActivity(i);
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            Toast.makeText(Sign_up_activity.this, "Error!! " +task.getException(), Toast.LENGTH_SHORT).show();
 
                         }
                     }
