@@ -62,4 +62,5 @@ dependencies {
 
     //FirebaseUI
     implementation 'com.firebaseui:firebase-ui-database:8.0.0'
+    implementation 'com.hbb20:ccp:2.4.0'
 }
