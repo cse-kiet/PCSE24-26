@@ -32,7 +32,7 @@ import java.util.Objects;
 import static android.content.ContentValues.TAG;
 
 public class Login_1 extends AppCompatActivity {
-    ImageButton  GoogleSignIN,EYE ;
+    ImageButton  GoogleSignIN,EYE ,Phone;
     Integer RC_SIGN_IN=1;
     FirebaseAuth Auth;
     GoogleSignInClient mGoogleSignInClient;
@@ -56,6 +56,14 @@ public class Login_1 extends AppCompatActivity {
         progressBar=findViewById(R.id.Progress_Bar_Login_With_Email);
         Password=findViewById(R.id.Password_Email_LogIn);
         Forget_password=findViewById(R.id.Forget_Password_LogIn_Email);
+        Phone=findViewById(R.id.User_Phone_number_login_Button);
+        Phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i= new Intent(Login_1.this,otp_login.class);
+                startActivity(i);
+            }
+        });
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

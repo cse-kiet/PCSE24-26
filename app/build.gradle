@@ -59,8 +59,8 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     // glide
-
     //FirebaseUI
     implementation 'com.firebaseui:firebase-ui-database:8.0.0'
+    //Country code picker
     implementation 'com.hbb20:ccp:2.4.0'
 }

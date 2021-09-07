@@ -4,187 +4,152 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#103059"
     tools:context=".otp_login">
 
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView4"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="110dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="12sp"
+        android:layout_height="400dp"
+        android:alpha="0.6"
+        android:background="@drawable/cardview_left_corner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-            <EditText
-                android:id="@+id/User_Phone_number_login"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="80dp"
-                android:layout_marginLeft="80dp"
-                android:layout_marginTop="95dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginRight="15dp"
-
-                android:gravity="center"
-
-                android:inputType="phone"
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/Login_WIth_Phone_Timer"
-        android:layout_width="50dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="160dp"
-        app:autoSizeMaxTextSize="15sp"
-        android:textColor="@color/black"
-        app:autoSizeMinTextSize="5sp"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.hbb20.CountryCodePicker
-        android:id="@+id/country_code"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="105dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:paddingHorizontal="5dp"
-        android:scaleX="2"
-        android:scaleY="2"
-        app:layout_constraintEnd_toStartOf="@+id/User_Phone_number_login"
-        app:layout_constraintHorizontal_bias="0.172"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/Get_OTP_button"
-        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginRight="15dp"
-        app:autoSizeTextType="uniform"
-        app:autoSizeMaxTextSize="18sp"
-        app:autoSizeMinTextSize="8sp"
-        android:text="Get OTP"
-        android:textColor="@color/black"
-        android:textSize="18sp"
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="160dp"
+        android:layout_height="180dp"
+        android:alpha="0.4"
+        android:background="@drawable/cardview_top_left_corner"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/User_Phone_number_login" />
-
-    <EditText
-        android:id="@+id/editTextOTP"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="27dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Enter OTP"
-        android:inputType="number"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:orientation="horizontal">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView5"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="27dp"
-        app:cardCornerRadius="60dp"
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:actionBarItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#FFFFFF">
 
-            <ImageButton
+        <EditText
+            android:id="@+id/User_Phone_number_login"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="95dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/custom_button"
+            android:gravity="center"
+            android:hint="Phone Number"
+            android:inputType="phone"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/Login_WIth_Phone_Timer"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            app:autoSizeMaxTextSize="15sp"
+            app:autoSizeMinTextSize="5sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toEndOf="@+id/editTextOTP"
+            app:layout_constraintStart_toStartOf="@+id/editTextOTP"
+            app:layout_constraintTop_toBottomOf="@+id/editTextOTP" />
+
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/country_code"
+            android:layout_width="115dp"
+            android:layout_height="wrap_content"
+            app:ccp_hintExampleNumberType="MOBILE"
+            app:layout_constraintEnd_toStartOf="@+id/User_Phone_number_login"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/User_Phone_number_login" />
+
+        <Button
+            android:id="@+id/Get_OTP_button"
+            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Get OTP"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:autoSizeMaxTextSize="18sp"
+            app:autoSizeMinTextSize="8sp"
+            app:autoSizeTextType="uniform"
+            app:backgroundTint="#FFEB3B"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/User_Phone_number_login"
+            app:layout_constraintTop_toBottomOf="@+id/User_Phone_number_login" />
+
+        <EditText
+            android:id="@+id/editTextOTP"
+            android:layout_width="125dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/custom_button"
+            android:gravity="center"
+            android:hint="Enter OTP"
+            app:autoSizeTextType="uniform"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/country_code"
+            app:layout_constraintStart_toStartOf="@+id/country_code"
+            app:layout_constraintTop_toBottomOf="@+id/country_code" />
+
+        <androidx.cardview.widget.CardView
+
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="20dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextOTP">
+
+
+            <Button
                 android:id="@+id/login_1_next_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="?android:attr/selectableItemBackground"
-                android:scaleX="2"
-                android:scaleY="2"
+                android:background="@drawable/custom_button"
+                android:text="Next"
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform"
+                app:backgroundTint="#FFEB3B" />
 
-                tools:ignore="ContentDescription" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-    <ProgressBar
-        android:id="@+id/Progress_Bar_Login_With_Phone"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ProgressBar
+            android:id="@+id/Progress_Bar_Login_With_Phone"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/User_Phone_number_login"
+            app:layout_constraintTop_toBottomOf="@+id/User_Phone_number_login" />
 
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-
-
-<androidx.cardview.widget.CardView
-android:layout_width="150dp"
-android:layout_height="150dp"
-android:layout_marginTop="40dp"
-app:cardCornerRadius="150dp"
-app:cardElevation="15dp"
-app:layout_constraintEnd_toEndOf="parent"
-app:layout_constraintHorizontal_bias="0.5"
-app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintTop_toTopOf="parent">
-
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="5dp"
-        android:layout_marginBottom="10dp"
-        android:scaleType="fitCenter"
-        android:scaleX="0.8"
-        android:scaleY="0.8"/>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+

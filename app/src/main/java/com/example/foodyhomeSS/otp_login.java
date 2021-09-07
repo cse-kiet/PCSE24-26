@@ -1,8 +1,5 @@
 package com.example.foodyhomeSS;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +11,9 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,9 +27,8 @@ import com.hbb20.CountryCodePicker;
 import java.util.concurrent.TimeUnit;
 
 public class otp_login extends AppCompatActivity {
-    ImageButton next;
     EditText OTP;
-    Button GetOTP;
+    Button GetOTP,next;
     String otpid;
     FirebaseAuth Auth;
     String UserPhoneNumber;
@@ -54,6 +53,7 @@ public class otp_login extends AppCompatActivity {
         next=findViewById(R.id.login_1_next_button);
         countryCodePicker=findViewById(R.id.country_code);
         countryCodePicker.registerCarrierNumberEditText(EditTextPhoneNumber);
+        Auth=FirebaseAuth.getInstance();
         GetOTP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,14 +92,14 @@ public class otp_login extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (OTP.getText().toString().isEmpty())
+                if (OTP.getText().toString().length()==0)
                     Toast.makeText(getApplicationContext(), "Blank field can not be processed", Toast.LENGTH_LONG).show();
                 else if (OTP.getText().toString().length() != 6)
                     Toast.makeText(getApplicationContext(), "INVALID OTP", Toast.LENGTH_LONG).show();
 
                 else {
-                    PhoneAuthCredential credential = PhoneAuthProvider.getCredential(otpid, OTP.getText().toString());
-                    signInWithPhoneAuthCredential(credential);
+                    PhoneAuthCredential credentials= PhoneAuthProvider.getCredential(otpid , OTP.getText().toString());
+                    signInWithPhoneAuthCredential(credentials);
                 }
 
             }
@@ -140,18 +140,16 @@ public class otp_login extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        Toast.makeText(otp_login.this, "coming in Auth", Toast.LENGTH_SHORT).show();
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Intent i = new Intent(otp_login.this, MainActivity.class);
                             startActivity(i);
-
                             finish();
-
                             // Update UI
                         }
                         else {
                             Toast.makeText(getApplicationContext(), "Invalid OTP , Try Again", Toast.LENGTH_LONG).show();
-
                             // The verification code entered was invalid
                         }
                     }

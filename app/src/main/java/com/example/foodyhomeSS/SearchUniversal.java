@@ -76,8 +76,9 @@ public class SearchUniversal extends AppCompatActivity {
         Searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+
                 for (String element : CategoryTags){
-                    if (element.contains(s)) {
+                    if (element.contains(s.toLowerCase())) {
                         FilteredTag = element;
                         type="Category";
                         fillRecyclerView();
@@ -89,7 +90,7 @@ public class SearchUniversal extends AppCompatActivity {
                 }
                 if (FilteredTag==null){
                     for (String element : SpecificTags){
-                        if (element.contains(s)) {
+                        if (element.contains(s.toLowerCase())) {
                             FilteredTag = element;
                             type="Tag";
                             fillRecyclerView();
@@ -105,6 +106,30 @@ public class SearchUniversal extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
+                for (String element : CategoryTags){
+                    if (element.contains(s.toLowerCase())) {
+                        FilteredTag = element;
+                        type="Category";
+                        fillRecyclerView();
+                        break;
+                    }
+                    else {
+                        FilteredTag=null;
+                    }
+                }
+                if (FilteredTag==null){
+                    for (String element : SpecificTags){
+                        if (element.contains(s.toLowerCase())) {
+                            FilteredTag = element;
+                            type="Tag";
+                            fillRecyclerView();
+                            break;
+                        }
+                        else {
+                            FilteredTag=null;
+                        }
+                    }
+                }
 
                 return false;
             }
