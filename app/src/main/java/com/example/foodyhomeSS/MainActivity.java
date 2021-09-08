@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         layout.setVisibility(View.VISIBLE);
                         break;
                 }
+
                 return true;
             }
         });
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.Drawer_Call_us: {
                         Toast.makeText(MainActivity.this, "Call Us", Toast.LENGTH_SHORT).show();
                         break;
@@ -131,11 +132,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case R.id.Drawer_logout: {
                         Auth.signOut();
                         Toast.makeText(MainActivity.this, "Logged out Successfully", Toast.LENGTH_SHORT).show();
-                        Intent i= new Intent(MainActivity.this,LogoLauncher.class);
+                        Intent i = new Intent(MainActivity.this, LogoLauncher.class);
                         startActivity(i);
                         finish();
                         break;
                     }
+                    case R.id.Drawer_Terms_of_Use: {
+                        Intent i = new Intent(MainActivity.this, Termandcondition.class);
+
+                        startActivity(i);
+                        finish();
+                        break;
+                    }
+
+
                 }
                 return true;
             }

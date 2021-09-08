@@ -64,13 +64,15 @@
 
 
                 <EditText
+                    android:id="@+id/Register_Name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/custom_button"
                     android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/custom_button"
+
                     android:hint="Name"
                     android:inputType="text"
-                    android:textColorHint="#191970"
+                    android:textColor="#103059"
                     app:autoSizeTextType="uniform" />
 
 
@@ -85,14 +87,15 @@
                 app:cardCornerRadius="8dp">
 
                 <EditText
+                    android:id="@+id/Register_Address"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/custom_button"
                     android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/custom_button"
                     android:hint="@string/address"
-                    android:importantForAutofill="no"
+
                     android:inputType="text"
-                    android:textColorHint="#103059" />
+                    android:textColor="#103059" />
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
@@ -104,12 +107,13 @@
 
 
                 <EditText
+                    android:id="@+id/Register_Email"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/custom_button"
                     android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/custom_button"
                     android:hint="@string/email"
-                    android:textColorHint="#103059"
+                    android:textColor="#103059"
                     app:autoSizeTextType="uniform" />
 
 
@@ -128,7 +132,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:id="@+id/Password_Email_LogIn"
+                        android:id="@+id/Register_Password_Email"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/white"
@@ -136,11 +140,10 @@
                         android:inputType="textPassword"
                         android:paddingHorizontal="15dp"
                         android:textColor="#103059"
-                        android:textColorHint="#191970"
                         app:autoSizeTextType="uniform" />
 
                     <ImageButton
-                        android:id="@+id/Password_Email_LogIn_Visibility_BUtton"
+                        android:id="@+id/Password_Email_Signup_Visibility_BUtton"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="15dp"
@@ -155,17 +158,40 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <Button
-                android:id="@+id/Sign_up"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:text="@string/signUp"
-                android:textColor="#191970"
-                app:background="@drawable/custom_button"
-                app:backgroundTint="@color/white" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content">
 
+
+                <Button
+                    android:id="@+id/Sign_up"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:text="@string/signUp"
+                    android:textColor="#191970"
+                    app:background="@drawable/custom_button"
+                    app:backgroundTint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar_Register_With_Email"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
             <Button
                 android:id="@+id/AlreadyRegistered_SignUP"
                 android:layout_width="300dp"

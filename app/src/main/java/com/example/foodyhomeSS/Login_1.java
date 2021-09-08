@@ -1,8 +1,10 @@
 package com.example.foodyhomeSS;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
@@ -21,10 +23,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.Objects;
@@ -32,7 +37,7 @@ import java.util.Objects;
 import static android.content.ContentValues.TAG;
 
 public class Login_1 extends AppCompatActivity {
-    ImageButton  GoogleSignIN,EYE ,Phone;
+    ImageButton  GoogleSignIN,EYE ;
     Integer RC_SIGN_IN=1;
     FirebaseAuth Auth;
     GoogleSignInClient mGoogleSignInClient;
@@ -50,21 +55,58 @@ public class Login_1 extends AppCompatActivity {
         setContentView(R.layout.activity_login_1);
         createRequest();
         Auth=FirebaseAuth.getInstance();
-        EYE=findViewById(R.id.Password_Email_LogIn_Visibility_BUtton);
+        EYE=findViewById(R.id.Password_Email_Signup_Visibility_BUtton);
         Login=findViewById(R.id.SignIn_With_Email_Login_Button);
         Email=findViewById(R.id.Email_Login_EditText);
         progressBar=findViewById(R.id.Progress_Bar_Login_With_Email);
-        Password=findViewById(R.id.Password_Email_LogIn);
+        Password=findViewById(R.id.Register_Password_Email);
+        NotRegistered=findViewById(R.id.Not_Registered_LogIn_Email);
         Forget_password=findViewById(R.id.Forget_Password_LogIn_Email);
-        Phone=findViewById(R.id.User_Phone_number_login_Button);
-        Phone.setOnClickListener(new View.OnClickListener() {
+        Forget_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i= new Intent(Login_1.this,otp_login.class);
+                final  EditText resetMail=new EditText(v.getContext());
+                final AlertDialog.Builder PasswordResetDialog= new AlertDialog.Builder((v.getContext()));
+                PasswordResetDialog.setTitle("Reset PassWord");
+                PasswordResetDialog.setMessage("Enter Your Email to receive reset link");
+                PasswordResetDialog.setView(resetMail);
+                PasswordResetDialog.setPositiveButton("Send", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String Mail=resetMail.getText().toString();
+                        Auth.sendPasswordResetEmail(Mail).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(@NonNull Void aVoid) {
+                                Toast.makeText(Login_1.this, "Reset Link Sent to your Email", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(Login_1.this, "Error! Please try Again " +e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+                PasswordResetDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        PasswordResetDialog.create().dismiss();
+                    }
+                });
+                PasswordResetDialog.create().show();
+            }
+        });
+
+        NotRegistered.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(Login_1.this,Sign_up_activity.class);
                 startActivity(i);
+                finish();
             }
         });
         Login.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 Email_string=Email.getText().toString();
@@ -193,5 +235,12 @@ public class Login_1 extends AppCompatActivity {
                         }
                     }
                 });
+
     }
 }
+
+
+
+
+
+
