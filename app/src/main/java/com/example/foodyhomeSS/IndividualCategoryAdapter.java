@@ -12,9 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
 
 public class IndividualCategoryAdapter extends FirebaseRecyclerAdapter<IndividualCategoryModel,IndividualCategoryAdapter.ViewHolder> {
 
+    private IndividualCategoryAdapter.OnItemClickListener listener;
     public IndividualCategoryAdapter(@NonNull FirebaseRecyclerOptions<IndividualCategoryModel> options) {
         super(options);
     }
@@ -41,6 +43,23 @@ public class IndividualCategoryAdapter extends FirebaseRecyclerAdapter<Individua
             Image=itemView.findViewById(R.id.Individual_Product_ImageView);
             Name=itemView.findViewById(R.id.Individual_Product_Name);
             Price=itemView.findViewById(R.id.Individual_Product_Price);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position!=RecyclerView.NO_POSITION && listener!=null){
+                        listener.onItemClick(getSnapshots().getSnapshot(position),position);
+
+                    }
+                }
+            });
         }
+    }
+    public interface OnItemClickListener{
+        void onItemClick(DataSnapshot dataSnapshot, int position);
+    }
+    public void setOnItemCLickListener(IndividualCategoryAdapter.OnItemClickListener listener){
+        this.listener=listener;
+
     }
 }

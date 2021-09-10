@@ -9,10 +9,12 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodyHome">
-        <activity android:name=".Individual_Product"></activity>
+        <activity android:name=".AllProduct"></activity>
+        <activity android:name=".Individual_Product" />
         <activity
             android:name=".Termandcondition"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".SeeAllCategories" />
         <activity android:name=".otp_login" />
         <activity android:name=".Sign_up_activity" />
         <activity android:name=".SearchUniversal" />

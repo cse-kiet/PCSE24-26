@@ -28,6 +28,7 @@
                 android:layout_height="130dp"
                 android:adjustViewBounds="true"
                 android:padding="5sp"
+                android:foregroundGravity="center"
                 android:id="@+id/Individual_Product_ImageView"
                 android:src="@drawable/png_pizza"
                 app:layout_constraintEnd_toEndOf="parent"

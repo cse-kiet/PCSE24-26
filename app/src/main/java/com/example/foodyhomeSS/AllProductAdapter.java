@@ -12,9 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
 
 public class AllProductAdapter extends FirebaseRecyclerAdapter<AllProductModel,AllProductAdapter.ViewHolder> {
 
+    private static AllProductAdapter.OnItemClickListener listener;
     public AllProductAdapter(@NonNull FirebaseRecyclerOptions<AllProductModel> options) {
         super(options);
     }
@@ -36,7 +38,7 @@ public class AllProductAdapter extends FirebaseRecyclerAdapter<AllProductModel,A
         return new ViewHolder(view);
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView Name,Price,MRP,Rating,Discount;
         ImageView Image;
         public ViewHolder(@NonNull View itemView) {
@@ -47,6 +49,23 @@ public class AllProductAdapter extends FirebaseRecyclerAdapter<AllProductModel,A
             MRP=itemView.findViewById(R.id.AllProductUniversal_Product_MRP);
             Rating=itemView.findViewById(R.id.AllProductUniversal_Product_Star_Rating);
             Discount=itemView.findViewById(R.id.AllProductUniversal_Product_Discount);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position!=RecyclerView.NO_POSITION && listener!=null){
+                        listener.onItemClick(getSnapshots().getSnapshot(position),position);
+
+                    }
+                }
+            });
         }
+    }
+    public interface OnItemClickListener{
+        void onItemClick(DataSnapshot dataSnapshot, int position);
+    }
+    public void setOnItemCLickListener(AllProductAdapter.OnItemClickListener listener){
+        AllProductAdapter.listener =listener;
+
     }
 }

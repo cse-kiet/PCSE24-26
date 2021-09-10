@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,12 +25,15 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.auth.User;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ActionBarDrawerToggle toggle;
     FirebaseAuth Auth;
     LinearLayout layout;
-    String SeeAll;
+    String SeeAll,Treat,ProductID;
     FirebaseFirestore Store;
     RecyclerView MostPopular,PizzaTreatRV,BurgerTreatRV,ComboForFamilyRV,BeveragesRV,DifferentWorldRV;
     AllProductAdapter MostPopularAdapter;
@@ -183,67 +187,129 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void fillDifferentWorld() {
         FirebaseRecyclerOptions<IndividualCategoryModel> options =
                 new FirebaseRecyclerOptions.Builder<IndividualCategoryModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Products").orderByChild("Category1").startAt("Pizza Treat").endAt("Pizza Treat"+"\uf8ff"), IndividualCategoryModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("DifferentTreat"), IndividualCategoryModel.class)
                         .build();
         DifferentWorldAdapter= new IndividualCategoryAdapter(options);
-        DifferentWorldRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, true));
+        DifferentWorldRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
         DifferentWorldRV.setAdapter(DifferentWorldAdapter);
         DifferentWorldAdapter.startListening();
+        DifferentWorldAdapter.setOnItemCLickListener(new IndividualCategoryAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DataSnapshot dataSnapshot, int position) {
+                ProductID= Objects.requireNonNull(dataSnapshot.child("PID").getValue()).toString();
+                SendProductID();
+            }
+        });
     }
 
     private void fillBeverages() {
         FirebaseRecyclerOptions<IndividualCategoryModel> options =
                 new FirebaseRecyclerOptions.Builder<IndividualCategoryModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Products").orderByChild("Category1").startAt("Pizza Treat").endAt("Pizza Treat"+"\uf8ff"), IndividualCategoryModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Beverages"), IndividualCategoryModel.class)
                         .build();
         BeveragesAdapter = new IndividualCategoryAdapter(options);
-        BeveragesRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, true));
+        BeveragesRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
         BeveragesRV.setAdapter(BeveragesAdapter);
         BeveragesAdapter.startListening();
+        BeveragesAdapter.setOnItemCLickListener(new IndividualCategoryAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DataSnapshot dataSnapshot, int position) {
+                ProductID= Objects.requireNonNull(dataSnapshot.child("PID").getValue()).toString();
+                SendProductID();
+            }
+        });
     }
 
     private void fillComboForFamily() {
         FirebaseRecyclerOptions<IndividualCategoryModel> options =
                 new FirebaseRecyclerOptions.Builder<IndividualCategoryModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Products").orderByChild("Category1").startAt("Pizza Treat").endAt("Pizza Treat"+"\uf8ff"), IndividualCategoryModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("ComboForFamily"), IndividualCategoryModel.class)
                         .build();
         ComboForFamilyAdapter = new IndividualCategoryAdapter(options);
-        ComboForFamilyRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, true));
+        ComboForFamilyRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
         ComboForFamilyRV.setAdapter(ComboForFamilyAdapter);
         ComboForFamilyAdapter.startListening();
+        ComboForFamilyAdapter.setOnItemCLickListener(new IndividualCategoryAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DataSnapshot dataSnapshot, int position) {
+                ProductID= Objects.requireNonNull(dataSnapshot.child("PID").getValue()).toString();
+                SendProductID();
+            }
+        });
     }
 
     private void fillBurgerTreat() {
         FirebaseRecyclerOptions<IndividualCategoryModel> options =
                 new FirebaseRecyclerOptions.Builder<IndividualCategoryModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Products").orderByChild("Category1").startAt("Pizza Treat").endAt("Pizza Treat"+"\uf8ff"), IndividualCategoryModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("BurgerTreat"), IndividualCategoryModel.class)
                         .build();
         BurgerTreatAdapter = new IndividualCategoryAdapter(options);
-        BurgerTreatRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, true));
+        BurgerTreatRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
         BurgerTreatRV.setAdapter(BurgerTreatAdapter);
         BurgerTreatAdapter.startListening();
+        BurgerTreatAdapter.setOnItemCLickListener(new IndividualCategoryAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DataSnapshot dataSnapshot, int position) {
+                ProductID= Objects.requireNonNull(dataSnapshot.child("PID").getValue()).toString();
+                SendProductID();
+            }
+        });
+    }
+
+    private void SendProductID() {
+        Map<String, Object> user = new HashMap<>();
+        user.put("HomePID", ProductID);
+        String UserId= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        DocumentReference documentReference=Store.collection("users").document(UserId);
+        documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                startActivity(new Intent(MainActivity.this,Individual_Product.class));
+            }
+        });
     }
 
     private void fillPizzaTreat() {
+
         FirebaseRecyclerOptions<IndividualCategoryModel> options =
                 new FirebaseRecyclerOptions.Builder<IndividualCategoryModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Products").orderByChild("Category1").startAt("Pizza Treat").endAt("Pizza Treat"+"\uf8ff"), IndividualCategoryModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("PizzaTreat"), IndividualCategoryModel.class)
                         .build();
         PizzaTreatAdapter = new IndividualCategoryAdapter(options);
-        PizzaTreatRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, true));
+        PizzaTreatRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
         PizzaTreatRV.setAdapter(PizzaTreatAdapter);
         PizzaTreatAdapter.startListening();
+        PizzaTreatAdapter.setOnItemCLickListener(new IndividualCategoryAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DataSnapshot dataSnapshot, int position) {
+
+                SeeAll= Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString().toLowerCase();
+                SendSeeAllIntent();
+
+            }
+        });
+    }
+
+    private void sendTreatIntent() {
+        Intent intent=new Intent(MainActivity.this,SeeAllCategories.class);
     }
 
     private void fillMostPopular() {
         FirebaseRecyclerOptions<AllProductModel> options =
                 new FirebaseRecyclerOptions.Builder<AllProductModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Products").orderByChild("Category1").startAt("Most Popular").endAt("Most Popular"+"\uf8ff"), AllProductModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Products"), AllProductModel.class)
                         .build();
         MostPopularAdapter = new AllProductAdapter(options);
-        MostPopular.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, true));
+        MostPopular.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
         MostPopular.setAdapter(MostPopularAdapter);
         MostPopularAdapter.startListening();
+        MostPopularAdapter.setOnItemCLickListener(new AllProductAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DataSnapshot dataSnapshot, int position) {
+                ProductID= Objects.requireNonNull(dataSnapshot.getKey());
+                SendProductID();
+            }
+        });
     }
 
     @Override
@@ -258,45 +324,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.Foody_Special_Treat_See_All:{
-                SeeAll="Foody_Special";
-                SendSeeAllIntent();
-                Toast.makeText(this, "Foody Special Treat", Toast.LENGTH_SHORT).show();
+//                SeeAll="FoodySpecial";
+//                SendSeeAllIntent();
                 break;
             }
             case R.id.Most_Popular_Treat_See_All:{
-                SeeAll="Most_Popular";
+                SeeAll="most popular";
                 SendSeeAllIntent();
-                Toast.makeText(this, "Most Popular Treat", Toast.LENGTH_SHORT).show();
                 break;
             }
             case R.id.Pizza_Treat_See_All:{
-                SeeAll="Pizza_Treat";
-                SendSeeAllIntent();
-                Toast.makeText(this, "Pizza Treat", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,SeeAllCategories.class));
                 break;
             }
             case R.id.Burger_Treat_See_All:{
-                SeeAll="Burger_Treat";
+                SeeAll="burger treat";
                 SendSeeAllIntent();
-                Toast.makeText(this, "Burger Treat", Toast.LENGTH_SHORT).show();
                 break;
             }
             case R.id.Combo_for_Family_See_All:{
-                SeeAll="Combo_For_Family";
+                SeeAll="combo for family";
                 SendSeeAllIntent();
-                Toast.makeText(this, "Family Combo Treat", Toast.LENGTH_SHORT).show();
                 break;
             }
             case R.id.Different_World_See_All:{
-                SeeAll="Different_World_Treat";
+                SeeAll="different treat";
                 SendSeeAllIntent();
-                Toast.makeText(this, "Different World Treat", Toast.LENGTH_SHORT).show();
                 break;
             }
             case R.id.Beverages_and_IceCreams_See_All:{
-                SeeAll="Beverages_and_IceCreams";
+                SeeAll="beverages";
                 SendSeeAllIntent();
-                Toast.makeText(this, "Beverages Treat", Toast.LENGTH_SHORT).show();
                 break;
             }
         }
@@ -305,11 +363,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void SendSeeAllIntent() {
         Map<String, Object> user = new HashMap<>();
         user.put("SeeAll", SeeAll);
-        Store.collection("users").document("user")
-                .update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+        String UserId= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        DocumentReference documentReference=Store.collection("users").document(UserId);
+        documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(MainActivity.this, "DataBase is Updated Successfully", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,AllProduct.class));
             }
         });
     }
