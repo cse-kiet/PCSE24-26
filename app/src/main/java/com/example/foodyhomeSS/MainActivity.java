@@ -3,6 +3,7 @@ package com.example.foodyhomeSS;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     NavigationView navigationView;
     Toolbar toolbar;
     ActionBarDrawerToggle toggle;
+    LoadingDialog progressBar;
     FirebaseAuth Auth;
     LinearLayout layout;
     String SeeAll,Treat,ProductID;
@@ -67,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // RecyclerViews Definitions
 
+        progressBar=new LoadingDialog(this);
+        progressBar.startLoadingDialog();
         //Filling RecyclerViews
 
         fillMostPopular();
@@ -75,6 +79,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fillComboForFamily();
         fillBeverages();
         fillDifferentWorld();
+        new CountDownTimer(10000,10){
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                if (DifferentWorldRV.getChildCount()!=0){
+                    progressBar.dismissDialog();
+                    cancel();
+                }
+
+            }
+
+            @Override
+            public void onFinish() {
+                progressBar.dismissDialog();
+                Toast.makeText(MainActivity.this, "No Internet, check your Connection and Restart FoodyHome", Toast.LENGTH_SHORT).show();
+            }
+        }.start();
+
 
         //Filling RecyclerViews
 
@@ -196,6 +218,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         DifferentWorldAdapter.setOnItemCLickListener(new IndividualCategoryAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(DataSnapshot dataSnapshot, int position) {
+                progressBar.startLoadingDialog();
                 ProductID= Objects.requireNonNull(dataSnapshot.child("PID").getValue()).toString();
                 SendProductID();
             }
@@ -214,6 +237,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BeveragesAdapter.setOnItemCLickListener(new IndividualCategoryAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(DataSnapshot dataSnapshot, int position) {
+                progressBar.startLoadingDialog();
                 ProductID= Objects.requireNonNull(dataSnapshot.child("PID").getValue()).toString();
                 SendProductID();
             }
@@ -232,6 +256,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ComboForFamilyAdapter.setOnItemCLickListener(new IndividualCategoryAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(DataSnapshot dataSnapshot, int position) {
+                progressBar.startLoadingDialog();
                 ProductID= Objects.requireNonNull(dataSnapshot.child("PID").getValue()).toString();
                 SendProductID();
             }
@@ -250,6 +275,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BurgerTreatAdapter.setOnItemCLickListener(new IndividualCategoryAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(DataSnapshot dataSnapshot, int position) {
+                progressBar.startLoadingDialog();
                 ProductID= Objects.requireNonNull(dataSnapshot.child("PID").getValue()).toString();
                 SendProductID();
             }
@@ -260,10 +286,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Map<String, Object> user = new HashMap<>();
         user.put("HomePID", ProductID);
         String UserId= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        DocumentReference documentReference=Store.collection("users").document(UserId);
+        DocumentReference documentReference=Store.collection("Users").document(UserId);
         documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
+                progressBar.dismissDialog();
                 startActivity(new Intent(MainActivity.this,Individual_Product.class));
             }
         });
@@ -282,6 +309,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         PizzaTreatAdapter.setOnItemCLickListener(new IndividualCategoryAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(DataSnapshot dataSnapshot, int position) {
+                progressBar.startLoadingDialog();
 
                 SeeAll= Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString().toLowerCase();
                 SendSeeAllIntent();
@@ -290,11 +318,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    private void sendTreatIntent() {
-        Intent intent=new Intent(MainActivity.this,SeeAllCategories.class);
-    }
 
     private void fillMostPopular() {
+
         FirebaseRecyclerOptions<AllProductModel> options =
                 new FirebaseRecyclerOptions.Builder<AllProductModel>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("Products"), AllProductModel.class)
@@ -306,10 +332,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         MostPopularAdapter.setOnItemCLickListener(new AllProductAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(DataSnapshot dataSnapshot, int position) {
+                progressBar.startLoadingDialog();
                 ProductID= Objects.requireNonNull(dataSnapshot.getKey());
                 SendProductID();
             }
         });
+
     }
 
     @Override
@@ -324,11 +352,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.Foody_Special_Treat_See_All:{
-//                SeeAll="FoodySpecial";
-//                SendSeeAllIntent();
                 break;
             }
             case R.id.Most_Popular_Treat_See_All:{
+                progressBar.startLoadingDialog();
                 SeeAll="most popular";
                 SendSeeAllIntent();
                 break;
@@ -338,21 +365,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             }
             case R.id.Burger_Treat_See_All:{
+                progressBar.startLoadingDialog();
                 SeeAll="burger treat";
                 SendSeeAllIntent();
                 break;
             }
             case R.id.Combo_for_Family_See_All:{
+                progressBar.startLoadingDialog();
                 SeeAll="combo for family";
                 SendSeeAllIntent();
                 break;
             }
             case R.id.Different_World_See_All:{
+                progressBar.startLoadingDialog();
                 SeeAll="different treat";
                 SendSeeAllIntent();
                 break;
             }
             case R.id.Beverages_and_IceCreams_See_All:{
+                progressBar.startLoadingDialog();
                 SeeAll="beverages";
                 SendSeeAllIntent();
                 break;
@@ -364,10 +395,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Map<String, Object> user = new HashMap<>();
         user.put("SeeAll", SeeAll);
         String UserId= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        DocumentReference documentReference=Store.collection("users").document(UserId);
+        DocumentReference documentReference=Store.collection("Users").document(UserId);
         documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
+                progressBar.dismissDialog();
                 startActivity(new Intent(MainActivity.this,AllProduct.class));
             }
         });

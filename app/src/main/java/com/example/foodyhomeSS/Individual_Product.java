@@ -31,19 +31,22 @@ public class Individual_Product extends AppCompatActivity {
     String SName,SPrice,SDescription,SImage,UserID,HomePID;
     FirebaseFirestore Store;
     FirebaseAuth Auth;
+    LoadingDialog progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual__product);
 
+        progressBar=new LoadingDialog(this);
+        progressBar.startLoadingDialog();
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference().child("Products");
         Auth = FirebaseAuth.getInstance();
         Store = FirebaseFirestore.getInstance();
         UserID = Objects.requireNonNull(Auth.getCurrentUser()).getUid();
-//        loadingDialog.startLoadingDialog();
-        DocumentReference documentReference = Store.collection("users").document(UserID);
+
+        DocumentReference documentReference = Store.collection("Users").document(UserID);
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -61,16 +64,31 @@ public class Individual_Product extends AppCompatActivity {
         PDescription=findViewById(R.id.Individual_Product_Activity_Product_Description);
         fillDetails();
 
-        new CountDownTimer(2000,1000){
+        new CountDownTimer(10000,1000){
 
             @Override
             public void onTick(long millisUntilFinished) {
+                if (PName.length()!=0){
+                   progressBar.dismissDialog();
+                   cancel();
+                }
+                else{
+                    fillDetails();
+                }
 
             }
 
             @Override
             public void onFinish() {
-             fillDetails();
+                if (PName.length()!=0){
+                    progressBar.dismissDialog();
+                    cancel();
+                }
+                else{
+                    progressBar.dismissDialog();
+                    Toast.makeText(Individual_Product.this, "No Internet, check your Connection and Restart FoodyHome", Toast.LENGTH_SHORT).show();
+                }
+
             }
         }.start();
 

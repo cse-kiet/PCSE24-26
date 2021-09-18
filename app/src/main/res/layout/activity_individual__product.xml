@@ -42,7 +42,6 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="Drinks/Beverages"
                 android:textColor="@color/white"
                 app:autoSizeTextType="uniform" />
 
@@ -100,7 +99,6 @@ android:orientation="horizontal"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
-                    android:text="$12"
                     android:textColor="@color/white"
                     app:autoSizeTextType="uniform"
                     android:layout_marginStart="10dp" />

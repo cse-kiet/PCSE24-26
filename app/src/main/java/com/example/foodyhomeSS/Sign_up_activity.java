@@ -81,6 +81,7 @@ EditText Email;
                 Name_string=Name.getText().toString();
                 Email_string=Email.getText().toString();
                 Password_string=Password.getText().toString();
+                Address_string=Address.getText().toString();
                 test=1;
                 if (TextUtils.isEmpty(Name_string)){
                     Name.setError("Name_string is Required");

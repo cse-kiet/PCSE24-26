@@ -36,12 +36,15 @@ public class AllProduct extends AppCompatActivity {
     FirebaseFirestore Store;
     FirebaseAuth Auth;
     String UserID,SeeAll,ProductID;
+    LoadingDialog progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_product);
         recyclerView = findViewById(R.id.AllProduct_RecyclerView);
+        progressBar=new LoadingDialog(this);
+        progressBar.startLoadingDialog();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
@@ -49,8 +52,7 @@ public class AllProduct extends AppCompatActivity {
         Auth = FirebaseAuth.getInstance();
         Store = FirebaseFirestore.getInstance();
         UserID = Objects.requireNonNull(Auth.getCurrentUser()).getUid();
-//        loadingDialog.startLoadingDialog();
-        DocumentReference documentReference = Store.collection("users").document(UserID);
+        DocumentReference documentReference = Store.collection("Users").document(UserID);
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -61,16 +63,29 @@ public class AllProduct extends AppCompatActivity {
             }
         });
         fillRecyclerView();
-        new CountDownTimer(2000,1000){
+        new CountDownTimer(10000,1000){
 
             @Override
             public void onTick(long millisUntilFinished) {
-
+                if (recyclerView.getChildCount()!=0){
+                    progressBar.dismissDialog();
+                    cancel();
+                }
+                else{
+                    fillRecyclerView();
+                }
             }
 
             @Override
             public void onFinish() {
-                fillRecyclerView();
+                if (recyclerView.getChildCount()!=0){
+                    progressBar.dismissDialog();
+                    cancel();
+                }
+                else{
+                    progressBar.dismissDialog();
+                    Toast.makeText(AllProduct.this, "No Internet, check your Connection and Restart FoodyHome", Toast.LENGTH_SHORT).show();
+                }
             }
         }.start();
 
@@ -96,7 +111,7 @@ public class AllProduct extends AppCompatActivity {
                     Map<String, Object> user = new HashMap<>();
                     user.put("HomePID", ProductID);
                     String UserId= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-                    DocumentReference documentReference=Store.collection("users").document(UserId);
+                    DocumentReference documentReference=Store.collection("Users").document(UserId);
                     documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
