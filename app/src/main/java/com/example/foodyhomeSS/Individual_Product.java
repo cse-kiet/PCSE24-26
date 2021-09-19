@@ -3,14 +3,19 @@ package com.example.foodyhomeSS;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.widget.Adapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,22 +36,22 @@ public class Individual_Product extends AppCompatActivity {
     String SName,SPrice,SDescription,SImage,UserID,HomePID;
     FirebaseFirestore Store;
     FirebaseAuth Auth;
-    LoadingDialog progressBar;
+    IndividualCategoryAdapter Cheesing;
+    RecyclerView CheesingRV;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual__product);
 
-        progressBar=new LoadingDialog(this);
-        progressBar.startLoadingDialog();
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference().child("Products");
         Auth = FirebaseAuth.getInstance();
         Store = FirebaseFirestore.getInstance();
         UserID = Objects.requireNonNull(Auth.getCurrentUser()).getUid();
-
-        DocumentReference documentReference = Store.collection("Users").document(UserID);
+//        loadingDialog.startLoadingDialog();
+        DocumentReference documentReference = Store.collection("users").document(UserID);
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -62,37 +67,26 @@ public class Individual_Product extends AppCompatActivity {
         PPRice=findViewById(R.id.Individual_Product_Activity_Product_Price);
         PName=findViewById(R.id.Individual_Product_Activity_Product_Name);
         PDescription=findViewById(R.id.Individual_Product_Activity_Product_Description);
+        CheesingRV = findViewById(R.id.Individual_Product_Activity_AddOn_RV);
         fillDetails();
 
-        new CountDownTimer(10000,1000){
+        new CountDownTimer(2000,1000){
 
             @Override
             public void onTick(long millisUntilFinished) {
-                if (PName.length()!=0){
-                   progressBar.dismissDialog();
-                   cancel();
-                }
-                else{
-                    fillDetails();
-                }
 
             }
 
             @Override
             public void onFinish() {
-                if (PName.length()!=0){
-                    progressBar.dismissDialog();
-                    cancel();
-                }
-                else{
-                    progressBar.dismissDialog();
-                    Toast.makeText(Individual_Product.this, "No Internet, check your Connection and Restart FoodyHome", Toast.LENGTH_SHORT).show();
-                }
-
+             fillDetails();
             }
         }.start();
 
     }
+
+
+
 
     private void fillDetails() {
         if (HomePID!=null) {
@@ -117,6 +111,28 @@ public class Individual_Product extends AppCompatActivity {
                 }
             });
         }
+        fillCheesing();
+
+
+
+
+
     }
 
-}
+    private void fillCheesing() {
+
+
+            FirebaseRecyclerOptions<IndividualCategoryModel> options =
+                    new FirebaseRecyclerOptions.Builder<IndividualCategoryModel>()
+                            .setQuery(FirebaseDatabase.getInstance().getReference().child("Cheesing"), IndividualCategoryModel.class)
+                            .build();
+            Cheesing = new IndividualCategoryAdapter(options);
+            CheesingRV.setLayoutManager(new LinearLayoutManager(this));
+            CheesingRV.setAdapter(Cheesing);
+            Cheesing.startListening();
+
+                }
+
+        }
+
+

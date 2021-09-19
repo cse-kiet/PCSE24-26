@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodyHome">
-        <activity android:name=".AllProduct"></activity>
+        <activity android:name=".AllProduct"/>
         <activity android:name=".Individual_Product" />
         <activity
             android:name=".Termandcondition"
