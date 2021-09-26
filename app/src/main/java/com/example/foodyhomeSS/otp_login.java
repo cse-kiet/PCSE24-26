@@ -16,14 +16,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.hbb20.CountryCodePicker;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class otp_login extends AppCompatActivity {
@@ -33,8 +38,9 @@ public class otp_login extends AppCompatActivity {
     FirebaseAuth Auth;
     String UserPhoneNumber;
     EditText EditTextPhoneNumber;
-    ProgressBar progressBar;
+    ProgressBar progressBar,NextButtonProgress;
     CountryCodePicker countryCodePicker;
+    FirebaseFirestore FireStore;
     int timer = 60;
     TextView TVTimer;
 
@@ -44,7 +50,7 @@ public class otp_login extends AppCompatActivity {
         setContentView(R.layout.activity_otp_login);
 
 
-
+        FireStore=FirebaseFirestore.getInstance();
         OTP = findViewById(R.id.editTextOTP);
         GetOTP = findViewById(R.id.Get_OTP_button);
         TVTimer = findViewById(R.id.Login_WIth_Phone_Timer);
@@ -52,6 +58,7 @@ public class otp_login extends AppCompatActivity {
         EditTextPhoneNumber=findViewById(R.id.User_Phone_number_login);
         next=findViewById(R.id.login_1_next_button);
         countryCodePicker=findViewById(R.id.country_code);
+        NextButtonProgress=findViewById(R.id.Progress_Bar_Login_With_Phone_Next_Button);
         countryCodePicker.registerCarrierNumberEditText(EditTextPhoneNumber);
         Auth=FirebaseAuth.getInstance();
         GetOTP.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +105,8 @@ public class otp_login extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "INVALID OTP", Toast.LENGTH_LONG).show();
 
                 else {
+                    next.setVisibility(View.GONE);
+                    NextButtonProgress.setVisibility(View.VISIBLE);
                     PhoneAuthCredential credentials= PhoneAuthProvider.getCredential(otpid , OTP.getText().toString());
                     signInWithPhoneAuthCredential(credentials);
                 }
@@ -140,15 +149,34 @@ public class otp_login extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Toast.makeText(otp_login.this, "coming in Auth", Toast.LENGTH_SHORT).show();
                         if (task.isSuccessful()) {
+
+                            Auth=FirebaseAuth.getInstance();
+                            String UserID=Auth.getCurrentUser().getUid();
+                            DocumentReference documentReference=FireStore.collection("Users").document(UserID);
+                            Map<String,Object> user= new HashMap<>();
+                            user.put("Phone Number",UserPhoneNumber);
+                            documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+
+                                @Override
+                                public void onSuccess(@NonNull Void aVoid) {
+                                    Intent i = new Intent(otp_login.this, MainActivity.class);
+                                    startActivity(i);
+                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
+                                    finish();
+                                    Toast.makeText(otp_login.this, "Welcome FOODY", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                             // Sign in success, update UI with the signed-in user's information
-                            Intent i = new Intent(otp_login.this, MainActivity.class);
-                            startActivity(i);
-                            finish();
+
                             // Update UI
                         }
                         else {
+                            next.setVisibility(View.VISIBLE);
+                            NextButtonProgress.setVisibility(View.GONE);
                             Toast.makeText(getApplicationContext(), "Invalid OTP , Try Again", Toast.LENGTH_LONG).show();
                             // The verification code entered was invalid
                         }

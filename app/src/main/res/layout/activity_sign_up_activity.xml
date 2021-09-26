@@ -246,7 +246,7 @@
 
 
         <ImageButton
-
+            android:id="@+id/Phone_number_Login_Button_SignUp_Activity"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="#FFFFFF"

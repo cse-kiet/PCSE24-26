@@ -282,10 +282,11 @@
                         android:layout_height="match_parent"
                         app:autoSizeTextType="uniform"
                         android:padding="5sp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:textColor="@color/black"
                         android:text="Add to Your Menu"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginStart="50dp" />
+                        android:layout_marginHorizontal="50dp"/>
 
 
                 </LinearLayout>

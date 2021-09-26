@@ -38,7 +38,7 @@ import java.util.Objects;
 import static android.content.ContentValues.TAG;
 
 public class Sign_up_activity extends AppCompatActivity {
-    ImageButton GoogleSignIN ,EYE ;
+    ImageButton GoogleSignIN ,EYE ,OTP;
     Integer RC_SIGN_IN=1;
     FirebaseAuth Auth;
     GoogleSignInClient mGoogleSignInClient;
@@ -50,7 +50,7 @@ public class Sign_up_activity extends AppCompatActivity {
     String UserID;
     String Address_string;
     FirebaseFirestore FireStore;
-EditText Email;
+    EditText Email;
     EditText Password;
     EditText Address;
     EditText Name;
@@ -69,6 +69,13 @@ EditText Email;
        Address= findViewById(R.id.Register_Address);
         progressBar=findViewById(R.id.progressBar_Register_With_Email);
         EYE=findViewById(R.id.Password_Email_Signup_Visibility_BUtton);
+        OTP=findViewById(R.id.Phone_number_Login_Button_SignUp_Activity);
+        OTP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Sign_up_activity.this,otp_login.class));
+            }
+        });
 
 
 
