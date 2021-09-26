@@ -32,7 +32,12 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.auth.User;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -45,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     LoadingDialog progressBar;
     FirebaseAuth Auth;
     LinearLayout layout;
-    String SeeAll,Treat,ProductID;
+    String SeeAll,ProductID;
     FirebaseFirestore Store;
     RecyclerView MostPopular,PizzaTreatRV,BurgerTreatRV,ComboForFamilyRV,BeveragesRV,DifferentWorldRV;
     AllProductAdapter MostPopularAdapter;
@@ -58,7 +63,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
 
+        String formattedDate = getDateTime();
         // RecyclerViews Definitions
+
 
         MostPopular=findViewById(R.id.Most_Popular_Treat_RecyclerView_Home);
         PizzaTreatRV=findViewById(R.id.Pizza_Treat_RecyclerView_Home);
@@ -85,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onTick(long millisUntilFinished) {
                 if (DifferentWorldRV.getChildCount()!=0){
                     progressBar.dismissDialog();
+                    Toast.makeText(MainActivity.this, formattedDate, Toast.LENGTH_LONG).show();
                     cancel();
                 }
 
@@ -403,5 +411,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this,AllProduct.class));
             }
         });
+    }
+    private String getDateTime() {
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
     }
 }

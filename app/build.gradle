@@ -63,4 +63,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:8.0.0'
     //Country code picker
     implementation 'com.hbb20:ccp:2.4.0'
+
+    //Java Object to JSON and Vice-versa converting Library
+    implementation 'com.google.code.gson:gson:2.8.8'
 }

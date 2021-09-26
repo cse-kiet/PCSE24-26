@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodyHome">
-        <activity android:name=".Payment_Activity"></activity>
+        <activity android:name=".Payment_Activity"/>
         <activity android:name=".AllProduct" />
+        <activity android:name=".YourMenu"/>
+        <activity android:name=".OrderDetails" />
         <activity android:name=".Individual_Product" />
         <activity
             android:name=".Termandcondition"
