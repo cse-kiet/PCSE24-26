@@ -2,8 +2,10 @@ package com.example.foodyhomeSS;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,11 +21,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.datepicker.MaterialCalendar;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -57,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     IndividualCategoryAdapter PizzaTreatAdapter,BurgerTreatAdapter,ComboForFamilyAdapter,BeveragesAdapter,DifferentWorldAdapter;
     //See All TextView of all Topics
     TextView FoodySeeAll,PizzaSeeAll,BurgerSeeAll,FamilyComboSeeAll,MostPopularSeeAll,BeveragesSeeAll,DifferentWorldSeeAll;
+    private NavigationBarView bottomNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,6 +139,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
+
+
                     case R.id.Toolbar_Search:
                         Intent intent=new Intent(MainActivity.this,SearchUniversal.class);
                         startActivity(intent);
@@ -141,6 +150,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
                     case R.id.Toolbar_share:
                         layout.setVisibility(View.VISIBLE);
+                        Intent sendIntent = new Intent();
+                        sendIntent.setAction(Intent.ACTION_SEND);
+                        sendIntent.putExtra(Intent.EXTRA_TEXT,"Hello ! we are foody home and we are providing you a platform which will deliver item to you within 1 hour");
+                        sendIntent.setType("text/plain");
+                        Intent.createChooser(sendIntent,"Share via");
+                        startActivity(sendIntent);
                         break;
                 }
 
@@ -151,16 +166,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
+
+
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 switch (item.getItemId()) {
-                    case R.id.Drawer_Call_us: {
-                        Toast.makeText(MainActivity.this, "Call Us", Toast.LENGTH_SHORT).show();
+                    case R.id.Drawer_Home:{
+
+
+                        drawerLayout.closeDrawer(Gravity.LEFT);
                         break;
                     }
+                    case R.id.Drawer_Call_us: {
+                        Intent call=new Intent(Intent.ACTION_CALL);
+                        call.setData(Uri.parse("tel:" +"9410264395"));
+                        startActivity(call);
+                        break;
+
+                    }
+                    case R.id.Drawer_share_app: {
+                        Intent sendIntent = new Intent();
+                        sendIntent.setAction(Intent.ACTION_SEND);
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hello ! we are foodyhome and we are providing you a platform which will deliver item to you within 1 hour");
+                        sendIntent.setType("text/plain");
+                        Intent.createChooser(sendIntent, "Share via");
+                        startActivity(sendIntent);
+                        break;
+                    }
+
+
+
                     case R.id.Drawer_Chat_with_us: {
-                        Toast.makeText(MainActivity.this, "Chat with Us", Toast.LENGTH_SHORT).show();
+                        Intent Query=new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"+"8218655014"));
+                        startActivity(Query);
                         break;
                     }
                     case R.id.Drawer_logout: {
