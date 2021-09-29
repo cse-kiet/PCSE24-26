@@ -83,7 +83,7 @@
                             android:id="@+id/PizzaTopbarImageView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/png_pizza"
+                            android:src="@mipmap/pizza_round"
                             />
                     </androidx.cardview.widget.CardView>
 
@@ -112,12 +112,12 @@
                             android:layout_marginBottom="15dp"
                             android:layout_gravity="center_horizontal"
                             app:cardCornerRadius="90dp">
+
                             <ImageView
                                 android:id="@+id/FOodyOfferTopbarImageView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/png_pizza"
-                                />
+                                android:src="@mipmap/icecream_round" />
                         </androidx.cardview.widget.CardView>
 
                         <TextView
@@ -150,7 +150,7 @@
                                 android:id="@+id/PastaTopbarImageView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/png_pizza"
+                                android:src="@mipmap/pasta_round"
                                 />
                         </androidx.cardview.widget.CardView>
 
@@ -183,7 +183,7 @@
                                 android:id="@+id/BeveragesTopbarImageView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/png_pizza"
+                                android:src="@mipmap/burger_round"
                                 />
                         </androidx.cardview.widget.CardView>
 
@@ -215,7 +215,7 @@
                                 android:id="@+id/BurgersTopbarImageView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/png_pizza"
+                                android:src="@mipmap/icecream_round"
                                 />
                         </androidx.cardview.widget.CardView>
 
