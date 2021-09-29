@@ -2,6 +2,7 @@ package com.example.foodyhomeSS;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.Menu;
@@ -31,9 +32,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.auth.User;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -52,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     LinearLayout layout;
     String SeeAll,ProductID;
     FirebaseFirestore Store;
+    ArrayList<String> PList=new ArrayList<>();
     RecyclerView MostPopular,PizzaTreatRV,BurgerTreatRV,ComboForFamilyRV,BeveragesRV,DifferentWorldRV;
     AllProductAdapter MostPopularAdapter;
     IndividualCategoryAdapter PizzaTreatAdapter,BurgerTreatAdapter,ComboForFamilyAdapter,BeveragesAdapter,DifferentWorldAdapter;
@@ -62,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        PList.clear();
 
         String formattedDate = getDateTime();
         // RecyclerViews Definitions
@@ -178,7 +186,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         finish();
                         break;
                     }
-
+                    case R.id.Drawer_My_Menu: {
+                        startActivity(new Intent(MainActivity.this, YourMenu.class));
+                        break;
+                    }
 
                 }
                 return true;
@@ -298,6 +309,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
+                PList.add(ProductID);
+                SaveSharedPreferences();
                 progressBar.dismissDialog();
                 startActivity(new Intent(MainActivity.this,Individual_Product.class));
             }
@@ -413,7 +426,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
     private String getDateTime() {
-        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         Date date = new Date();
         return dateFormat.format(date);
     }
@@ -427,4 +440,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(getIntent());
         overridePendingTransition(0, 0);
     }
+    private void SaveSharedPreferences() {
+        SharedPreferences sharedPreferences=getSharedPreferences("Shared Preferences",MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor=sharedPreferences.edit();
+        Gson gson=new Gson();
+        String json=gson.toJson(PList);
+        editor.putString("PList",json);
+        editor.apply();
+
+    }
+  
 }

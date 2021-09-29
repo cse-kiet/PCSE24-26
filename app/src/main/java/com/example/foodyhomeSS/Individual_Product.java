@@ -15,6 +15,7 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -40,7 +41,10 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -64,16 +68,21 @@ public class Individual_Product extends AppCompatActivity {
     RecyclerView CheesingRV,RecommendedRV;
     AllProductAdapter RecommendedAdapter;
     View MRPView;
+    LoadingDialog loadingDialog;
+    ArrayList<String> PList,AddOns=new ArrayList<>();
+    int count=1;
+    Button AddToMenuButton;
 
-    ArrayList<String> PList=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual__product);
         //Loading dialog
-        LoadingDialog loadingDialog=new LoadingDialog(this);
+        loadingDialog=new LoadingDialog(this);
         loadingDialog.startLoadingDialog();
+        AddToMenuButton=findViewById(R.id.Add_to_Menu_Individual_Product);
+        AddOns.clear();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference().child("Products");
@@ -108,6 +117,7 @@ public class Individual_Product extends AppCompatActivity {
         Star5=findViewById(R.id.Individual_Product_Star_5);
         fillDetails();
 
+
         new CountDownTimer(10000,1000){
 
             @Override
@@ -116,6 +126,16 @@ public class Individual_Product extends AppCompatActivity {
                 fillRecommendedRV();
                 if (!TextUtils.isEmpty(SName)){
                     loadingDialog.dismissDialog();
+                    AddToMenuButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                         if (!TextUtils.isEmpty(SName)) {
+                             AddToMenu();
+                        }
+
+                            Toast.makeText(Individual_Product.this, "Clicked", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                     if (sMRP.equals(SPrice)){
                         MRP.setVisibility(View.GONE);
                         MRPView.setVisibility(View.GONE);
@@ -127,13 +147,14 @@ public class Individual_Product extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                loadingDialog.dismissDialog();
                 Toast.makeText(Individual_Product.this, "Please Check your Connection and Restart FoodyHome", Toast.LENGTH_SHORT).show();
 
             }
         }.start();
 
-
     }
+
 
     private void fillRecommendedRV() {
         FirebaseRecyclerOptions<AllProductModel> options =
@@ -172,8 +193,10 @@ public class Individual_Product extends AppCompatActivity {
         SharedPreferences sharedPreferences=getSharedPreferences("Shared Preferences",MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor=sharedPreferences.edit();
         Gson gson=new Gson();
+        String json2=gson.toJson(AddOns);
         String json=gson.toJson(PList);
         editor.putString("PList",json);
+        editor.putString("AddOns",json2);
         editor.apply();
 
     }
@@ -181,17 +204,20 @@ public class Individual_Product extends AppCompatActivity {
         SharedPreferences sharedPreferences=getSharedPreferences("Shared Preferences",MODE_PRIVATE);
         Gson gson=new Gson();
         String jsonString=sharedPreferences.getString("PList","");
+        String jsonString2=sharedPreferences.getString("AddOns","");
         Type type=new TypeToken<ArrayList<String>>() {}.getType();
          PList=gson.fromJson(jsonString,type);
+         AddOns=gson.fromJson(jsonString2,type);
+         if (AddOns==null){
+             AddOns=new ArrayList<>();
+         }
         if (PList==null){
             PList=new ArrayList<>();
         }
     }
 
 
-    private void SendProductID() {
 
-    }
 
 
     private void fillDetails() {
@@ -288,8 +314,7 @@ public class Individual_Product extends AppCompatActivity {
     }
 
     private void fillCheesing() {
-
-
+        AddOns.clear();
             FirebaseRecyclerOptions<IndividualCategoryModel> options =
                     new FirebaseRecyclerOptions.Builder<IndividualCategoryModel>()
                             .setQuery(FirebaseDatabase.getInstance().getReference().child("Cheesing"), IndividualCategoryModel.class)
@@ -298,18 +323,36 @@ public class Individual_Product extends AppCompatActivity {
             CheesingRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
             CheesingRV.setAdapter(Cheesing);
             Cheesing.startListening();
+            Cheesing.setOnItemCLickListener(new IndividualCategoryAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DataSnapshot dataSnapshot, int position) {
+
+                String s= Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
+                if (AddOns.contains(s)) {
+                    AddOns.remove(s);
+                    SaveSharedPreferences();
+                    Toast.makeText(Individual_Product.this, s+" is removed", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    AddOns.add(s);
+                    SaveSharedPreferences();
+                    Toast.makeText(Individual_Product.this, ""+s, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            });
 
                 }
 
     @Override
     protected void onResume() {
         super.onResume();
+        AddOns.clear();
         LoadSharedPreferences();
 
         if (PList!=null) {
                 try {
                     HomePID=PList.get(PList.size()-1);
-                    Toast.makeText(this, HomePID, Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -322,9 +365,9 @@ public class Individual_Product extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        AddOns.clear();
         super.onBackPressed();
         if (PList.size()>=1) {
-            Toast.makeText(this, PList.size() - 1 + " is Removed", Toast.LENGTH_SHORT).show();
             int index = PList.size() - 1;
             PList.remove(index);
             if (PList != null) {
@@ -345,6 +388,43 @@ public class Individual_Product extends AppCompatActivity {
         Star4.setImageResource(R.drawable.ic_baseline_star_24);
         Star5.setImageResource(R.drawable.ic_baseline_star_24);
     }
+    private void AddToMenu(){
+        loadingDialog.startLoadingDialog();
+        FirebaseFirestore Store1;
+        Store1=FirebaseFirestore.getInstance();
+        DocumentReference documentReference=Store1.collection("Users").document(UserID);
+
+//        loadingDialog.startLoadingDialog();
+        Map<String, Object> user = new HashMap<>();
+        user.put("Name", PName.getText().toString());
+        user.put("Price", PPRice.getText().toString());
+        user.put("Image", SImage);
+        user.put("Discount",Discount.getText().toString() );
+        user.put("MRP", sMRP);
+        LoadSharedPreferences();
+        if (AddOns!=null){
+            for (int i = 0; i < AddOns.size(); i++)
+                user.put("AddOn"+i,AddOns.get(i));
+        }
+
+        documentReference
+                .collection("YourMenu")
+                .document(getDateTime())
+                .set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                loadingDialog.dismissDialog();
+                startActivity(new Intent(Individual_Product.this,YourMenu.class));
+            }
+        });
+
+    }
+    private String getDateTime() {
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+
 }
 
 

@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.widget.Toast;
@@ -24,7 +26,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -37,6 +41,7 @@ public class AllProduct extends AppCompatActivity {
     FirebaseAuth Auth;
     String UserID,SeeAll,ProductID;
     LoadingDialog progressBar;
+    ArrayList<String> PList=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +120,8 @@ public class AllProduct extends AppCompatActivity {
                     documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
+                            PList.add(ProductID);
+                            SaveSharedPreferences();
                             startActivity(new Intent(AllProduct.this,Individual_Product.class));
                         }
                     });
@@ -123,5 +130,14 @@ public class AllProduct extends AppCompatActivity {
         }
     }
 
+    private void SaveSharedPreferences() {
+        SharedPreferences sharedPreferences=getSharedPreferences("Shared Preferences",MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor=sharedPreferences.edit();
+        Gson gson=new Gson();
+        String json=gson.toJson(PList);
+        editor.putString("PList",json);
+        editor.apply();
+
+    }
 
 }

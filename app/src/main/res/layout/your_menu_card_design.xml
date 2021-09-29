@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="220dp">
+    android:layout_height="250dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_marginHorizontal="10dp"
-        android:layout_height="200dp"
+        android:layout_height="230dp"
         android:layout_marginVertical="10dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp"
@@ -24,12 +24,12 @@
             android:layout_height="match_parent">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:weightSum="2"
+                android:weightSum="3"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/Order_Image_View_cart"
+                    android:id="@+id/YourMenu_Image_View"
                     android:layout_width="130dp"
                     android:layout_height="130dp"
                     android:layout_marginHorizontal="5dp"
@@ -38,6 +38,7 @@
                     android:layout_marginTop="10dp"
                     android:src="@drawable/ic_baseline_image_24" />
                 <LinearLayout
+                    android:weightSum="5"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1.5"
@@ -48,38 +49,171 @@
                     android:layout_marginLeft="15sp">
 
                     <TextView
-                        android:id="@+id/Order_Product_Name_cart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_weight="3"
+                        android:id="@+id/YourMenu_Product_Name"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
                         android:gravity="center"
                         android:text="Product Name"
                         android:textColor="@color/black"
-                        android:textSize="13sp"
+                        app:autoSizeTextType="uniform"
                         android:textStyle="bold"
-                        />
+                        tools:ignore="NestedWeights" />
                     <TextView
-                        android:id="@+id/Order_Product_Price_cart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:id="@+id/YourMenu_Product_Price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Product Price"
                         android:textColor="@color/black"
                         android:textSize="10sp"
                         android:textStyle="bold"
+                        android:layout_weight="0.4"
+                        app:autoSizeTextType="uniform"
+                        />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                        <View
+                            android:layout_width="45dp"
+                            android:layout_height="1.5dp"
+                            android:background="@color/black"
+                            android:rotation="-10"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/YourMenu_Product_MRP"
+                            android:layout_width="match_parent"
+                            android:layout_height="15dp"
+                            android:gravity="center"
+
+                            android:text="Product MRP"
+                            android:textColor="@color/teal_700"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            app:autoSizeTextType="uniform"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:weightSum="5"
+                    android:layout_marginStart="15sp"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="10dp"
+                    android:layout_marginLeft="15sp">
+
+                    <TextView
+                        android:id="@+id/AddOns_0_YourMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        app:autoSizeTextType="uniform"
+                        android:textColor="@color/purple_500"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        tools:ignore="NestedWeights" />
+                    <TextView
+                        android:id="@+id/AddOns_1_YourMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        app:autoSizeTextType="uniform"
+                        android:textColor="@color/purple_500"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
                         />
                     <TextView
-                        android:id="@+id/Order_Product_quantity_cart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:id="@+id/AddOns_2_YourMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Product QTY"
-                        android:textColor="@color/black"
-                        android:textSize="10sp"
+                        app:autoSizeTextType="uniform"
+                        android:textColor="@color/purple_500"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:id="@+id/AddOns_3_YourMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        app:autoSizeTextType="uniform"
+                        android:textColor="@color/purple_500"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:id="@+id/AddOns_4_YourMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        app:autoSizeTextType="uniform"
+                        android:textColor="@color/purple_500"
+                        android:textSize="13sp"
                         android:textStyle="bold"
                         />
                 </LinearLayout>
             </LinearLayout>
             <!-- buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingHorizontal="5dp"
+                android:orientation="horizontal"
+                >
+                <ImageButton
+                    android:id="@+id/YourMenu_QTY_decrease_ImageButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/custom_button_3"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_marginHorizontal="5sp"
+                    android:src="@drawable/ic_baseline_remove_24"/>
+                <TextView
+                    android:id="@+id/YourMenu_QTY_TextView"
+                    android:layout_width="40dp"
+                    android:text="1"
+                    app:autoSizeTextType="uniform"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginHorizontal="10dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/custom_button_3"
+                    android:layout_height="30dp"/>
+                <ImageButton
+                    android:id="@+id/YourMenu_QTY_increase_ImageButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/custom_button_3"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="5sp"
+                    android:src="@drawable/ic_baseline_add_24"/>
+            </LinearLayout>
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
@@ -95,7 +229,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:backgroundTint="#c2e59c"
-                    android:id="@+id/Track_order_Button_cart"
+                    android:id="@+id/YourMenu_Remove_Button"
                     android:shadowDx="12"
                     android:layout_marginHorizontal="5dp"
                     android:shadowDy="12"
@@ -109,7 +243,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:backgroundTint="#FFC107"
-                    android:id="@+id/order_Help_Button_cart"
+                    android:id="@+id/YourMenu_BuyNow_Button"
                     android:shadowDx="12"
                     android:layout_marginHorizontal="5dp"
                     android:shadowDy="12"
