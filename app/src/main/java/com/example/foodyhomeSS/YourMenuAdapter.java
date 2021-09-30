@@ -15,23 +15,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.firestore.DocumentSnapshot;
+
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class YourMenuAdapter extends RecyclerView.Adapter<YourMenuAdapter.MyViewHolder>{
-    ArrayList<YourMenuModel> DataList;
-    Context context;
-    private YourMenuAdapter.OnItemClickListener Listener;
-    public interface OnItemClickListener {
-        void onItemClick(int position);
-        void onIncreaseClick(int position);
-        void onDecreaseClick(int position);
-    }
+public class YourMenuAdapter extends FirestoreRecyclerAdapter<YourMenuModel, YourMenuAdapter.MyViewHolder> {
+    public YourMenuAdapter.OnItemClickListener listener;
 
-    public YourMenuAdapter(ArrayList<YourMenuModel> dataList, Context context) {
-        this.DataList = dataList;
-        this.context=context;
+    public YourMenuAdapter(@NonNull FirestoreRecyclerOptions<YourMenuModel> options) {
+        super(options);
     }
 
     @NonNull
@@ -41,36 +39,50 @@ public class YourMenuAdapter extends RecyclerView.Adapter<YourMenuAdapter.MyView
         return new MyViewHolder(view);
     }
 
+
+
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.PName.setText(DataList.get(position).getName());
-        holder.PPrice.setText(DataList.get(position).getPrice());
-        holder.PMRP.setText(DataList.get(position).getMRP());
-        if (DataList.get(position).getAddOn0()!=null) {
-
-            holder.A0.setText("+ " +DataList.get(position).getAddOn0());
+    protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull YourMenuModel yourMenuModel) {
+        holder.PName.setText(yourMenuModel.getName());
+        holder.PPrice.setText(yourMenuModel.getPrice());
+        holder.PMRP.setText(yourMenuModel.getMRP());
+        if (yourMenuModel.getAddOn0()==null){
+            holder.A0.setText("");
         }
-        if (DataList.get(position).getAddOn1()!=null) {
-            holder.A1.setText("+ " +DataList.get(position).getAddOn1());
+        if (yourMenuModel.getAddOn1()==null){
+            holder.A1.setText("");
         }
-        if (DataList.get(position).getAddOn2()!=null) {
-            holder.A2.setText("+ " +DataList.get(position).getAddOn2());
+        if (yourMenuModel.getAddOn2()==null){
+            holder.A2.setText("");
         }
-        if (DataList.get(position).getAddOn3()!=null) {
-            holder.A3.setText("+ " +DataList.get(position).getAddOn3());
+        if (yourMenuModel.getAddOn3()==null){
+            holder.A3.setText("");
         }
-        if (DataList.get(position).getAddOn4()!=null) {
-            holder.A4.setText("+ " +DataList.get(position).getAddOn4());
+        if (yourMenuModel.getAddOn4()==null){
+            holder.A4.setText("");
         }
-        Glide.with(holder.PImage).load(DataList.get(position).getImage()).into(holder.PImage);
+        if (yourMenuModel.getAddOn0()!=null){
+            holder.A0.setText("+ " +yourMenuModel.getAddOn0());
+        }
+        if (yourMenuModel.getAddOn1()!=null){
+            holder.A1.setText("+ " +yourMenuModel.getAddOn1());
+        }
+        if (yourMenuModel.getAddOn2()!=null){
+            holder.A2.setText("+ " +yourMenuModel.getAddOn2());
+        }
+        if (yourMenuModel.getAddOn3()!=null){
+            holder.A3.setText("+ " +yourMenuModel.getAddOn3());
+        }
+        if (yourMenuModel.getAddOn4()!=null){
+            holder.A4.setText("+ " +yourMenuModel.getAddOn4());
+        }
+        holder.QTY.setText(yourMenuModel.getQTY());
+        Glide.with(holder.PImage).load(yourMenuModel.getImage()).into(holder.PImage);
 
     }
 
-    @Override
-    public int getItemCount() {
-        return DataList.size();
-    }
+
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView PName,PPrice,PMRP,A0,A1,A2,A3,A4,QTY;
@@ -93,61 +105,91 @@ public class YourMenuAdapter extends RecyclerView.Adapter<YourMenuAdapter.MyView
             Increase=itemView.findViewById(R.id.YourMenu_QTY_increase_ImageButton);
             Decrease=itemView.findViewById(R.id.YourMenu_QTY_decrease_ImageButton);
             QTY=itemView.findViewById(R.id.YourMenu_QTY_TextView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && listener != null) {
+                        listener.onItemClick(getSnapshots().getSnapshot(position), position);
+                    }
+                }
+            });
             Increase.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (Listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            Listener.onIncreaseClick(position);
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && listener != null) {
+                        listener.onIncreaseClick(getSnapshots().getSnapshot(position), position);
 
-                            String Sqty= QTY.getText().toString();
-                            Integer Iqty=Integer.parseInt(Sqty);
-                            Iqty+=1;
-                            Sqty=Iqty.toString();
-                            QTY.setText(Sqty);
+                        String S=QTY.getText().toString();
+                        if (S!=null) {
+                            Integer I = Integer.parseInt(S);
+                            I += 1;
+                            S = I.toString();
+                            QTY.setText(S);
+                            Map<String, Object> user = new HashMap<>();
+                            user.put("QTY",S);
+                            getSnapshots().getSnapshot(position).getReference().update(user);
                         }
                     }
-
-
                 }
             });
             Decrease.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (Listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            Listener.onDecreaseClick(position);
-                            String Sqty= QTY.getText().toString();
-                            Integer Iqty=Integer.parseInt(Sqty);
-                            if (Iqty>1){
-                                Iqty-=1;
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && listener != null) {
+                        listener.onDecreaseClick(getSnapshots().getSnapshot(position), position);
+                        String S=QTY.getText().toString();
+                        if (S!=null) {
+                            Integer I = Integer.parseInt(S);
+                            if (I>1){
+                                I -= 1;
+                                S = I.toString();
+                                QTY.setText(S);
+                                Map<String, Object> user = new HashMap<>();
+                                user.put("QTY",S);
+                                getSnapshots().getSnapshot(position).getReference().update(user);
                             }
-                            Sqty=Iqty.toString();
-                            QTY.setText(Sqty);
+
                         }
                     }
-
                 }
             });
-            itemView.setOnClickListener(new View.OnClickListener() {
+            Remove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (Listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            Listener.onItemClick(position);
-                        }
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && listener != null) {
+                        listener.onRemoveClick(getSnapshots().getSnapshot(position), position);
+                        deleteItem(position);
                     }
                 }
             });
-
+            BuyNow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && listener != null) {
+                        listener.onBuyNowClick(getSnapshots().getSnapshot(position), position);
+                    }
+                }
+            });
 
         }
     }
+    public interface OnItemClickListener {
+        void onItemClick(DocumentSnapshot documentSnapshot, int position);
+        void onIncreaseClick(DocumentSnapshot documentSnapshot,int position);
+        void onDecreaseClick(DocumentSnapshot documentSnapshot,int position);
+        void onBuyNowClick(DocumentSnapshot documentSnapshot,int position);
+        void onRemoveClick(DocumentSnapshot documentSnapshot,int position);
+    }
     public void setOnItemClickListener(YourMenuAdapter.OnItemClickListener listener) {
-        Listener = listener;
+        this.listener = listener;
+    }
+    public void deleteItem(int position) {
+        getSnapshots().getSnapshot(position).getReference().delete();
     }
 
 }

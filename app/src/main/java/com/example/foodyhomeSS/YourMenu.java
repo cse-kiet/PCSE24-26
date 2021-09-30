@@ -5,15 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -22,7 +26,6 @@ import java.util.Objects;
 
 public class YourMenu extends AppCompatActivity {
     RecyclerView recyclerView;
-    ArrayList<YourMenuModel> DataList;
     FirebaseFirestore Store;
     String UserId;
     YourMenuAdapter adapter;
@@ -32,69 +35,69 @@ public class YourMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_menu);
-        DataList=new ArrayList<>();
+
         recyclerView=findViewById(R.id.YourMenu_RecyclerView);
         loadingDialog=new LoadingDialog(this);
         loadingDialog.startLoadingDialog();
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter=new YourMenuAdapter(DataList,this);
-        recyclerView.setAdapter(adapter);
-        AdapterSetOnClick();
+        fillRecyclerView();
+        adapter.startListening();
+    }
+
+    private void fillRecyclerView() {
         Store=FirebaseFirestore.getInstance();
+
         UserId= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        Store.collection("Users")
-                .document(UserId)
-                .collection("YourMenu")
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        List<DocumentSnapshot> list=queryDocumentSnapshots.getDocuments();
-                        for (DocumentSnapshot d:list){
-                            YourMenuModel obj=d.toObject(YourMenuModel.class);
-                            DataList.add(obj);
-                        }
-                        adapter.notifyDataSetChanged();
-                        AdapterSetOnClick();
-                        loadingDialog.dismissDialog();
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                loadingDialog.dismissDialog();
-                Toast.makeText(YourMenu.this, "Please check your connection" +
-                        "       or" +
-                        "Restart the App", Toast.LENGTH_SHORT).show();
-            }
-        });
-
+        FirestoreRecyclerOptions<YourMenuModel> options = new FirestoreRecyclerOptions.Builder<YourMenuModel>()
+                .setQuery(Store
+                        .collection("Users")
+                        .document(UserId)
+                        .collection("YourMenu")
+                        .orderBy("Code",Query.Direction.DESCENDING), YourMenuModel.class)
+                .build();
+        adapter = new YourMenuAdapter(options);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+        loadingDialog.dismissDialog();
+        AdapterSetOnClick();
     }
 
     private void AdapterSetOnClick() {
         adapter.setOnItemClickListener(new YourMenuAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(int position) {
+            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
 
             }
 
             @Override
-            public void onIncreaseClick(int position) {
+            public void onIncreaseClick(DocumentSnapshot documentSnapshot, int position) {
 
 
             }
 
             @Override
-            public void onDecreaseClick(int position) {
+            public void onDecreaseClick(DocumentSnapshot documentSnapshot, int position) {
+
+            }
+
+            @Override
+            public void onBuyNowClick(DocumentSnapshot documentSnapshot, int position) {
+                startActivity(new Intent(YourMenu.this,Payment_Activity.class));
+
+            }
+
+            @Override
+            public void onRemoveClick(DocumentSnapshot documentSnapshot, int position) {
 
             }
         });
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        adapter.notifyDataSetChanged();
+        adapter.startListening();
         AdapterSetOnClick();
     }
 }

@@ -66,4 +66,6 @@ dependencies {
 
     //Java Object to JSON and Vice-versa converting Library
     implementation 'com.google.code.gson:gson:2.8.8'
+    implementation 'com.firebaseui:firebase-ui-firestore:4.1.0'
+    implementation 'com.google.firebase:firebase-core:19.0.1'
 }

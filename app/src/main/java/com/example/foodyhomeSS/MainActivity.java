@@ -3,6 +3,7 @@ package com.example.foodyhomeSS;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.Gravity;
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         PList.clear();
 
-        String formattedDate = getDateTime();
+
         // RecyclerViews Definitions
 
 
@@ -106,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onTick(long millisUntilFinished) {
                 if (DifferentWorldRV.getChildCount()!=0){
                     progressBar.dismissDialog();
-                    Toast.makeText(MainActivity.this, formattedDate, Toast.LENGTH_LONG).show();
                     cancel();
                 }
 
@@ -201,7 +201,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         startActivity(sendIntent);
                         break;
                     }
-
+                    case R.id.Drawer_My_Menu:{
+                        startActivity(new Intent(MainActivity.this,YourMenu.class));
+                        break;
+                    }
 
 
                     case R.id.Drawer_Chat_with_us: {
@@ -460,11 +463,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
-    private String getDateTime() {
-        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-        Date date = new Date();
-        return dateFormat.format(date);
-    }
+
 
 
     @Override

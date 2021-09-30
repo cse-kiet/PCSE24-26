@@ -348,6 +348,7 @@ public class Individual_Product extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         AddOns.clear();
+        SaveSharedPreferences();
         LoadSharedPreferences();
 
         if (PList!=null) {
@@ -366,6 +367,7 @@ public class Individual_Product extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         AddOns.clear();
+        SaveSharedPreferences();
         super.onBackPressed();
         if (PList.size()>=1) {
             int index = PList.size() - 1;
@@ -374,6 +376,13 @@ public class Individual_Product extends AppCompatActivity {
                 SaveSharedPreferences();
             }
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        AddOns.clear();
+        SaveSharedPreferences();
     }
 
     private void clearRating() {
@@ -401,6 +410,8 @@ public class Individual_Product extends AppCompatActivity {
         user.put("Image", SImage);
         user.put("Discount",Discount.getText().toString() );
         user.put("MRP", sMRP);
+        user.put("Code",getDateTime());
+        user.put("QTY","1");
         LoadSharedPreferences();
         if (AddOns!=null){
             for (int i = 0; i < AddOns.size(); i++)
