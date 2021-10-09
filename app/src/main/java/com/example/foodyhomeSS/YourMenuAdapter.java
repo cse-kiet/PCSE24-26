@@ -28,8 +28,12 @@ import java.util.Map;
 public class YourMenuAdapter extends FirestoreRecyclerAdapter<YourMenuModel, YourMenuAdapter.MyViewHolder> {
     public YourMenuAdapter.OnItemClickListener listener;
 
+
+
+
     public YourMenuAdapter(@NonNull FirestoreRecyclerOptions<YourMenuModel> options) {
         super(options);
+
     }
 
     @NonNull
@@ -46,6 +50,7 @@ public class YourMenuAdapter extends FirestoreRecyclerAdapter<YourMenuModel, You
     protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull YourMenuModel yourMenuModel) {
         holder.PName.setText(yourMenuModel.getName());
         holder.PPrice.setText(yourMenuModel.getPrice());
+
         holder.PMRP.setText(yourMenuModel.getMRP());
         if (yourMenuModel.getAddOn0()==null){
             holder.A0.setText("");
@@ -87,7 +92,7 @@ public class YourMenuAdapter extends FirestoreRecyclerAdapter<YourMenuModel, You
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView PName,PPrice,PMRP,A0,A1,A2,A3,A4,QTY;
         ImageView PImage;
-        Button Remove,BuyNow;
+        Button Remove;
         ImageButton Increase,Decrease;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -101,7 +106,6 @@ public class YourMenuAdapter extends FirestoreRecyclerAdapter<YourMenuModel, You
             A4=itemView.findViewById(R.id.AddOns_4_YourMenu);
             PImage=itemView.findViewById(R.id.YourMenu_Image_View);
             Remove=itemView.findViewById(R.id.YourMenu_Remove_Button);
-            BuyNow=itemView.findViewById(R.id.YourMenu_BuyNow_Button);
             Increase=itemView.findViewById(R.id.YourMenu_QTY_increase_ImageButton);
             Decrease=itemView.findViewById(R.id.YourMenu_QTY_decrease_ImageButton);
             QTY=itemView.findViewById(R.id.YourMenu_QTY_TextView);
@@ -166,15 +170,6 @@ public class YourMenuAdapter extends FirestoreRecyclerAdapter<YourMenuModel, You
                     }
                 }
             });
-            BuyNow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION && listener != null) {
-                        listener.onBuyNowClick(getSnapshots().getSnapshot(position), position);
-                    }
-                }
-            });
 
         }
     }
@@ -182,7 +177,6 @@ public class YourMenuAdapter extends FirestoreRecyclerAdapter<YourMenuModel, You
         void onItemClick(DocumentSnapshot documentSnapshot, int position);
         void onIncreaseClick(DocumentSnapshot documentSnapshot,int position);
         void onDecreaseClick(DocumentSnapshot documentSnapshot,int position);
-        void onBuyNowClick(DocumentSnapshot documentSnapshot,int position);
         void onRemoveClick(DocumentSnapshot documentSnapshot,int position);
     }
     public void setOnItemClickListener(YourMenuAdapter.OnItemClickListener listener) {
@@ -191,5 +185,6 @@ public class YourMenuAdapter extends FirestoreRecyclerAdapter<YourMenuModel, You
     public void deleteItem(int position) {
         getSnapshots().getSnapshot(position).getReference().delete();
     }
+
 
 }

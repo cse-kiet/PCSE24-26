@@ -20,8 +20,11 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodyHome">
-        <activity android:name=".Razorpay"></activity>
+        <activity android:name=".NoConnection"></activity>
+        <activity android:name=".YourOrders" />
+        <activity android:name=".Razorpay" />
         <activity android:name=".Payment_Activity" />
+        <activity android:name=".TopCategories" />
         <activity android:name=".AllProduct" />
         <activity android:name=".YourMenu" />
         <activity android:name=".OrderDetails" />

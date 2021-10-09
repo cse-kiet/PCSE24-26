@@ -315,6 +315,7 @@ public class Individual_Product extends AppCompatActivity {
 
     private void fillCheesing() {
         AddOns.clear();
+        SaveSharedPreferences();
             FirebaseRecyclerOptions<IndividualCategoryModel> options =
                     new FirebaseRecyclerOptions.Builder<IndividualCategoryModel>()
                             .setQuery(FirebaseDatabase.getInstance().getReference().child("Cheesing"), IndividualCategoryModel.class)
@@ -348,17 +349,18 @@ public class Individual_Product extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         AddOns.clear();
-        SaveSharedPreferences();
         LoadSharedPreferences();
 
         if (PList!=null) {
                 try {
                     HomePID=PList.get(PList.size()-1);
+                    Toast.makeText(this, "Showing " + HomePID, Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
         }
+        SaveSharedPreferences();
         clearRating();
         fillDetails();
         fillRecommendedRV();
@@ -366,24 +368,21 @@ public class Individual_Product extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        AddOns.clear();
-        SaveSharedPreferences();
+
         super.onBackPressed();
+        AddOns.clear();
+
         if (PList.size()>=1) {
+
+            Toast.makeText(this, PList.get(PList.size()-1)+" is Removed", Toast.LENGTH_SHORT).show();
             int index = PList.size() - 1;
             PList.remove(index);
-            if (PList != null) {
-                SaveSharedPreferences();
-            }
+            SaveSharedPreferences();
         }
+
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        AddOns.clear();
-        SaveSharedPreferences();
-    }
+
 
     private void clearRating() {
         Star1.setVisibility(View.GONE);
@@ -423,7 +422,7 @@ public class Individual_Product extends AppCompatActivity {
                 .document(getDateTime())
                 .set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onSuccess(Void aVoid) {
+            public void onSuccess(@NonNull Void aVoid) {
                 loadingDialog.dismissDialog();
                 startActivity(new Intent(Individual_Product.this,YourMenu.class));
             }

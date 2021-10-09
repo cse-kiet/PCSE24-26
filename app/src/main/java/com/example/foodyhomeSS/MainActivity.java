@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     LoadingDialog progressBar;
     FirebaseAuth Auth;
     LinearLayout layout;
-    String SeeAll,ProductID;
+    String SeeAll,ProductID,TopCategory;
     FirebaseFirestore Store;
     ArrayList<String> PList=new ArrayList<>();
     RecyclerView MostPopular,PizzaTreatRV,BurgerTreatRV,ComboForFamilyRV,BeveragesRV,DifferentWorldRV;
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //See All TextView of all Topics
     TextView FoodySeeAll,PizzaSeeAll,BurgerSeeAll,FamilyComboSeeAll,MostPopularSeeAll,BeveragesSeeAll,DifferentWorldSeeAll;
     private NavigationBarView bottomNavigationView;
+    ImageButton PizzaIB,BurgerIB,PastaIB,IceCreamIB,FoodyOffersIB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +92,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         DifferentWorldRV=findViewById(R.id.Different_World_Treat_RecyclerView_Home);
 
         // RecyclerViews Definitions
+
+        //Top Category Image Button Definitions
+        PizzaIB=findViewById(R.id.PizzaTopCategoryImageButton);
+        PastaIB=findViewById(R.id.PastaTopCategoryImageButton);
+        BurgerIB=findViewById(R.id.BurgersTopCategoryImageButton);
+        IceCreamIB=findViewById(R.id.BeveragesTopCategoryImageButton);
+        FoodyOffersIB=findViewById(R.id.FoodyOfferTopCategoryImageButton);
+        //Top Category Image Button Definitions
 
         progressBar=new LoadingDialog(this);
         progressBar.startLoadingDialog();
@@ -252,6 +262,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BeveragesSeeAll.setOnClickListener(this);
         MostPopularSeeAll.setOnClickListener(this);
         DifferentWorldSeeAll.setOnClickListener(this);
+        PizzaIB.setOnClickListener(this);
+        PastaIB.setOnClickListener(this);
+        BurgerIB.setOnClickListener(this);
+        IceCreamIB.setOnClickListener(this);
+        FoodyOffersIB.setOnClickListener(this);
 
 
 
@@ -447,7 +462,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 SendSeeAllIntent();
                 break;
             }
+            case R.id.BeveragesTopCategoryImageButton: {
+                progressBar.startLoadingDialog();
+                TopCategory="beverages";
+                sendTopCategory();
+                break;
+            }
+            case R.id.BurgersTopCategoryImageButton: {
+                progressBar.startLoadingDialog();
+                TopCategory="burger";
+                sendTopCategory();
+                break;
+            }
+            case R.id.FoodyOfferTopCategoryImageButton: {
+                progressBar.startLoadingDialog();
+                TopCategory="foody offer";
+                sendTopCategory();
+                break;
+            }
+            case R.id.PastaTopCategoryImageButton: {
+                progressBar.startLoadingDialog();
+                TopCategory="pasta";
+                sendTopCategory();
+                break;
+            }
+            case R.id.PizzaTopCategoryImageButton: {
+                progressBar.startLoadingDialog();
+                TopCategory="pizza";
+                sendTopCategory();
+                break;
+            }
         }
+    }
+
+    private void sendTopCategory() {
+        SaveSharedPreferences();
+        progressBar.dismissDialog();
+        startActivity(new Intent(MainActivity.this,TopCategories.class));
     }
 
     private void SendSeeAllIntent() {
@@ -479,6 +530,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor=sharedPreferences.edit();
         Gson gson=new Gson();
         String json=gson.toJson(PList);
+        editor.putString("TopCategory",TopCategory);
         editor.putString("PList",json);
         editor.apply();
 

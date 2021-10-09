@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
     <string name="app_name">Foody Home</string>
     <string name="home">Home</string>
     <string name="my_menu">My Menu</string>
@@ -27,4 +27,18 @@
     <string name="signUp">SignUp</string>
     <string name="address">Address</string>
     <string name="already_registerd_login_here">Already Registerd?login here</string>
+    <string name="foody_offers">Foody Offers</string>
+    <string name="beverages_and_icecreams">Beverages and Icecreams</string>
+    <string name="pasta">Pasta</string>
+    <string name="burgers">Burgers</string>
+    <string name="pizza">Pizza</string>
+    <string name="change_or_add_address">Change or Add Address</string>
+    <string name="remove">remove</string>
+    <string name="grand_total">Grand Total</string>
+    <string name="foodyhome_special_discount">FoodyHome Special Discount</string>
+    <string name="Select_Store">Select Store</string>
+        <string-array name="Select_Store" >
+            <item >Pizza Buzzer</item>
+            <item>The Pizza Station</item>
+        </string-array>
 </resources>

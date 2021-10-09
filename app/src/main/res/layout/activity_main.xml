@@ -61,7 +61,8 @@
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical">
+                android:layout_gravity="center_vertical"
+                tools:ignore="UselessParent">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -79,18 +80,20 @@
                         android:layout_marginBottom="10dp"
                         android:layout_gravity="center_horizontal"
                         app:cardCornerRadius="90dp">
-                        <ImageView
+                        <ImageButton
+                            android:scaleType="fitXY"
                             android:padding="5dp"
-                            android:id="@+id/PizzaTopbarImageView"
+                            android:background="?actionBarItemBackground"
+                            android:id="@+id/PizzaTopCategoryImageButton"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:src="@drawable/png_pizza"
-                            />
+                            tools:ignore="ContentDescription" />
                     </androidx.cardview.widget.CardView>
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:text="Pizza"
+                        android:text="@string/pizza"
                         app:autoSizeMinTextSize="6sp"
                         app:autoSizeMaxTextSize="15sp"
                         android:layout_gravity="center_horizontal"
@@ -114,19 +117,20 @@
                             android:layout_gravity="center_horizontal"
                             app:cardCornerRadius="90dp">
 
-                            <ImageView
-                                android:id="@+id/FOodyOfferTopbarImageView"
+                            <ImageButton
+                                android:background="?actionBarItemBackground"
+                                android:id="@+id/FoodyOfferTopCategoryImageButton"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="fitXY"
                                 android:padding="10dp"
-                                android:src="@drawable/burger" />
+                                android:src="@drawable/burger"
+                                tools:ignore="ContentDescription" />
                         </androidx.cardview.widget.CardView>
 
                         <TextView
                             android:layout_width="match_parent"
-
-                            android:text="Foody Offers"
+                            android:text="@string/foody_offers"
                             app:autoSizeMinTextSize="6sp"
                             app:autoSizeMaxTextSize="15sp"
                             android:layout_gravity="center_horizontal"
@@ -149,18 +153,20 @@
                             android:layout_marginBottom="15dp"
                             android:layout_gravity="center_horizontal"
                             app:cardCornerRadius="90dp">
-                            <ImageView
-                                android:id="@+id/PastaTopbarImageView"
+                            <ImageButton
+                                android:scaleType="fitXY"
+                                android:id="@+id/PastaTopCategoryImageButton"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:src="@drawable/png_pasta"
                                 android:padding="5dp"
-                                />
+                                android:background="?actionBarItemBackground"
+                                tools:ignore="ContentDescription" />
                         </androidx.cardview.widget.CardView>
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:text="Pasta"
+                            android:text="@string/pasta"
                             app:autoSizeMinTextSize="6sp"
                             app:autoSizeMaxTextSize="15sp"
                             android:layout_gravity="center_horizontal"
@@ -183,17 +189,19 @@
                             android:layout_marginBottom="15dp"
                             android:layout_gravity="center_horizontal"
                             app:cardCornerRadius="90dp">
-                            <ImageView
-                                android:id="@+id/BeveragesTopbarImageView"
+                            <ImageButton
+                                android:scaleType="fitXY"
+                                android:background="?android:actionBarItemBackground"
+                                android:id="@+id/BeveragesTopCategoryImageButton"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:src="@drawable/png_icecream"
-                                />
+                                tools:ignore="ContentDescription" />
                         </androidx.cardview.widget.CardView>
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:text="Beverages and Icecreams"
+                            android:text="@string/beverages_and_icecreams"
                             android:layout_gravity="center_horizontal"
                             android:textAlignment="center"
                             app:autoSizeMinTextSize="6sp"
@@ -215,17 +223,20 @@
                             android:layout_marginBottom="15dp"
                             android:layout_gravity="center_horizontal"
                             app:cardCornerRadius="90dp">
-                            <ImageView
-                                android:id="@+id/BurgersTopbarImageView"
+                            <ImageButton
+                                android:scaleType="fitXY"
+                                android:padding="8dp"
+                                android:background="?android:actionBarItemBackground"
+                                android:id="@+id/BurgersTopCategoryImageButton"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:src="@drawable/burger"
-                                />
+                                tools:ignore="ContentDescription" />
                         </androidx.cardview.widget.CardView>
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:text="Burgers"
+                            android:text="@string/burgers"
                             app:autoSizeMinTextSize="6sp"
                             app:autoSizeMaxTextSize="15sp"
                             android:layout_gravity="center_horizontal"

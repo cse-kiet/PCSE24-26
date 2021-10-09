@@ -214,43 +214,20 @@
                     android:layout_marginHorizontal="5sp"
                     android:src="@drawable/ic_baseline_add_24"/>
             </LinearLayout>
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="2dp"
-                android:paddingHorizontal="10dp"
-                android:orientation="horizontal"
-                android:weightSum="2">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:backgroundTint="#c2e59c"
+                    app:backgroundTint="#c2e59c"
                     android:id="@+id/YourMenu_Remove_Button"
                     android:shadowDx="12"
-                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginHorizontal="15dp"
                     android:shadowDy="12"
-                    android:text="remove"
+                    android:text="@string/remove"
                     android:textColor="@color/black"
                     android:textStyle="bold|italic" />
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:backgroundTint="#FFC107"
-                    android:id="@+id/YourMenu_BuyNow_Button"
-                    android:shadowDx="12"
-                    android:layout_marginHorizontal="5dp"
-                    android:shadowDy="12"
-                    android:text="Buy Now"
-                    android:textColor="@color/black"
-                    android:textStyle="bold|italic" />
-            </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
