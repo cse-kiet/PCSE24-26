@@ -143,6 +143,7 @@ public class Payment_Activity extends AppCompatActivity {
 // Apply the adapter to the spinner
         spinnerSelectStore.setPrompt("Select a Store");
         spinnerSelectStore.setAdapter(adapter);
+        spinnerSelectStore.setSelection(0);
         spinnerSelectStore.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
