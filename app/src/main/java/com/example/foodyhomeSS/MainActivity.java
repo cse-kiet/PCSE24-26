@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private NavigationBarView bottomNavigationView;
     ImageButton PizzaIB,BurgerIB,PastaIB,IceCreamIB,FoodyOffersIB;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -190,8 +191,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 switch (item.getItemId()) {
                     case R.id.Drawer_Home:{
-
-
                         drawerLayout.closeDrawer(Gravity.LEFT);
                         break;
                     }
@@ -218,6 +217,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                     case R.id.Drawer_Chat_with_us: {
+
                         Intent Query=new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"+"8218655014"));
                         startActivity(Query);
                         break;
@@ -232,10 +232,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                     case R.id.Drawer_Terms_of_Use: {
                         Intent i = new Intent(MainActivity.this, Termandcondition.class);
-
                         startActivity(i);
                         finish();
                         break;
+                    }
+                    case  R.id.Drawer_My_WishList: {
+                        startActivity(new Intent(MainActivity.this,YourOrder_1.class));
                     }
 
 

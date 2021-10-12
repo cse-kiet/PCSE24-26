@@ -4,48 +4,44 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
-public class YourOrders extends AppCompatActivity {
+public class AllAddresses extends AppCompatActivity {
     RecyclerView recyclerView;
     FirebaseFirestore Store;
-    String UserId,Key;
-    YourMenu2Adapter adapter;
+    String UserId;
+    AllAddressAdapter adapter;
     LoadingDialog loadingDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_your_orders);
-        recyclerView=findViewById(R.id.YourOrders2_RecyclerView);
+        setContentView(R.layout.activity_all_addresses);
+        recyclerView=findViewById(R.id.AllAddress_RecyclerView);
         Store= FirebaseFirestore.getInstance();
         UserId= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         loadingDialog=new LoadingDialog(this);
         loadingDialog.startLoadingDialog();
-        LoadSharedPreferences();
-        if (Key!=null){
-            fillItemRV();
-        }
-
+        fillItemRV();
     }
     private void fillItemRV() {
 
-        FirestoreRecyclerOptions<YourOrder2Model> options = new FirestoreRecyclerOptions.Builder<YourOrder2Model>()
+        FirestoreRecyclerOptions<AllAddressModel> options = new FirestoreRecyclerOptions.Builder<AllAddressModel>()
                 .setQuery(Store
-                                .collection("Users")
-                                .document(UserId)
-                                .collection("YourOrders")
-                        .document(Key)
-                                .collection(Key)
-                        , YourOrder2Model.class)
+                        .collection("Users")
+                        .document(UserId)
+                        .collection("Address")
+                        , AllAddressModel.class)
                 .build();
-        adapter = new YourMenu2Adapter(options);
+        adapter = new AllAddressAdapter(options);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         adapter.startListening();
@@ -54,9 +50,5 @@ public class YourOrders extends AppCompatActivity {
     }
 
     private void AdapterSetOnClick() {
-    }
-    private void LoadSharedPreferences() {
-        SharedPreferences sharedPreferences=getSharedPreferences("Shared Preferences",MODE_PRIVATE);
-        Key=sharedPreferences.getString("KeyYO1","");
     }
 }

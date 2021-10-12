@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -80,14 +81,34 @@ public class Payment_Activity extends AppCompatActivity {
         spinnerSelectStore = findViewById(R.id.spinner_Payment_Activity);
         setInfoString();
         setSpinnerAdapter();
+        ChangeAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Payment_Activity.this,AllAddresses.class));
+            }
+        });
         PlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Info0!=null){
-                    Info0=Info0+Phone0;
-                    SaveSharedPreferences();
+
+                if(TextUtils.isEmpty(NameAS.getText().toString())){
+                    NameAS.setError("Required");
                 }
-                startActivity(new Intent(Payment_Activity.this,Razorpay.class));
+                if(TextUtils.isEmpty(PhoneAS.getText().toString())){
+                    PhoneAS.setError("Required");
+                }
+                if(TextUtils.isEmpty(AddressAS.getText().toString())){
+                    AddressAS.setError("Required");
+                }
+               if (!TextUtils.isEmpty(NameAS.getText().toString()) && !TextUtils.isEmpty(PhoneAS.getText().toString()) && !TextUtils.isEmpty(AddressAS.getText().toString()))
+                    if (Info0!=null){
+                        Info0=Info0+Phone0;
+                        SaveSharedPreferences();
+                        startActivity(new Intent(Payment_Activity.this,Razorpay.class));
+                    }
+
+
+
             }
         });
         DownloadDataList();
@@ -109,11 +130,6 @@ public class Payment_Activity extends AppCompatActivity {
                         double Total=TotalPay+tax-Discount;
                         ITotal = (int) Total+1;
                         GrandTotal.setText("Rs  "+ITotal);
-                        if (Info0!=null){
-                            Info0=Info0+Phone0;
-                        }
-
-
                     }
                 }
 
@@ -137,22 +153,23 @@ public class Payment_Activity extends AppCompatActivity {
 
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.Select_Store, android.R.layout.simple_spinner_item);
+                R.array.Select_Store, R.layout.color_spinner);
 // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
         spinnerSelectStore.setPrompt("Select a Store");
         spinnerSelectStore.setAdapter(adapter);
+        spinnerSelectStore.setPrompt("Select Store");
         spinnerSelectStore.setSelection(0);
         spinnerSelectStore.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
-                    case 0:{
+                    case 1:{
                         Toast.makeText(Payment_Activity.this, "Pizza Buzzer", Toast.LENGTH_SHORT).show();
                         break;
                     }
-                    case 1:{
+                    case 2:{
                         Toast.makeText(Payment_Activity.this, "The Pizza Station", Toast.LENGTH_SHORT).show();
                         break;
                     }
@@ -223,7 +240,7 @@ public class Payment_Activity extends AppCompatActivity {
                 assert value != null;
                 NameAS.setText(value.getString("Name"));
                 PhoneAS.setText(value.getString("Phone"));
-                Info0=value.getString("Address")+", "+value.getString("PinCode");
+                Info0=value.getString("Address")+", "+value.getString("PinCode")+ ", ";
                 AddressAS.setText(Info0);
             }
         });

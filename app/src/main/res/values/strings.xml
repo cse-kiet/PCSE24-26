@@ -37,8 +37,9 @@
     <string name="grand_total">Grand Total</string>
     <string name="foodyhome_special_discount">FoodyHome Special Discount</string>
     <string name="Select_Store">Select Store</string>
-        <string-array name="Select_Store" >
-            <item >Pizza Buzzer</item>
-            <item>The Pizza Station</item>
-        </string-array>
+    <string-array name="Select_Store">
+        <item>Select Store</item>
+        <item>Pizza Buzzer</item>
+        <item>The Pizza Station</item>
+    </string-array>
 </resources>

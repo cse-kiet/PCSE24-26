@@ -155,9 +155,8 @@ public class otp_login extends AppCompatActivity {
                             String UserID=Auth.getCurrentUser().getUid();
                             DocumentReference documentReference=FireStore.collection("Users").document(UserID);
                             Map<String,Object> user= new HashMap<>();
-                            user.put("Phone Number",UserPhoneNumber);
-                            documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-
+                            user.put("Phone",UserPhoneNumber);
+                            documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
 
                                 @Override
                                 public void onSuccess(@NonNull Void aVoid) {

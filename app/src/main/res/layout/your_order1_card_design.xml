@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#171717"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"
+        android:layout_marginHorizontal="20dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/YourOrder1_Address_TV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:paddingHorizontal="15dp"
+                android:singleLine="false"
+                android:text="Address"
+                android:textColor="@color/black"
+                app:autoSizeMaxTextSize="18sp"
+                app:autoSizeMinTextSize="16sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/YourOrder1_TotalPay_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:singleLine="false"
+                android:text="Rs 450/-"
+                android:textColor="@color/purple_700"
+                app:autoSizeMaxTextSize="17sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/YourOrder1_Address_TV" />
+
+            <TextView
+                android:id="@+id/YourOrder1_Date_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="25dp"
+                android:singleLine="false"
+                android:text="1 day ago"
+                android:textColor="@color/purple_500"
+                app:autoSizeMaxTextSize="17sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/YourOrder1_Address_TV" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="15dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginHorizontal="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/YourOrder1_TotalPay_TV">
+
+                <Button
+                    android:id="@+id/YourOrder1_Track_Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_weight="1"
+                    android:text="Track"
+                    android:textColor="@color/black"
+                    app:backgroundTint="@color/Spanish_Yellow"
+                    app:autoSizeMaxTextSize="17sp"
+                    app:autoSizeMinTextSize="12sp"
+                    app:autoSizeTextType="uniform" />
+
+                <Button
+                    android:id="@+id/YourOrder1_Help_Button"
+                    android:textColor="@color/black"
+                    app:backgroundTint="#FF6C3D"                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_weight="1"
+                    android:text="Help"
+                    app:autoSizeMaxTextSize="17sp"
+                    app:autoSizeMinTextSize="14sp"
+                    app:autoSizeTextType="uniform" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -38,7 +39,7 @@ import java.util.Objects;
 public class Razorpay extends AppCompatActivity  implements PaymentResultListener {
     TextView Paytext;
     FirebaseAuth Auth;
-    String currentuser;
+    String currentuser,DateCode,Date;
     ArrayList<YourMenuPayModel> DataList;
     FirebaseFirestore Store;
     String UserId,Address;
@@ -171,41 +172,61 @@ public class Razorpay extends AppCompatActivity  implements PaymentResultListene
     private void SetDataListToYourOrders(){
         loadingDialog.startLoadingDialog();
         FirebaseFirestore Store1;
+        DateCode=getDateTime();
+        Date=getDate();
         Store1=FirebaseFirestore.getInstance();
-        DocumentReference documentReference=Store1.collection("Users").document(UserId);
-        Map<String, Object> user = new HashMap<>();
+        Map<String, Object> user1 = new HashMap<>();
+        DocumentReference documentReference=Store1
+                .collection("Users")
+                .document(UserId)
+                .collection("YourOrders")
+                .document(DateCode);
+        CollectionReference collectionReference=
+                documentReference
+                .collection(DateCode);
         for (int i=0;i<DataList2.size();i++){
-                user.put("Name"+i, DataList2.get(i).getName());
-                user.put("Price"+i, DataList2.get(i).getPrice());
-                user.put("Image"+i, DataList2.get(i).getImage());
-                user.put("MRP"+i, DataList2.get(i).getMRP());
-                user.put("QTY"+i,DataList2.get(i).getQTY());
+
+            Map<String, Object> user = new HashMap<>();
+                user.put("Name", DataList2.get(i).getName());
+                user.put("Price", DataList2.get(i).getPrice());
+                user.put("Image", DataList2.get(i).getImage());
+                user.put("MRP", DataList2.get(i).getMRP());
+                user.put("QTY",DataList2.get(i).getQTY());
                 if (DataList2.get(i).getAddOn0()!=null){
-                    user.put("AddOn0"+i,DataList2.get(i).getAddOn0());
+                    user.put("AddOn0",DataList2.get(i).getAddOn0());
                 }
                 if (DataList2.get(i).getAddOn0()!=null){
-                    user.put("AddOn1"+i,DataList2.get(i).getAddOn1());
+                    user.put("AddOn1",DataList2.get(i).getAddOn1());
                 }
                 if (DataList2.get(i).getAddOn0()!=null){
-                    user.put("AddOn2"+i,DataList2.get(i).getAddOn2());
+                    user.put("AddOn2",DataList2.get(i).getAddOn2());
                 }
                 if (DataList2.get(i).getAddOn0()!=null){
-                    user.put("AddOn3"+i,DataList2.get(i).getAddOn3());
+                    user.put("AddOn3",DataList2.get(i).getAddOn3());
                 }
+            collectionReference
+                    .document(String.valueOf(i))
+                    .set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(@NonNull Void aVoid) {
+                    loadingDialog.dismissDialog();
+
+                }
+            });
         }
             if (Address!=null){
-                user.put("Address",Address);
+                user1.put("Address",Address);
             }
+            user1.put("Date",Date);
+            user1.put("TotalPay",TotalPay/100);
+            user1.put("Code",DateCode);
 
         documentReference
-                .collection("YourOrders")
-                .document(getDateTime())
-                .set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                .set(user1).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(@NonNull Void aVoid) {
-                loadingDialog.dismissDialog();
-                finishAffinity();
-                startActivity(new Intent(Razorpay.this,MainActivity.class));
+                finish();
+                startActivity(new Intent(Razorpay.this,YourOrder_1.class));
             }
         });
     }
@@ -218,6 +239,11 @@ public class Razorpay extends AppCompatActivity  implements PaymentResultListene
     }
     private String getDateTime() {
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+    private String getDate() {
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         Date date = new Date();
         return dateFormat.format(date);
     }

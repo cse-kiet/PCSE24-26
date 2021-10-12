@@ -6,7 +6,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,12 +43,15 @@ public class SearchUniversal extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     String type,ProductID;
     FirebaseFirestore Store;
+    LoadingDialog loadingDialog;
+    ArrayList<String> PList=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_universal);
         toolbar=findViewById(R.id.Toolbar_Universal_Search);
         setSupportActionBar(toolbar);
+        loadingDialog=new LoadingDialog(this);
         recyclerView=findViewById(R.id.RecyclerViewSearchUniversal);
         Store=FirebaseFirestore.getInstance();
         FirebaseDatabase.getInstance().getReference().child("Tags")
@@ -70,8 +76,6 @@ public class SearchUniversal extends AppCompatActivity {
                         Toast.makeText(SearchUniversal.this, "Error!!!", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
 
 
     }
@@ -158,6 +162,7 @@ public class SearchUniversal extends AppCompatActivity {
         adapter.setOnItemCLickListener(new AllProductAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(DataSnapshot dataSnapshot, int position) {
+                loadingDialog.startLoadingDialog();
                 ProductID= Objects.requireNonNull(dataSnapshot.getKey());
                 Map<String, Object> user = new HashMap<>();
                 user.put("HomePID", ProductID);
@@ -166,10 +171,28 @@ public class SearchUniversal extends AppCompatActivity {
                 documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        PList.add(ProductID);
+                        SaveSharedPreferences();
+                        loadingDialog.dismissDialog();
                         startActivity(new Intent(SearchUniversal.this,Individual_Product.class));
                     }
                 });
             }
         });
+    }
+    private void SaveSharedPreferences() {
+        SharedPreferences sharedPreferences=getSharedPreferences("Shared Preferences",MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor=sharedPreferences.edit();
+        Gson gson=new Gson();
+        String json=gson.toJson(PList);
+        editor.putString("PList",json);
+        editor.apply();
+
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        PList.clear();
+        fillRecyclerView();
     }
 }

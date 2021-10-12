@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#171717"
-    tools:context=".YourOrders">
+    tools:context=".YourOrder_1">
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -30,7 +30,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="60dp"
-        android:id="@+id/YourOrders2_RecyclerView"
+        android:id="@+id/YourOrder1_RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="243dp"
