@@ -239,8 +239,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case  R.id.Drawer_My_WishList: {
                         startActivity(new Intent(MainActivity.this,YourOrder_1.class));
                     }
-
-
+                    case R.id.Drawer_Profile: {
+                        startActivity(new Intent(MainActivity.this, profile.class));
+                    }
                 }
                 return true;
             }

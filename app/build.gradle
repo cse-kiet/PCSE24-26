@@ -77,4 +77,5 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-firestore:4.1.0'
     implementation 'com.google.firebase:firebase-core:19.0.1'
     implementation 'com.razorpay:checkout:1.6.12'
+
 }

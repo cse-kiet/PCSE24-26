@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodyHome">
-        <activity android:name=".YourOrder_1"></activity>
+        <activity android:name=".profile"></activity>
+        <activity android:name=".YourOrder_1" />
         <activity android:name=".AllAddresses" />
         <activity android:name=".NoConnection" />
         <activity android:name=".YourOrders" />
