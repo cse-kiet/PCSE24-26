@@ -54,7 +54,7 @@ public class Payment_Activity extends AppCompatActivity {
     LoadingDialog loadingDialog;
     Button ChangeAddress,PlaceOrder,B10,B25,B50,B75;
     TextView NameAS,AddressAS,PhoneAS,TotalItem,TotalPrice,OtherTaxes,SpecialDiscount,GrandTotal;
-    String Info0,Info1,Info2,Info3,Info4,Phone0;
+    String Info0,Name0,Phone0,Email0;
     int ITotal=0;
     ArrayList<YourMenuPayModel> DataList;
     Spinner spinnerSelectStore;
@@ -78,9 +78,7 @@ public class Payment_Activity extends AppCompatActivity {
         OtherTaxes=findViewById(R.id.Other_Taxes_TV_Payment_Activity);
         SpecialDiscount=findViewById(R.id.FoodyHome_Special_DiscountTV_Payment_Activity);
         GrandTotal=findViewById(R.id.Grand_TotalTV_DiscountTV_Payment_Activity);
-        spinnerSelectStore = findViewById(R.id.spinner_Payment_Activity);
-        setInfoString();
-        setSpinnerAdapter();
+
         ChangeAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,9 +100,9 @@ public class Payment_Activity extends AppCompatActivity {
                 }
                if (!TextUtils.isEmpty(NameAS.getText().toString()) && !TextUtils.isEmpty(PhoneAS.getText().toString()) && !TextUtils.isEmpty(AddressAS.getText().toString()))
                     if (Info0!=null){
-                        Info0=Info0+Phone0;
+                        Info0=Name0+Info0+Phone0;
                         SaveSharedPreferences();
-                        startActivity(new Intent(Payment_Activity.this,Razorpay.class));
+                        startActivity(new Intent(Payment_Activity.this,SelectStore.class));
                     }
 
 
@@ -149,44 +147,15 @@ public class Payment_Activity extends AppCompatActivity {
         fillItemRV();
     }
 
-    private void setSpinnerAdapter() {
 
-// Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.Select_Store, R.layout.color_spinner);
-// Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        spinnerSelectStore.setPrompt("Select a Store");
-        spinnerSelectStore.setAdapter(adapter);
-        spinnerSelectStore.setPrompt("Select Store");
-        spinnerSelectStore.setSelection(0);
-        spinnerSelectStore.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
-                    case 1:{
-                        Toast.makeText(Payment_Activity.this, "Pizza Buzzer", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
-                    case 2:{
-                        Toast.makeText(Payment_Activity.this, "The Pizza Station", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
 
     private void SaveSharedPreferences() {
         SharedPreferences sharedPreferences=getSharedPreferences("Shared Preferences",MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor=sharedPreferences.edit();
         editor.putInt("RazorPayTP",ITotal);
+        editor.putString("Name",Name0);
+        editor.putString("Phone",Phone0);
+        editor.putString("Email",Email0);
         if (Info0!=null){
             editor.putString("Address",Info0);
         }
@@ -238,41 +207,18 @@ public class Payment_Activity extends AppCompatActivity {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                 assert value != null;
-                NameAS.setText(value.getString("Name"));
-                PhoneAS.setText(value.getString("Phone"));
+                Name0=value.getString("Name");
+                NameAS.setText(Name0);
+                Phone0=value.getString("Phone");
+                Email0=value.getString("Email");
+                PhoneAS.setText(Phone0);
                 Info0=value.getString("Address")+", "+value.getString("PinCode")+ ", ";
                 AddressAS.setText(Info0);
             }
         });
     }
 
-    private void setInfoString() {
 
-        DocumentReference documentReference=Store
-                                            .collection("Users")
-                                            .document(UserId);
-        documentReference.addSnapshotListener( new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                assert value != null;
-
-
-                    Info1=value.getString("Name")+", "+value.getString("Phone")+", "+value.getString("Address")+", "+value.getString("PinCode");
-                    Phone0=value.getString("Phone");
-                    Info2=value.getString("Name1")+", "+value.getString("Phone1")+", "+value.getString("Address1")+", "+value.getString("PinCode1");
-
-                if (value.getString("Address2")!=null&& value.getString("Phone2")!=null&&value.getString("PinCode2")!=null){
-                    Info3=value.getString("Name2")+", "+value.getString("Phone2")+", "+value.getString("Address2")+", "+value.getString("PinCode2");
-
-                }
-                if (value.getString("Address3")!=null&& value.getString("Phone3")!=null&&value.getString("PinCode3")!=null){
-                    Info4=value.getString("Name3")+", "+value.getString("Phone3")+", "+value.getString("Address3")+", "+value.getString("PinCode3");
-
-                }
-            }
-        });
-
-    }
 
 
     private void fillItemRV() {
@@ -319,9 +265,6 @@ public class Payment_Activity extends AppCompatActivity {
                 }
             }
         }.start();
-
-
-
     }
 
 }

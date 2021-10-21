@@ -4,6 +4,186 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#103059"
     tools:context=".SignUp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:alpha="0.6"
+        android:background="@drawable/cardview_left_corner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </LinearLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="130dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F1A13A"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:paddingEnd="20dp"
+                android:text="Update Profile"
+                android:textColor="#000000"
+                android:gravity="center"
+                app:autoSizeMaxTextSize="20sp"
+                app:autoSizeTextType="uniform"
+                tools:ignore="RtlSymmetry" />
+
+
+
+
+                <EditText
+                    android:id="@+id/Name_signUP2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10sp"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/custom_button"
+                    android:hint="Name"
+                    android:inputType="textMultiLine"
+                    android:textColor="#103059"
+                    android:layout_marginTop="15dp"
+                    android:paddingHorizontal="10dp"
+                    app:autoSizeTextType="uniform" />
+
+
+
+                <EditText
+                    android:id="@+id/Address_signUP2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10sp"
+                    android:paddingHorizontal="10dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/custom_button"
+                    android:hint="@string/address"
+                    android:inputType="textMultiLine"
+                    android:textSize="17sp"
+                    android:singleLine="false"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#103059" />
+            <EditText
+                android:id="@+id/Phone_signUP2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="10sp"
+                android:paddingHorizontal="10dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/custom_button"
+                android:hint="Phone"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMaxTextSize="17sp"
+                app:autoSizeMinTextSize="12sp"
+                android:layout_marginTop="15dp"
+                android:inputType="number"
+                android:textColor="#103059"
+                tools:ignore="TextFields" />
+            <EditText
+                android:id="@+id/PinCode_signUP2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="10sp"
+                android:paddingHorizontal="10dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/custom_button"
+                android:hint="PinCode"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMaxTextSize="17sp"
+                app:autoSizeMinTextSize="12sp"
+                android:layout_marginTop="15dp"
+                android:inputType="number"
+                android:textColor="#103059" />
+
+            <EditText
+                android:id="@+id/Email_signUP2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="10sp"
+                android:paddingHorizontal="10dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/custom_button"
+                android:hint="Email"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMaxTextSize="17sp"
+                app:autoSizeMinTextSize="12sp"
+                android:layout_marginTop="15dp"
+                android:inputType="textWebEmailAddress"
+                android:textColor="#103059" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content">
+
+
+                <Button
+                    android:id="@+id/UpdateButton_signUP2"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:text="Update"
+                    android:textColor="#191970"
+                    app:background="@drawable/custom_button"
+                    app:backgroundTint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar_signUP2"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="140dp"
+        android:layout_height="160dp"
+        android:alpha="0.7"
+        android:background="@drawable/cardview_top_left_corner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal">
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

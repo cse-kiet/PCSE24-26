@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="wrap_content">
 
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         app:cardCornerRadius="2dp"
         app:cardElevation="8dp"
-        android:layout_margin="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,23 +28,22 @@
 
             <TextView
                 android:id="@+id/Name_Address_Section_Address_Card"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_margin="8dp"
                 android:paddingEnd="80dp"
+                android:singleLine="false"
                 android:text="Samanvay Arya"
                 android:textColor="@color/black"
                 android:textStyle="bold|italic"
-                app:autoSizeMaxTextSize="18sp"
+                app:autoSizeMaxTextSize="16sp"
                 app:autoSizeTextType="uniform"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="RtlSymmetry" />
 
             <TextView
-                android:id="@+id/Address_Address_Section_Address_Card"
+                android:id="@+id/Address_Default_Address_Profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
@@ -52,7 +51,7 @@
                 android:singleLine="false"
                 android:text="Krishna puri kaloni , Budhana ,Muzaffarnagar ,251309"
                 android:textColor="@color/black"
-                android:textSize="17sp"
+                android:textSize="14sp"
                 android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -60,7 +59,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/Name_Address_Section_Address_Card" />
 
             <TextView
-                android:id="@+id/Phone_Address_Section_Address_Card"
+                android:id="@+id/Phone_Default_Address_Profile"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginHorizontal="15dp"
@@ -69,22 +68,25 @@
                 android:text="9410264395"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                app:autoSizeMaxTextSize="17sp"
+                app:autoSizeMaxTextSize="15sp"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Address_Address_Section_Address_Card" />
+                app:layout_constraintTop_toBottomOf="@+id/Address_Default_Address_Profile" />
 
-            <Button
-                style="@style/Widget.MaterialComponents.TimePicker.Button"
-                android:layout_width="80dp"
-                android:layout_height="40dp"
-                android:text="EDIT"
-                app:layout_constraintBottom_toBottomOf="@+id/Name_Address_Section_Address_Card"
+
+            <ImageButton
+                android:id="@+id/AllAddress_RemoveImageButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:scaleType="center"
+                android:background="?actionBarItemBackground"
+                app:srcCompat="@drawable/ic_baseline_cancel_24"
+                tools:ignore="VectorDrawableCompat" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

@@ -42,7 +42,7 @@ public class YourOrder_1 extends AppCompatActivity {
                 .setQuery(Store
                                 .collection("Users")
                                 .document(UserId)
-                                .collection("YourOrders")
+                                .collection("YourOrders").orderBy("Code",Query.Direction.DESCENDING)
                         , YourOrder_1_Model.class)
                 .build();
         adapter = new YourOder_1_Adapter(options);

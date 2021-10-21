@@ -69,7 +69,7 @@
                         android:src="@drawable/ic_baseline_star_24" />
 
                     <TextView
-                        android:id="@+id/AllProductUniversal_Product_Star_Rating"
+                        android:id="@+id/Store_Rating_SelectStore_TV"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1.2"

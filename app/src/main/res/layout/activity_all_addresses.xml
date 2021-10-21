@@ -33,6 +33,9 @@
             android:layout_height="match_parent"
             android:background="#103059"
             android:orientation="horizontal"
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/ConstraintLayout_All_Address"
             tools:ignore="UseCompoundDrawables">
 
             <ImageView

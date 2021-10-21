@@ -47,7 +47,7 @@ public class AllProductAdapter extends FirebaseRecyclerAdapter<AllProductModel,A
             Name=itemView.findViewById(R.id.AllProductUniversal_Product_Name);
             Price=itemView.findViewById(R.id.AllProductUniversal_Product_Price);
             MRP=itemView.findViewById(R.id.AllProductUniversal_Product_MRP);
-            Rating=itemView.findViewById(R.id.AllProductUniversal_Product_Star_Rating);
+            Rating=itemView.findViewById(R.id.Store_Rating_SelectStore_TV);
             Discount=itemView.findViewById(R.id.AllProductUniversal_Product_Discount);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
