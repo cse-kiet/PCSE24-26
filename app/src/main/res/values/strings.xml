@@ -2,7 +2,7 @@
     <string name="app_name">Foody Home</string>
     <string name="home">Home</string>
     <string name="my_menu">My Menu</string>
-    <string name="my_wishlist">My WishList</string>
+    <string name="my_wishlist">My Orders</string>
     <string name="discount_and_offers">Discount and Offers</string>
     <string name="logout">Logout</string>
     <string name="your_profile">Your Profile</string>

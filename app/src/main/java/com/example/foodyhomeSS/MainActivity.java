@@ -233,14 +233,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case R.id.Drawer_Terms_of_Use: {
                         Intent i = new Intent(MainActivity.this, Termandcondition.class);
                         startActivity(i);
-                        finish();
                         break;
                     }
                     case  R.id.Drawer_My_WishList: {
                         startActivity(new Intent(MainActivity.this,YourOrder_1.class));
+                        break;
                     }
                     case R.id.Drawer_Profile: {
                         startActivity(new Intent(MainActivity.this, profile.class));
+                        break;
+                    }
+                    case R.id.Drawer_Refund_Policy:{
+                        startActivity(new Intent(MainActivity.this,SelectStore.class));
+                        break;
                     }
                 }
                 return true;

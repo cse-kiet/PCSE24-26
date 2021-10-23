@@ -42,7 +42,7 @@ public class Razorpay extends AppCompatActivity  implements PaymentResultListene
     String currentuser,DateCode,Date;
     ArrayList<YourMenuPayModel> DataList;
     FirebaseFirestore Store;
-    String UserId,Address;
+    String UserId,Address,Name,Phone,Email,shop;
     LoadingDialog loadingDialog;
     Integer TotalPay=0;
     ArrayList<YourMenuModel> DataList2;
@@ -61,6 +61,7 @@ public class Razorpay extends AppCompatActivity  implements PaymentResultListene
         LoadSharedPreferences();
         loadingDialog.startLoadingDialog();
         DataList2=new ArrayList<YourMenuModel>();
+        Toast.makeText(this, Phone+" "+Email, Toast.LENGTH_SHORT).show();
         DownloadDataList();
         new CountDownTimer(3000,1000){
 
@@ -95,6 +96,10 @@ public class Razorpay extends AppCompatActivity  implements PaymentResultListene
         SharedPreferences sharedPreferences=getSharedPreferences("Shared Preferences",MODE_PRIVATE);
         TotalPay=sharedPreferences.getInt("RazorPayTP",0);
         Address=sharedPreferences.getString("Address","");
+        Name=sharedPreferences.getString("Name","");
+        Phone=sharedPreferences.getString("Phone","");
+        Email=sharedPreferences.getString("Email","");
+        shop=sharedPreferences.getString("Store","");
     }
 
     public void startPayment() {
@@ -128,8 +133,8 @@ public class Razorpay extends AppCompatActivity  implements PaymentResultListene
             options.put("theme.color", "#F4C886");
             options.put("currency", "INR");
             options.put("amount", TotalPay);//pass amount in currency subunits
-            options.put("prefill.contact", "8218305987");
-            options.put("prefill.Email", "shoryagarg69@gmail.com");
+            options.put("prefill.contact", "9410264395");
+            options.put("prefill.Email", "samanvay004dev@gmail.com");
             JSONObject retryObj = new JSONObject();
             retryObj.put("enabled", true);
             retryObj.put("max_count", 4);
@@ -220,6 +225,8 @@ public class Razorpay extends AppCompatActivity  implements PaymentResultListene
             user1.put("Date",Date);
             user1.put("TotalPay",TotalPay/100);
             user1.put("Code",DateCode);
+            user1.put("Store",shop);
+            user1.put("Email",Email);
 
         documentReference
                 .set(user1).addOnSuccessListener(new OnSuccessListener<Void>() {

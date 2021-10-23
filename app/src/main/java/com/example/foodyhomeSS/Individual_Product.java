@@ -318,7 +318,7 @@ public class Individual_Product extends AppCompatActivity {
         SaveSharedPreferences();
             FirebaseRecyclerOptions<IndividualCategoryModel> options =
                     new FirebaseRecyclerOptions.Builder<IndividualCategoryModel>()
-                            .setQuery(FirebaseDatabase.getInstance().getReference().child("Cheesing"), IndividualCategoryModel.class)
+                            .setQuery(FirebaseDatabase.getInstance().getReference().child("Products").child(HomePID).child("cheesing"), IndividualCategoryModel.class)
                             .build();
             Cheesing = new IndividualCategoryAdapter(options);
             CheesingRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
