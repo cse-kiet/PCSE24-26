@@ -41,13 +41,18 @@ public class location extends AppCompatActivity {
 //        client = LocationServices.getFusedLocationProviderClient(this);
         //smf = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.Google_map);
         Delivery.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(location.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
 
                 } else {
+
+
                     getCurrentLocation();
+
+
                 }
             }
         });
@@ -68,6 +73,8 @@ public class location extends AppCompatActivity {
     }
 
     private void getCurrentLocation() {
+
+
 
         progress.setVisibility(View.VISIBLE);
         LocationRequest locationrequest = new LocationRequest();
@@ -105,6 +112,8 @@ public class location extends AppCompatActivity {
                                         )
 
                                 );
+
+
                             }
                             progress.setVisibility(View.GONE);
                         }
