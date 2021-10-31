@@ -236,7 +236,7 @@ public class Sign_up_activity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
-                            Intent i = new Intent(Sign_up_activity.this, MainActivity.class);
+                            Intent i = new Intent(Sign_up_activity.this, SignUp.class);
                             startActivity(i);
                             finish();
                         } else {

@@ -70,7 +70,7 @@ public class Individual_Product extends AppCompatActivity {
     View MRPView;
     LoadingDialog loadingDialog;
     ArrayList<String> PList,AddOns=new ArrayList<>();
-    int count=1;
+   Integer TAddOn=0,temp=0;
     Button AddToMenuButton;
 
 
@@ -328,16 +328,21 @@ public class Individual_Product extends AppCompatActivity {
             @Override
             public void onItemClick(DataSnapshot dataSnapshot, int position) {
 
+
                 String s= Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
                 if (AddOns.contains(s)) {
                     AddOns.remove(s);
                     SaveSharedPreferences();
-                    Toast.makeText(Individual_Product.this, s+" is removed", Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    String tAO= Objects.requireNonNull(dataSnapshot.child("Price").getValue()).toString()
+                            .replace("Rs ","").replace("/-","");
+                    temp=Integer.parseInt(tAO);
+                    Toast.makeText(Individual_Product.this, ""+tAO, Toast.LENGTH_SHORT).show();
+                    TAddOn+=temp;
                     AddOns.add(s);
                     SaveSharedPreferences();
-                    Toast.makeText(Individual_Product.this, ""+s, Toast.LENGTH_SHORT).show();
+
                 }
 
             }
@@ -349,12 +354,12 @@ public class Individual_Product extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         AddOns.clear();
+        TAddOn=0;
         LoadSharedPreferences();
 
         if (PList!=null) {
                 try {
                     HomePID=PList.get(PList.size()-1);
-                    Toast.makeText(this, "Showing " + HomePID, Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -371,10 +376,10 @@ public class Individual_Product extends AppCompatActivity {
 
         super.onBackPressed();
         AddOns.clear();
+        TAddOn=0;
 
         if (PList.size()>=1) {
 
-            Toast.makeText(this, PList.get(PList.size()-1)+" is Removed", Toast.LENGTH_SHORT).show();
             int index = PList.size() - 1;
             PList.remove(index);
             SaveSharedPreferences();
@@ -405,7 +410,8 @@ public class Individual_Product extends AppCompatActivity {
 //        loadingDialog.startLoadingDialog();
         Map<String, Object> user = new HashMap<>();
         user.put("Name", PName.getText().toString());
-        user.put("Price", PPRice.getText().toString());
+        String price=PPRice.getText().toString().replace("Rs ","").replace("/-","");
+        temp=Integer.parseInt(price);
         user.put("Image", SImage);
         user.put("Discount",Discount.getText().toString() );
         user.put("MRP", sMRP);
@@ -416,6 +422,7 @@ public class Individual_Product extends AppCompatActivity {
             for (int i = 0; i < AddOns.size(); i++)
                 user.put("AddOn"+i,AddOns.get(i));
         }
+        user.put("Price","Rs " +String.valueOf(temp+TAddOn)+"/-");
 
         documentReference
                 .collection("YourMenu")

@@ -160,9 +160,8 @@ public class otp_login extends AppCompatActivity {
 
                                 @Override
                                 public void onSuccess(@NonNull Void aVoid) {
-                                    Intent i = new Intent(otp_login.this, MainActivity.class);
-                                    startActivity(i);
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+                                    Intent intent = new Intent(getApplicationContext(), SignUp.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
                                     finish();

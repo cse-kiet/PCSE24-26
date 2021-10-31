@@ -1,8 +1,10 @@
 package com.example.foodyhomeSS;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -21,12 +23,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.interfaces.ItemClickListener;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.datepicker.MaterialCalendar;
@@ -34,7 +42,10 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.auth.User;
@@ -48,6 +59,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -68,9 +80,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     AllProductAdapter MostPopularAdapter;
     IndividualCategoryAdapter PizzaTreatAdapter,BurgerTreatAdapter,ComboForFamilyAdapter,BeveragesAdapter,DifferentWorldAdapter;
     //See All TextView of all Topics
-    TextView FoodySeeAll,PizzaSeeAll,BurgerSeeAll,FamilyComboSeeAll,MostPopularSeeAll,BeveragesSeeAll,DifferentWorldSeeAll;
+    TextView PizzaSeeAll,BurgerSeeAll,FamilyComboSeeAll,MostPopularSeeAll,BeveragesSeeAll,DifferentWorldSeeAll;
     private NavigationBarView bottomNavigationView;
     ImageButton PizzaIB,BurgerIB,PastaIB,IceCreamIB,FoodyOffersIB;
+    List<SlideModel> sliderImages=new ArrayList<SlideModel>();
+    ImageSlider top_sliderView;
 
 
     @Override
@@ -100,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BurgerIB=findViewById(R.id.BurgersTopCategoryImageButton);
         IceCreamIB=findViewById(R.id.BeveragesTopCategoryImageButton);
         FoodyOffersIB=findViewById(R.id.FoodyOfferTopCategoryImageButton);
+        top_sliderView = findViewById(R.id.Top_Slider_View);
         //Top Category Image Button Definitions
 
         progressBar=new LoadingDialog(this);
@@ -112,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fillComboForFamily();
         fillBeverages();
         fillDifferentWorld();
+        fillSlider();
         new CountDownTimer(10000,10){
 
             @Override
@@ -167,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Toast.makeText(MainActivity.this, "Notification", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.Toolbar_share:
+
                         layout.setVisibility(View.VISIBLE);
                         Intent sendIntent = new Intent();
                         sendIntent.setAction(Intent.ACTION_SEND);
@@ -195,10 +212,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
                     }
                     case R.id.Drawer_Call_us: {
-                        Intent call=new Intent(Intent.ACTION_CALL);
-                        call.setData(Uri.parse("tel:" +"9410264395"));
-                        startActivity(call);
-                        break;
+                        int result = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE);
+                        if (result == PackageManager.PERMISSION_GRANTED) {
+                            Intent call=new Intent(Intent.ACTION_CALL);
+                            call.setData(Uri.parse("tel:" +"9410264395"));
+                            startActivity(call);
+                            break;
+                        }
+                        else {
+                            ActivityCompat.requestPermissions(MainActivity.this, new String[] { Manifest.permission.CALL_PHONE },1);
+                            break;
+                        }
+
 
                     }
                     case R.id.Drawer_share_app: {
@@ -247,13 +272,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         startActivity(new Intent(MainActivity.this,SelectStore.class));
                         break;
                     }
+
                 }
                 return true;
             }
         });
 
         // TextView for See All of all Topics
-        FoodySeeAll=findViewById(R.id.Foody_Special_Treat_See_All);
         PizzaSeeAll=findViewById(R.id.Pizza_Treat_See_All);
         BurgerSeeAll=findViewById(R.id.Burger_Treat_See_All);
         FamilyComboSeeAll=findViewById(R.id.Combo_for_Family_See_All);
@@ -262,8 +287,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         DifferentWorldSeeAll=findViewById(R.id.Different_World_See_All);
 
         //Calling Onclick Method for See All of all Topics
-
-        FoodySeeAll.setOnClickListener(this);
         PizzaSeeAll.setOnClickListener(this);
         BurgerSeeAll.setOnClickListener(this);
         FamilyComboSeeAll.setOnClickListener(this);
@@ -284,6 +307,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+    }
+
+    private void fillSlider() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference Trending_topic_1_reference = database.getReference().child("SliderHome");
+        Trending_topic_1_reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    sliderImages.add(new SlideModel(Objects.requireNonNull(dataSnapshot.child("Image").getValue()).toString(), ScaleTypes.FIT));
+                }
+                top_sliderView.setImageList(sliderImages,ScaleTypes.FIT);
+                top_sliderView.setItemClickListener(new ItemClickListener() {
+                    @Override
+                    public void onItemSelected(int i) {
+//                        sliderImages.get(i).getTitle();
+                        Toast.makeText(MainActivity.this, ""+sliderImages.get(i).getImageUrl(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void fillDifferentWorld() {
@@ -433,9 +482,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.Foody_Special_Treat_See_All:{
-                break;
-            }
+
             case R.id.Most_Popular_Treat_See_All:{
                 progressBar.startLoadingDialog();
                 SeeAll="most popular";

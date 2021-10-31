@@ -41,9 +41,9 @@ public class YourOrders extends AppCompatActivity {
                                 .collection("Users")
                                 .document(UserId)
                                 .collection("YourOrders")
-                        .document(Key)
+                                .document(Key)
                                 .collection(Key)
-                        , YourOrder2Model.class)
+                                , YourOrder2Model.class)
                 .build();
         adapter = new YourMenu2Adapter(options);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

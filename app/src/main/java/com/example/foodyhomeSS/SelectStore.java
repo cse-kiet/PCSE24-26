@@ -29,7 +29,6 @@ public class SelectStore extends AppCompatActivity {
         loadingDialog=new LoadingDialog(this);
         loadingDialog.startLoadingDialog();
         fillSelectStoreRV();
-        
     }
 
     private void fillSelectStoreRV() {

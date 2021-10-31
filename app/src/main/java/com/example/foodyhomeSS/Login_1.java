@@ -112,7 +112,7 @@ public class Login_1 extends AppCompatActivity {
         NotRegistered.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(Login_1.this,location.class);
+                Intent i=new Intent(Login_1.this,Sign_up_activity.class);
                 startActivity(i);
                 finish();
             }
@@ -237,7 +237,7 @@ public class Login_1 extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(Login_1.this, "Logged In Successfully", Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(Login_1.this, MainActivity.class);
+                            Intent i = new Intent(Login_1.this, SignUp.class);
                             startActivity(i);
 
                         } else {

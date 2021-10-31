@@ -53,14 +53,18 @@ public class profile extends AppCompatActivity {
         PName=findViewById(R.id.Name_Profile);
         PEmail=findViewById(R.id.Email_Profile);
         PPhone=findViewById(R.id.Phone_Profile);
+        loadingDialog=new LoadingDialog(this);
+        loadingDialog.startLoadingDialog();
+        Store= FirebaseFirestore.getInstance();
+        recyclerView=findViewById(R.id.Profile_RV_for_Address);
+        UserId= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         EditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(profile.this, SignUp.class));
             }
         });
-        Store= FirebaseFirestore.getInstance();
-        UserId= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
         fillDefaultAddress();
         AddAddress.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,11 +72,7 @@ public class profile extends AppCompatActivity {
                 startActivity(new Intent(profile.this,EditAddress.class));
             }
         });
-        recyclerView=findViewById(R.id.Profile_RV_for_Address);
 
-
-        loadingDialog=new LoadingDialog(this);
-        loadingDialog.startLoadingDialog();
         fillItemRV();
     }
 
@@ -85,12 +85,21 @@ public class profile extends AppCompatActivity {
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                 assert value != null;
 
-                DName.setText(Objects.requireNonNull(value.get("Name")).toString());
-                DPhone.setText(Objects.requireNonNull(value.get("Phone")).toString());
-                DAddress.setText(Objects.requireNonNull(value.get("Address")).toString());
-                PName.setText(value.getString("Name"));
-                PPhone.setText(value.getString("Phone"));
-                PEmail.setText(value.getString("Email"));
+                if (value.get("Name")!=null){
+                    PName.setText(Objects.requireNonNull(value.getString("Name")));
+                    DName.setText(Objects.requireNonNull(value.get("Name")).toString());
+                }
+
+                if (value.get("Phone")!=null){
+                    PPhone.setText(Objects.requireNonNull(value.getString("Phone")));
+                    DPhone.setText(Objects.requireNonNull(value.get("Phone")).toString());
+                }
+                if (value.get("Address")!=null){
+                    DAddress.setText(Objects.requireNonNull(value.get("Address")).toString());
+                    PEmail.setText(Objects.requireNonNull(value.getString("Email")));
+                }
+
+
             }
         });
     }
@@ -115,13 +124,12 @@ public class profile extends AppCompatActivity {
         adapter.setOnItemClickListener(new AllAddressAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
-                SName=documentSnapshot.getString("Name");
-                SPhone=documentSnapshot.getString("Phone");
-                SAddress=documentSnapshot.getString("Address");
-                SPinCode=documentSnapshot.getString("PinCode");
+                SName=Objects.requireNonNull(documentSnapshot.getString("Name"));
+                SPhone=Objects.requireNonNull(documentSnapshot.getString("Phone"));
+                SAddress=Objects.requireNonNull(documentSnapshot.getString("Address"));
+                SPinCode=Objects.requireNonNull(documentSnapshot.getString("PinCode"));
                 setAddress();
                 fillDefaultAddress();
-
             }
 
             @Override

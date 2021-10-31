@@ -186,9 +186,16 @@ public class Razorpay extends AppCompatActivity  implements PaymentResultListene
                 .document(UserId)
                 .collection("YourOrders")
                 .document(DateCode);
+        DocumentReference documentReference1=   Store1.collection("Store")
+                .document(shop)
+                .collection("Orders")
+                .document(DateCode);
         CollectionReference collectionReference=
                 documentReference
                 .collection(DateCode);
+        CollectionReference collectionReference1=
+                documentReference1
+                        .collection(DateCode);
         for (int i=0;i<DataList2.size();i++){
 
             Map<String, Object> user = new HashMap<>();
@@ -214,10 +221,22 @@ public class Razorpay extends AppCompatActivity  implements PaymentResultListene
                     .set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(@NonNull Void aVoid) {
-                    loadingDialog.dismissDialog();
+
 
                 }
             });
+
+           collectionReference1.document(String.valueOf(i))
+                   .set(user)
+                   .addOnSuccessListener(new OnSuccessListener<Void>() {
+                       @Override
+                       public void onSuccess(@NonNull Void aVoid) {
+
+                       }
+                   });
+
+
+
         }
             if (Address!=null){
                 user1.put("Address",Address);
@@ -227,15 +246,25 @@ public class Razorpay extends AppCompatActivity  implements PaymentResultListene
             user1.put("Code",DateCode);
             user1.put("Store",shop);
             user1.put("Email",Email);
+            user1.put("Status","Pending");
+            user1.put("UserId",UserId);
 
         documentReference
                 .set(user1).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(@NonNull Void aVoid) {
-                finish();
-                startActivity(new Intent(Razorpay.this,YourOrder_1.class));
+                loadingDialog.dismissDialog();
             }
         });
+        documentReference1.set(user1)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(@NonNull Void aVoid) {
+
+                        startActivity(new Intent(Razorpay.this,YourOrder_1.class));
+                        finish();
+                    }
+                });
     }
 
     @SuppressLint("SetTextI18n")

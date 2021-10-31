@@ -53,7 +53,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="120dp"
             app:elevation="20dp"
             android:id="@+id/AllCategories"
             android:background="@drawable/card_bottom_radius">
@@ -70,12 +70,12 @@
                     <LinearLayout
                     android:layout_width="100dp"
                     android:orientation="vertical"
-                    android:layout_height="130dp"
+                    android:layout_height="110dp"
                     tools:ignore="UseCompoundDrawables,UselessParent">
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
                         app:cardElevation="10dp"
                         android:layout_marginBottom="10dp"
                         android:layout_gravity="center_horizontal"
@@ -101,17 +101,17 @@
                         app:autoSizeTextType="uniform"
                         android:textColor="@color/white"
                         android:layout_marginBottom="10dp"
-                        android:layout_height="25dp"/>
+                        android:layout_height="20dp"/>
                 </LinearLayout>
                     <LinearLayout
                         android:layout_width="100dp"
                         android:orientation="vertical"
-                        android:layout_height="130dp"
+                        android:layout_height="110dp"
                         tools:ignore="UseCompoundDrawables,UselessParent">
 
                         <androidx.cardview.widget.CardView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="65dp"
+                            android:layout_height="65dp"
                             app:cardElevation="10dp"
                             android:layout_marginBottom="15dp"
                             android:layout_gravity="center_horizontal"
@@ -138,17 +138,17 @@
                             app:autoSizeTextType="uniform"
                             android:textColor="@color/white"
                             android:layout_marginBottom="10dp"
-                            android:layout_height="25dp"/>
+                            android:layout_height="20dp"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="100dp"
                         android:orientation="vertical"
-                        android:layout_height="130dp"
+                        android:layout_height="110dp"
                         tools:ignore="UseCompoundDrawables,UselessParent">
 
                         <androidx.cardview.widget.CardView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="65dp"
+                            android:layout_height="65dp"
                             app:cardElevation="10dp"
                             android:layout_marginBottom="15dp"
                             android:layout_gravity="center_horizontal"
@@ -174,17 +174,17 @@
                             app:autoSizeTextType="uniform"
                             android:textColor="@color/white"
                             android:layout_marginBottom="10dp"
-                            android:layout_height="25dp"/>
+                            android:layout_height="20dp"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="100dp"
                         android:orientation="vertical"
-                        android:layout_height="130dp"
+                        android:layout_height="110dp"
                         tools:ignore="UseCompoundDrawables,UselessParent">
 
                         <androidx.cardview.widget.CardView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="65dp"
+                            android:layout_height="65dp"
                             app:cardElevation="10dp"
                             android:layout_marginBottom="15dp"
                             android:layout_gravity="center_horizontal"
@@ -205,20 +205,21 @@
                             android:layout_gravity="center_horizontal"
                             android:textAlignment="center"
                             app:autoSizeMinTextSize="6sp"
+                            android:singleLine="false"
                             app:autoSizeTextType="uniform"
                             android:textColor="@color/white"
                             android:layout_marginBottom="10dp"
-                            android:layout_height="25dp"/>
+                            android:layout_height="20dp"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="100dp"
                         android:orientation="vertical"
-                        android:layout_height="130dp"
+                        android:layout_height="110dp"
                         tools:ignore="UseCompoundDrawables,UselessParent">
 
                         <androidx.cardview.widget.CardView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="65dp"
+                            android:layout_height="65dp"
                             app:cardElevation="10dp"
                             android:layout_marginBottom="15dp"
                             android:layout_gravity="center_horizontal"
@@ -244,7 +245,7 @@
                             app:autoSizeTextType="uniform"
                             android:textColor="@color/white"
                             android:layout_marginBottom="10dp"
-                            android:layout_height="25dp"/>
+                            android:layout_height="20dp"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -278,98 +279,32 @@
                 android:paddingLeft="20sp"
                 tools:ignore="RtlSymmetry" />
 
-            <TextView
-                android:id="@+id/Foody_Special_Treat_See_All"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="bottom"
-                android:layout_weight="0.7"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="end"
-                android:paddingEnd="20sp"
-                android:paddingRight="20sp"
-                android:text="See All"
-                android:textAlignment="textEnd"
-                android:textColor="@color/Yellow"
-                app:autoSizeMaxTextSize="15sp"
-                app:autoSizeMinTextSize="5sp"
-                app:autoSizeTextType="uniform"
-                tools:ignore="RtlSymmetry" />
+
         </LinearLayout>
 
         <!-- Foody Offer Categories Layout -->
 
-        <HorizontalScrollView
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            >
-            <LinearLayout
-                android:layout_width="wrap_content"
+            tools:ignore="UselessParent">
+            <!--Automatic Slider for the Offers-->
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/Top_Slider_View"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
-                android:orientation="horizontal">
+                app:iss_auto_cycle="true"
+                app:iss_period="1200"
+                app:iss_corner_radius="20"
+                app:iss_delay="0"
+                app:iss_title_background="?actionBarItemBackground"
+                />
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="250dp"
-                    android:layout_height="170dp"
-                    android:layout_marginTop="10dp"
-                    app:cardCornerRadius="15dp"
-                    android:layout_marginHorizontal="10dp"
-                    app:cardElevation="30dp">
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="170dp"
-                            android:src="@drawable/pizza"
-                            android:scaleType="fitXY"
-                            />
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="250dp"
-                    android:layout_height="170dp"
-                    android:layout_marginTop="10dp"
-                    app:cardCornerRadius="15dp"
-                    android:layout_marginHorizontal="10dp"
-                    app:cardElevation="30dp">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="170dp"
-                        android:src="@drawable/pizza"
-                        android:scaleType="fitXY"
-                        />
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="250dp"
-                    android:layout_height="170dp"
-                    android:layout_marginTop="10dp"
-                    app:cardCornerRadius="15dp"
-                    android:layout_marginHorizontal="10dp"
-                    app:cardElevation="30dp">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="170dp"
-                        android:src="@drawable/pizza"
-                        android:scaleType="fitXY"
-                        />
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="250dp"
-                    android:layout_height="170dp"
-                    android:layout_marginTop="10dp"
-                    app:cardCornerRadius="15dp"
-                    android:layout_marginHorizontal="10dp"
-                    app:cardElevation="30dp">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="170dp"
-                        android:src="@drawable/pizza"
-                        android:scaleType="fitXY"
-                        tools:ignore="ContentDescription" />
-                </androidx.cardview.widget.CardView>
+        </RelativeLayout>
 
-            </LinearLayout>
-
-        </HorizontalScrollView>
 
 
 
@@ -428,7 +363,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="270dp"
                     android:orientation="horizontal"
                     android:id="@+id/Most_Popular_Treat_RecyclerView_Home"/>
 
