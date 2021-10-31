@@ -2,6 +2,7 @@ package com.example.foodyhomeSS;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Looper;
 import android.view.View;
@@ -26,6 +27,7 @@ public class location extends AppCompatActivity {
     TextView textLatlong;
     Button Delivery;
     ProgressBar progress;
+    LocationManager lm;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
 
 //    FusedLocationProviderClient client;
@@ -41,13 +43,18 @@ public class location extends AppCompatActivity {
 //        client = LocationServices.getFusedLocationProviderClient(this);
         //smf = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.Google_map);
         Delivery.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(location.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
 
                 } else {
+
+
                     getCurrentLocation();
+
+
                 }
             }
         });
@@ -69,6 +76,7 @@ public class location extends AppCompatActivity {
 
     private void getCurrentLocation() {
 
+
         progress.setVisibility(View.VISIBLE);
         LocationRequest locationrequest = new LocationRequest();
         locationrequest.setInterval(10000);
@@ -84,34 +92,37 @@ public class location extends AppCompatActivity {
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-
+            return;
         }
-            LocationServices.getFusedLocationProviderClient(location.this)
-                    .requestLocationUpdates(locationrequest, new LocationCallback() {
-                        @Override
-                        public void onLocationResult(LocationResult locationResult) {
-                            super.onLocationResult(locationResult);
-                            LocationServices.getFusedLocationProviderClient(location.this)
-                                    .removeLocationUpdates(this);
-                            if (locationResult != null && locationResult.getLocations().size() > 0) {
-                                int LatestLocationIndex = locationResult.getLocations().size() - 1;
-                                double latitude = locationResult.getLocations().get(LatestLocationIndex).getLatitude();
-                                double longitude = locationResult.getLocations().get(LatestLocationIndex).getLongitude();
-                                textLatlong.setText(
-                                        String.format(
-                                                "Latitude: %s\nLongitude: %s",
-                                                latitude,
-                                                longitude
-                                        )
+        LocationServices.getFusedLocationProviderClient(location.this)
+                .requestLocationUpdates(locationrequest, new LocationCallback() {
+                    @Override
+                    public void onLocationResult(LocationResult locationResult) {
+                        super.onLocationResult(locationResult);
+                        LocationServices.getFusedLocationProviderClient(location.this)
+                                .removeLocationUpdates(this);
+                        if (locationResult != null && locationResult.getLocations().size() > 0) {
+                            int LatestLocationIndex = locationResult.getLocations().size() - 1;
+                            double latitude = locationResult.getLocations().get(LatestLocationIndex).getLatitude();
+                            double longitude = locationResult.getLocations().get(LatestLocationIndex).getLongitude();
+                            textLatlong.setText(
+                                    String.format(
+                                            "Latitude: %s\nLongitude: %s",
+                                            latitude,
+                                            longitude
+                                    )
 
-                                );
-                            }
-                            progress.setVisibility(View.GONE);
+                            );
+
+
                         }
-                    }, Looper.getMainLooper());
+                        progress.setVisibility(View.GONE);
+                    }
+                }, Looper.getMainLooper());
 
 
-        }
+    }
+
     }
 
 //if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
