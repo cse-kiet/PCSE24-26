@@ -30,6 +30,7 @@ public class YourOder_1_Adapter extends FirestoreRecyclerAdapter<YourOrder_1_Mod
     protected void onBindViewHolder(@NonNull MyViewHolder holder, int i, @NonNull YourOrder_1_Model model) {
         holder.Address.setText(model.getAddress());
         holder.TotalPay.setText("Rs "+model.getTotalPay().toString()+"/-");
+        holder.OrderId.setText("Order Id :  "+ model.getOrderId());
         String TDateS=getDate();
         String ODateS=model.getDate();
         Integer ODateI=Integer.parseInt(ODateS);
@@ -64,7 +65,7 @@ public class YourOder_1_Adapter extends FirestoreRecyclerAdapter<YourOrder_1_Mod
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView Address,TotalPay,Date,Store;
+        TextView Address,TotalPay,Date,Store,OrderId;
         Button Track , Help;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -74,6 +75,7 @@ public class YourOder_1_Adapter extends FirestoreRecyclerAdapter<YourOrder_1_Mod
             Track=itemView.findViewById(R.id.YourOrder1_Track_Button);
             Help=itemView.findViewById(R.id.YourOrder1_Help_Button);
             Store=itemView.findViewById(R.id.YourOrder1_Store);
+            OrderId=itemView.findViewById(R.id.YourOrder1_OrderId);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
