@@ -115,7 +115,7 @@ public class SeeAllCategories extends AppCompatActivity {
             adapter.setOnItemCLickListener(new IndividualCategoryAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(DataSnapshot dataSnapshot, int position) {
-
+                    progressBar.startLoadingDialog();
                     SeeAll= Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString().toLowerCase();
 
                     Map<String, Object> user = new HashMap<>();
@@ -125,6 +125,7 @@ public class SeeAllCategories extends AppCompatActivity {
                     documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
+                            progressBar.dismissDialog();
                             startActivity(new Intent(SeeAllCategories.this,AllProduct.class));
                         }
                     });
@@ -134,4 +135,9 @@ public class SeeAllCategories extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fillRecyclerView();
+    }
 }

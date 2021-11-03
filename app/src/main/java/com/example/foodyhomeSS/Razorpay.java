@@ -42,7 +42,7 @@ public class Razorpay extends AppCompatActivity  implements PaymentResultListene
     String currentuser,DateCode,Date;
     ArrayList<YourMenuPayModel> DataList;
     FirebaseFirestore Store;
-    String UserId,Address,Name,Phone,Email,shop;
+    String UserId,Address,Name,Phone,Email,shop,OrderId;
     LoadingDialog loadingDialog;
     Integer TotalPay=0;
     ArrayList<YourMenuModel> DataList2;
@@ -63,6 +63,7 @@ public class Razorpay extends AppCompatActivity  implements PaymentResultListene
         DataList2=new ArrayList<YourMenuModel>();
         Toast.makeText(this, Phone+" "+Email, Toast.LENGTH_SHORT).show();
         DownloadDataList();
+        OrderId=UserId.substring(0,3).toUpperCase()+getDateTime();
         new CountDownTimer(3000,1000){
 
             @Override
@@ -127,14 +128,14 @@ public class Razorpay extends AppCompatActivity  implements PaymentResultListene
             JSONObject options = new JSONObject();
 
             options.put("name", "FoodyHome");
-            options.put("description", "Reference No. #123456");
+            options.put("description", "Order ID: "+OrderId);
             options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
 //            options.put("order_id", "order_DBJOWzybf0sJbb");//from response of step 3.
             options.put("theme.color", "#F4C886");
             options.put("currency", "INR");
             options.put("amount", TotalPay);//pass amount in currency subunits
-            options.put("prefill.contact", "9410264395");
-            options.put("prefill.Email", "samanvay004dev@gmail.com");
+            options.put("prefill.contact", Phone);
+            options.put("prefill.Email", Email);
             JSONObject retryObj = new JSONObject();
             retryObj.put("enabled", true);
             retryObj.put("max_count", 4);
@@ -179,6 +180,7 @@ public class Razorpay extends AppCompatActivity  implements PaymentResultListene
         FirebaseFirestore Store1;
         DateCode=getDateTime();
         Date=getDate();
+
         Store1=FirebaseFirestore.getInstance();
         Map<String, Object> user1 = new HashMap<>();
         DocumentReference documentReference=Store1
@@ -186,6 +188,8 @@ public class Razorpay extends AppCompatActivity  implements PaymentResultListene
                 .document(UserId)
                 .collection("YourOrders")
                 .document(DateCode);
+        DocumentReference documentReference2=Store1.collection("AllOrders")
+                .document(OrderId);
         DocumentReference documentReference1=   Store1.collection("Store")
                 .document(shop)
                 .collection("Orders")
@@ -195,7 +199,8 @@ public class Razorpay extends AppCompatActivity  implements PaymentResultListene
                 .collection(DateCode);
         CollectionReference collectionReference1=
                 documentReference1
-                        .collection(DateCode);
+                .collection(DateCode);
+        CollectionReference collectionReference2=documentReference2.collection(DateCode);
         for (int i=0;i<DataList2.size();i++){
 
             Map<String, Object> user = new HashMap<>();
@@ -235,7 +240,14 @@ public class Razorpay extends AppCompatActivity  implements PaymentResultListene
 
                        }
                    });
+            collectionReference2.document(String.valueOf(i))
+                    .set(user)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(@NonNull Void aVoid) {
 
+                        }
+                    });
 
 
         }
@@ -249,8 +261,16 @@ public class Razorpay extends AppCompatActivity  implements PaymentResultListene
             user1.put("Email",Email);
             user1.put("Status","Pending");
             user1.put("UserId",UserId);
+            user1.put("OrderId",OrderId);
 
         documentReference
+                .set(user1).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(@NonNull Void aVoid) {
+
+            }
+        });
+        documentReference2
                 .set(user1).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(@NonNull Void aVoid) {

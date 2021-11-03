@@ -10,10 +10,11 @@
         android:layout_height="250dp"
         app:cardCornerRadius="15dp"
         android:layout_margin="5dp"
-        app:cardElevation="10dp">
+        app:cardElevation="5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:padding="5dp"
             android:background="@drawable/bg_grad_design_2"
             android:layout_height="match_parent">
 

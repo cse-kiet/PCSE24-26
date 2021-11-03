@@ -140,4 +140,9 @@ public class AllProduct extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fillRecyclerView();
+    }
 }

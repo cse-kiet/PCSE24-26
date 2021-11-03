@@ -7,10 +7,14 @@
     <androidx.cardview.widget.CardView
         android:layout_width="170dp"
         android:layout_height="200dp"
-        android:layout_marginVertical="10dp"
         android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
         app:cardCornerRadius="15dp"
-        app:cardElevation="30dp"
+        app:cardElevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -19,17 +23,17 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:background="@drawable/bg_grad_design_2"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_grad_design_2">
 
 
             <ImageView
+                android:id="@+id/Individual_Product_ImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="130dp"
                 android:adjustViewBounds="true"
-                android:padding="5sp"
                 android:foregroundGravity="center"
-                android:id="@+id/Individual_Product_ImageView"
+                android:padding="5sp"
                 android:src="@drawable/png_pizza"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -38,11 +42,11 @@
 
             <TextView
                 android:id="@+id/Individual_Product_Name"
-                android:layout_marginHorizontal="12dp"
-                android:background="@drawable/custom_button2"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
+                android:layout_marginHorizontal="12dp"
                 android:layout_marginBottom="35dp"
+                android:background="@drawable/custom_button2"
                 android:fontFamily="sans-serif-smallcaps"
                 android:gravity="center_horizontal"
                 android:text="Extra Cheese"
@@ -60,12 +64,12 @@
                 android:id="@+id/Individual_Product_Price"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:layout_marginBottom="12dp"
-                android:paddingHorizontal="10sp"
                 android:layout_marginHorizontal="60dp"
+                android:layout_marginBottom="12dp"
                 android:background="@drawable/custom_button2"
                 android:fontFamily="monospace"
                 android:gravity="center"
+                android:paddingHorizontal="10sp"
                 android:text="Rs 20/-"
                 android:textColor="@color/purple_700"
                 android:textStyle="bold|italic"

@@ -49,7 +49,6 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="10dp"
                 android:singleLine="false"
-                android:text="Rs 450/-"
                 android:textColor="@color/purple_700"
                 app:autoSizeMaxTextSize="17sp"
                 app:autoSizeTextType="uniform"

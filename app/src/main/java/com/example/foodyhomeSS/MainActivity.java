@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,9 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,7 +34,6 @@ import com.denzcoskun.imageslider.interfaces.ItemClickListener;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.datepicker.MaterialCalendar;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,19 +44,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.auth.User;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -76,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String SeeAll,ProductID,TopCategory;
     FirebaseFirestore Store;
     ArrayList<String> PList=new ArrayList<>();
+    ArrayList<String> SliderDataList=new ArrayList<String>();
     RecyclerView MostPopular,PizzaTreatRV,BurgerTreatRV,ComboForFamilyRV,BeveragesRV,DifferentWorldRV;
     AllProductAdapter MostPopularAdapter;
     IndividualCategoryAdapter PizzaTreatAdapter,BurgerTreatAdapter,ComboForFamilyAdapter,BeveragesAdapter,DifferentWorldAdapter;
@@ -316,14 +305,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                    SliderDataList.add(Objects.requireNonNull(dataSnapshot.child("HomePID").getValue()).toString());
                     sliderImages.add(new SlideModel(Objects.requireNonNull(dataSnapshot.child("Image").getValue()).toString(), ScaleTypes.FIT));
                 }
                 top_sliderView.setImageList(sliderImages,ScaleTypes.FIT);
                 top_sliderView.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onItemSelected(int i) {
-//                        sliderImages.get(i).getTitle();
-                        Toast.makeText(MainActivity.this, ""+sliderImages.get(i).getImageUrl(), Toast.LENGTH_SHORT).show();
+                        progressBar.startLoadingDialog();
+                        ProductID= SliderDataList.get(i);
+                       if (ProductID!=null){
+                           SendProductID();
+                       }
+
                     }
                 });
             }
