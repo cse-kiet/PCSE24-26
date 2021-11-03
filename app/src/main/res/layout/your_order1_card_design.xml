@@ -63,19 +63,33 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="25dp"
                 android:singleLine="false"
-                android:text="1 day ago"
                 android:textColor="@color/purple_500"
                 app:autoSizeMaxTextSize="17sp"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/YourOrder1_Address_TV" />
 
+            <TextView
+                android:id="@+id/YourOrder1_Store"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#FFEB3B"
+                android:singleLine="false"
+                android:textColor="@color/black"
+                app:autoSizeMaxTextSize="17sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintEnd_toStartOf="@+id/YourOrder1_Date_TV"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/YourOrder1_TotalPay_TV"
+                app:layout_constraintTop_toBottomOf="@+id/YourOrder1_Address_TV" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
                 android:layout_marginVertical="15dp"
                 android:layout_marginBottom="1dp"
-                android:layout_marginHorizontal="10dp"
                 android:orientation="horizontal"
                 android:weightSum="2"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -92,22 +106,23 @@
                     android:layout_weight="1"
                     android:text="Track"
                     android:textColor="@color/black"
-                    app:backgroundTint="@color/Spanish_Yellow"
                     app:autoSizeMaxTextSize="17sp"
                     app:autoSizeMinTextSize="12sp"
-                    app:autoSizeTextType="uniform" />
+                    app:autoSizeTextType="uniform"
+                    app:backgroundTint="@color/Spanish_Yellow" />
 
                 <Button
                     android:id="@+id/YourOrder1_Help_Button"
-                    android:textColor="@color/black"
-                    app:backgroundTint="#FF6C3D"                    android:layout_width="wrap_content"
+                    android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginHorizontal="5dp"
                     android:layout_weight="1"
                     android:text="Help"
+                    android:textColor="@color/black"
                     app:autoSizeMaxTextSize="17sp"
                     app:autoSizeMinTextSize="14sp"
-                    app:autoSizeTextType="uniform" />
+                    app:autoSizeTextType="uniform"
+                    app:backgroundTint="#FF6C3D" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

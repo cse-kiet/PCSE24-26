@@ -58,6 +58,7 @@ public class YourMenu2Adapter extends FirestoreRecyclerAdapter<YourOrder2Model,Y
         }
         holder.QTY.setText(model.getQTY());
         Glide.with(holder.PImage).load(model.getImage()).into(holder.PImage);
+        holder.PSize.setText(model.getSize());
     }
 
     @NonNull
@@ -68,7 +69,7 @@ public class YourMenu2Adapter extends FirestoreRecyclerAdapter<YourOrder2Model,Y
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView PName,PStore,PMRP,PPrice,A0,A1,A2,A3,A4,QTY;
+        TextView PName,PSize,PMRP,PPrice,A0,A1,A2,A3,A4,QTY;
         ImageView PImage;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -81,7 +82,7 @@ public class YourMenu2Adapter extends FirestoreRecyclerAdapter<YourOrder2Model,Y
             A3=itemView.findViewById(R.id.AddOns_3_YourOrder_2);
             A4=itemView.findViewById(R.id.AddOns_4_YourOrder_2);
             PImage=itemView.findViewById(R.id.YourOrder_2_Image_View);
-            PStore=itemView.findViewById(R.id.YourOrder_2_Product_Store);
+            PSize=itemView.findViewById(R.id.YourOrder_2_Product_Size);
             QTY=itemView.findViewById(R.id.YourOrder_2_Product_QTY);
         }
     }

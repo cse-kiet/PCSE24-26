@@ -140,15 +140,15 @@
 
                     <TextView
                         android:layout_weight="1.5"
-                        android:id="@+id/YourOrder_2_Product_Store"
+                        android:id="@+id/YourOrder_2_Product_Size"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_marginTop="10dp"
                         android:gravity="center"
-                        android:text="The Pizza Station"
                         android:textColor="@color/black"
                         app:autoSizeTextType="uniform"
                         app:autoSizeMinTextSize="6sp"
+                        app:autoSizeMaxTextSize="14sp"
                         android:textStyle="bold"
                         android:singleLine="false" />
 

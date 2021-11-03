@@ -55,7 +55,7 @@ public class Individual_Product extends AppCompatActivity {
     String SName;
     String SPrice;
     String SDescription;
-    String SImage;
+    String SImage,RMLKey,Size;
     String UserID;
     String HomePID;
     String sMRP;
@@ -65,7 +65,8 @@ public class Individual_Product extends AppCompatActivity {
     FirebaseFirestore Store;
     FirebaseAuth Auth;
     IndividualCategoryAdapter Cheesing;
-    RecyclerView CheesingRV,RecommendedRV;
+    RMLAdapter AdapterRML;
+    RecyclerView CheesingRV,RecommendedRV,RMLRecyclerView;
     AllProductAdapter RecommendedAdapter;
     View MRPView;
     LoadingDialog loadingDialog;
@@ -83,7 +84,8 @@ public class Individual_Product extends AppCompatActivity {
         loadingDialog.startLoadingDialog();
         AddToMenuButton=findViewById(R.id.Add_to_Menu_Individual_Product);
         AddOns.clear();
-
+        RMLKey="01";
+        Size="Regular";
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference().child("Products");
         Auth = FirebaseAuth.getInstance();
@@ -109,6 +111,7 @@ public class Individual_Product extends AppCompatActivity {
         MRP=findViewById(R.id.Individual_Product_Activity_Product_MRP);
         Discount=findViewById(R.id.Individual_Product_Activity_Product_Discount);
         RecommendedRV=findViewById(R.id.Individual_Product_Recommended_Product_RecyclerView);
+        RMLRecyclerView=findViewById(R.id.RML_RecyclerView);
         MRPView=findViewById(R.id.MRP_Individual_Product_View);
         Star1=findViewById(R.id.Individual_Product_Star_1);
         Star2=findViewById(R.id.Individual_Product_Star_2);
@@ -123,7 +126,9 @@ public class Individual_Product extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished) {
                 fillDetails();
+                fillCheesing();
                 fillRecommendedRV();
+                fillRMLRecyclerView();
                 if (!TextUtils.isEmpty(SName)){
                     loadingDialog.dismissDialog();
                     AddToMenuButton.setOnClickListener(new View.OnClickListener() {
@@ -153,6 +158,28 @@ public class Individual_Product extends AppCompatActivity {
             }
         }.start();
 
+    }
+
+    private void fillRMLRecyclerView() {
+        if (HomePID!=null) {
+            FirebaseRecyclerOptions<RegularModel> options =
+                    new FirebaseRecyclerOptions.Builder<RegularModel>()
+                            .setQuery(FirebaseDatabase.getInstance().getReference().child("Products").child(HomePID).child("RML"), RegularModel.class)
+                            .build();
+            AdapterRML = new RMLAdapter(options);
+            RMLRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+            RMLRecyclerView.setAdapter(AdapterRML);
+            AdapterRML.startListening();
+            AdapterRML.setOnItemCLickListener(new RMLAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(DataSnapshot dataSnapshot, int position) {
+                    RMLKey = dataSnapshot.getKey();
+                    Size= Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
+                    Toast.makeText(Individual_Product.this, ""+Size, Toast.LENGTH_SHORT).show();
+                    fillDetails();
+                }
+            });
+        }
     }
 
 
@@ -222,28 +249,39 @@ public class Individual_Product extends AppCompatActivity {
 
     private void fillDetails() {
         if (HomePID!=null) {
+
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference().child("Products");
             myRef.child(HomePID).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     SName = Objects.requireNonNull(snapshot.child("Name").getValue()).toString();
-                    SPrice = Objects.requireNonNull(snapshot.child("Price").getValue()).toString();
+
                     SDescription = Objects.requireNonNull(snapshot.child("Name").getValue()).toString();
                     SImage = Objects.requireNonNull(snapshot.child("Image").getValue()).toString();
-                    sMRP= Objects.requireNonNull(snapshot.child("MRP").getValue()).toString();
-                    Discount.setText(Objects.requireNonNull(snapshot.child("Discount").getValue()).toString());
+
                     SRating= Objects.requireNonNull(snapshot.child("Rating").getValue()).toString();
                     SRating=SRating.replace("+","");
                     FRating=Float.parseFloat(SRating);
-                    MRP.setText(sMRP);
                     PName.setText(SName);
                     PDescription.setText(SDescription);
-                    PPRice.setText(SPrice);
                     Glide.with(PImage.getContext()).load(SImage).into(PImage);
                     SelectRating();
+                }
 
-                    fillCheesing();
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            myRef.child(HomePID).child("RML").child(RMLKey).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    SPrice = Objects.requireNonNull(snapshot.child("Price").getValue()).toString();
+                    sMRP= Objects.requireNonNull(snapshot.child("MRP").getValue()).toString();
+                    PPRice.setText(SPrice);
+                    MRP.setText(sMRP);
+                    Discount.setText(Objects.requireNonNull(snapshot.child("Discount").getValue()).toString());
                 }
 
                 @Override
@@ -417,6 +455,7 @@ public class Individual_Product extends AppCompatActivity {
         user.put("MRP", sMRP);
         user.put("Code",getDateTime());
         user.put("QTY","1");
+        user.put("Size",Size);
         LoadSharedPreferences();
         if (AddOns!=null){
             for (int i = 0; i < AddOns.size(); i++)

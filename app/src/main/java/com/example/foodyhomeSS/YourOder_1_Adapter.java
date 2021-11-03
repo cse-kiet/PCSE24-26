@@ -31,14 +31,28 @@ public class YourOder_1_Adapter extends FirestoreRecyclerAdapter<YourOrder_1_Mod
         holder.Address.setText(model.getAddress());
         holder.TotalPay.setText("Rs "+model.getTotalPay().toString()+"/-");
         String TDateS=getDate();
+        String ODateS=model.getDate();
+        Integer ODateI=Integer.parseInt(ODateS);
         Integer TDateI=Integer.parseInt(TDateS);
-        int diff=Integer.parseInt(model.getDate())-TDateI;
-        if (diff==0){
-            holder.Date.setText("Today");
+        int MDiff=(TDateI/100)-(ODateI/100);
+        int YDiff=(TDateI/10000)-(ODateI/10000);
+        if (YDiff==0) {
+            if (MDiff == 0) {
+                int diff = TDateI - Integer.parseInt(model.getDate());
+                if (diff == 0) {
+                    holder.Date.setText("Today");
+                } else {
+                    holder.Date.setText(diff + " day ago");
+                }
+            } else if (MDiff > 0) {
+                holder.Date.setText(MDiff + " month ago");
+            }
         }
-        if (diff>0){
-            holder.Date.setText(diff+" day ago");
+        else{
+            holder.Date.setText(YDiff+ " Year ago");
         }
+
+
 
     }
 
@@ -50,7 +64,7 @@ public class YourOder_1_Adapter extends FirestoreRecyclerAdapter<YourOrder_1_Mod
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView Address,TotalPay,Date;
+        TextView Address,TotalPay,Date,Store;
         Button Track , Help;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,6 +73,7 @@ public class YourOder_1_Adapter extends FirestoreRecyclerAdapter<YourOrder_1_Mod
             Date=itemView.findViewById(R.id.YourOrder1_Date_TV);
             Track=itemView.findViewById(R.id.YourOrder1_Track_Button);
             Help=itemView.findViewById(R.id.YourOrder1_Help_Button);
+            Store=itemView.findViewById(R.id.YourOrder1_Store);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -123,10 +123,10 @@ public class Payment_Activity extends AppCompatActivity {
                         TotalItem.setText(TotalQTY.toString()+" Only");
                         double tax=(0.05*((float) TotalPay));
                         OtherTaxes.setText("+"+String.format("%.1f",tax));
-                        double Discount=(0.01*((float) TotalPay));
+                        double Discount=(0.05*((float) TotalPay));
                         SpecialDiscount.setText("-"+String.format("%.1f",Discount));
-                        double Total=TotalPay+tax-Discount;
-                        ITotal = (int) Total+1;
+                        double Total=TotalPay;
+                        ITotal = (int) Total;
                         GrandTotal.setText("Rs  "+ITotal);
                     }
                 }

@@ -10,6 +10,15 @@ public class YourMenuModel {
     String AddOn4;
     String MRP;
     String Price;
+    String Size;
+
+    public String getSize() {
+        return Size;
+    }
+
+    public void setSize(String size) {
+        Size = size;
+    }
 
     public String getQTY() {
         return QTY;
@@ -100,7 +109,7 @@ public class YourMenuModel {
         Price = price;
     }
 
-    public YourMenuModel(String image, String name, String addOn1, String addOn2, String addOn3, String addOn0, String addOn4, String MRP, String price) {
+    public YourMenuModel(String image, String name, String addOn1, String addOn2, String addOn3, String addOn0, String addOn4, String MRP, String price,String size) {
         Image = image;
         Name = name;
         AddOn1 = addOn1;
@@ -110,5 +119,6 @@ public class YourMenuModel {
         AddOn4 = addOn4;
         this.MRP = MRP;
         Price = price;
+        Size=size;
     }
 }

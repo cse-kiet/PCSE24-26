@@ -133,7 +133,6 @@ public class YourMenu extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-        loadingDialog.dismissDialog();
         AdapterSetOnClick();
     }
 
@@ -173,6 +172,7 @@ public class YourMenu extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 if (DataList.size()!=0){
                     checkTotalPayment();
+                    loadingDialog.dismissDialog();
                     cancel();
                 }
 
@@ -180,7 +180,7 @@ public class YourMenu extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-
+                loadingDialog.dismissDialog();
                 Toast.makeText(YourMenu.this, "Total Payment is not Updated !!!!" +
                         "please reopen YourMenu and Check your Connection", Toast.LENGTH_LONG).show();
 

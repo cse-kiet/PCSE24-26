@@ -1,7 +1,7 @@
 package com.example.foodyhomeSS;
 
 public class YourOrder_1_Model {
-    String Address;
+    String Address,Store;
 
     public String getAddress() {
         return Address;
@@ -27,9 +27,18 @@ public class YourOrder_1_Model {
         TotalPay = totalPay;
     }
 
-    public YourOrder_1_Model(String address, String date, Integer totalPay) {
+    public String getStore() {
+        return Store;
+    }
+
+    public void setStore(String store) {
+        Store = store;
+    }
+
+    public YourOrder_1_Model(String address, String store, String date, Integer totalPay) {
         Address = address;
         Date = date;
+        Store=store;
         TotalPay = totalPay;
     }
 

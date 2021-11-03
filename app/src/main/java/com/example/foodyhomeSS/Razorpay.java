@@ -204,6 +204,7 @@ public class Razorpay extends AppCompatActivity  implements PaymentResultListene
                 user.put("Image", DataList2.get(i).getImage());
                 user.put("MRP", DataList2.get(i).getMRP());
                 user.put("QTY",DataList2.get(i).getQTY());
+                user.put("Size",DataList2.get(i).getSize());
                 if (DataList2.get(i).getAddOn0()!=null){
                     user.put("AddOn0",DataList2.get(i).getAddOn0());
                 }

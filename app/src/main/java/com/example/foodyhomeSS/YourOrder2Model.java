@@ -1,7 +1,7 @@
 package com.example.foodyhomeSS;
 
 public class YourOrder2Model {
-    String Image,Name,Price,MRP,AddOn1,AddOn2,AddOn3,AddOn0,AddOn4,Store,QTY;
+    String Image,Name,Price,MRP,AddOn1,AddOn2,AddOn3,AddOn0,AddOn4,Store,QTY,Size;
 
     public String getAddOn4() {
         return AddOn4;
@@ -98,7 +98,15 @@ public class YourOrder2Model {
         Store = store;
     }
 
-    public YourOrder2Model(String image, String name, String price, String MRP, String addOn1, String addOn2, String addOn3, String addOn0, String store) {
+    public String getSize() {
+        return Size;
+    }
+
+    public void setSize(String size) {
+        Size = size;
+    }
+
+    public YourOrder2Model(String image, String name, String price, String MRP, String addOn1, String addOn2, String addOn3, String size, String addOn0, String store) {
         Image = image;
         Name = name;
         Price = price;
@@ -108,5 +116,6 @@ public class YourOrder2Model {
         AddOn3 = addOn3;
         AddOn0 = addOn0;
         Store = store;
+        Size=size;
     }
 }
