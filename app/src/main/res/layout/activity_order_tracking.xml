@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4B03A9F4"
+    android:weightSum="7"
+    tools:context=".OrderTracking">
+
+
+    <View
+        android:id="@+id/OrderTracking_Placed_View"
+        android:layout_width="2dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="45dp"
+        android:background="#4B038AC6"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OrderTracking_OrderPlaced_CardView" />
+
+    <View
+        android:id="@+id/OrderTracking_Packed_View"
+        android:layout_width="2dp"
+        android:layout_height="109dp"
+        android:layout_marginStart="45dp"
+        android:background="#4B038AC6"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OrderTracking_OrderPacked_CardView" />
+
+    <View
+        android:id="@+id/OrderTracking_Shipped_View"
+        android:layout_width="2dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="45dp"
+        android:background="#4B038AC6"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OrderTracking_OrderShipped_CardView" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/OrderTracking_OrderPlaced_CardView"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="100dp"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/OrderTracking_OrderPlaced"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/rzp_loader_circle"
+            tools:ignore="ContentDescription" />
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="6dp"
+        android:layout_weight="1.2"
+        android:text="Order Placed"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:autoSizeMaxTextSize="22sp"
+        app:autoSizeMinTextSize="18sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/OrderTracking_OrderPlaced_CardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/OrderTracking_OrderPlaced_CardView" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/OrderTracking_OrderPacked_CardView"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="30dp"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OrderTracking_Placed_View">
+
+        <ImageView
+            android:id="@+id/OrderTracking_OrderPacked"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/rzp_loader_circle"
+            tools:ignore="ContentDescription" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1.2"
+        android:text="Order Packed"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:autoSizeMaxTextSize="22sp"
+        app:autoSizeMinTextSize="18sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@+id/OrderTracking_Packed_View"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/OrderTracking_OrderPacked_CardView" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/OrderTracking_OrderShipped_CardView"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="30dp"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OrderTracking_Packed_View">
+
+        <ImageView
+            android:id="@+id/OrderTracking_OrderShipped"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/rzp_loader_circle"
+            tools:ignore="ContentDescription" />
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1.2"
+        android:text="Order Shipped"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:autoSizeMaxTextSize="22sp"
+        app:autoSizeMinTextSize="18sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@+id/OrderTracking_Shipped_View"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/OrderTracking_OrderShipped_CardView" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/OrderTracking_OrderCompleted_CardView"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="30dp"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OrderTracking_Shipped_View">
+
+        <ImageView
+            android:id="@+id/OrderTracking_OrderCompleted"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/rzp_loader_circle"
+            tools:ignore="ContentDescription" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+
+        android:id="@+id/textView6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1.2"
+        android:text="Order Delivered"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:autoSizeMaxTextSize="22sp"
+        app:autoSizeMinTextSize="18sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/OrderTracking_OrderCompleted_CardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/OrderTracking_OrderCompleted_CardView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

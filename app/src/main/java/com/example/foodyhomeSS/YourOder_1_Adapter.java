@@ -85,6 +85,16 @@ public class YourOder_1_Adapter extends FirestoreRecyclerAdapter<YourOrder_1_Mod
                     }
                 }
             });
+            Track.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && listener != null) {
+                        listener.onTrackClick(getSnapshots().getSnapshot(position), position);
+                    }
+                }
+            });
+
         }
     }
     private String getDate() {

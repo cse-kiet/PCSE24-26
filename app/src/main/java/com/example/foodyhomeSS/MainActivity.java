@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Looper;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,6 +34,10 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.interfaces.ItemClickListener;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
@@ -69,11 +74,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     AllProductAdapter MostPopularAdapter;
     IndividualCategoryAdapter PizzaTreatAdapter,BurgerTreatAdapter,ComboForFamilyAdapter,BeveragesAdapter,DifferentWorldAdapter;
     //See All TextView of all Topics
-    TextView PizzaSeeAll,BurgerSeeAll,FamilyComboSeeAll,MostPopularSeeAll,BeveragesSeeAll,DifferentWorldSeeAll;
+    TextView PizzaSeeAll,BurgerSeeAll,FamilyComboSeeAll,MostPopularSeeAll,BeveragesSeeAll,DifferentWorldSeeAll,AvailTV;
     private NavigationBarView bottomNavigationView;
     ImageButton PizzaIB,BurgerIB,PastaIB,IceCreamIB,FoodyOffersIB;
     List<SlideModel> sliderImages=new ArrayList<SlideModel>();
     ImageSlider top_sliderView;
+    private static final int REQUEST_LOCATION_PERMISSION = 1;
 
 
     @Override
@@ -94,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ComboForFamilyRV=findViewById(R.id.Family_Treat_RecyclerView_Home);
         BeveragesRV=findViewById(R.id.Beverages_and_IceCreams_RecyclerView_Home);
         DifferentWorldRV=findViewById(R.id.Different_World_Treat_RecyclerView_Home);
+        AvailTV=findViewById(R.id.Availability_TV_MainActivity);
 
         // RecyclerViews Definitions
 
@@ -135,6 +142,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }.start();
 
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
+
+        } else {
+
+
+            getCurrentLocation();
+
+
+        }
 
         //Filling RecyclerViews
 
@@ -169,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         startActivity(intent);
                         break;
                     case R.id.Toolbar_Notification_bell:
-                        Toast.makeText(MainActivity.this, "Notification", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this,location.class));
                         break;
                     case R.id.Toolbar_share:
 
@@ -287,14 +304,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BurgerIB.setOnClickListener(this);
         IceCreamIB.setOnClickListener(this);
         FoodyOffersIB.setOnClickListener(this);
-
-
-
-
-
-
-
-
 
     }
 
@@ -584,6 +593,75 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.putString("PList",json);
         editor.apply();
 
+    }
+    private void getCurrentLocation() {
+
+
+
+        LocationRequest locationrequest = new LocationRequest();
+        locationrequest.setInterval(10000);
+        locationrequest.setFastestInterval(3000);
+        locationrequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+//
+//
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        LocationServices.getFusedLocationProviderClient(MainActivity.this)
+                .requestLocationUpdates(locationrequest, new LocationCallback() {
+                    @Override
+                    public void onLocationResult(LocationResult locationResult) {
+                        super.onLocationResult(locationResult);
+                        LocationServices.getFusedLocationProviderClient(MainActivity.this)
+                                .removeLocationUpdates(this);
+                        if (locationResult != null && locationResult.getLocations().size() > 0) {
+                            int LatestLocationIndex = locationResult.getLocations().size() - 1;
+                            double latitude = locationResult.getLocations().get(LatestLocationIndex).getLatitude();
+                            double longitude = locationResult.getLocations().get(LatestLocationIndex).getLongitude();
+//                            textLatlong.setText(
+
+
+//                            );
+                            Toast.makeText(MainActivity.this,  String.format(
+                                    "Latitude: %s\nLongitude: %s",
+                                    latitude,
+                                    longitude
+                            ), Toast.LENGTH_SHORT).show();
+                            latitude*=100;
+                            longitude*=100;
+                            if ((latitude >= 2925) && (latitude <= 2930) && (longitude >= 7743) && (longitude <= 7750)){
+                                Toast.makeText(MainActivity.this, "Our Services are available at your location", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                AvailTV.setVisibility(View.VISIBLE);
+                            }
+
+
+                        }
+
+                    }
+                }, Looper.getMainLooper());
+
+
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_LOCATION_PERMISSION && grantResults.length > 0) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                getCurrentLocation();
+            } else {
+                Toast.makeText(this, "Permisssion Denied", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
 }

@@ -64,7 +64,9 @@ public class YourOrder_1 extends AppCompatActivity {
 
             @Override
             public void onTrackClick(DocumentSnapshot documentSnapshot, int position) {
-
+                key=documentSnapshot.getReference().getId();
+                SaveSharedPreferences();
+                startActivity(new Intent(YourOrder_1.this,OrderTracking.class));
             }
 
             @Override

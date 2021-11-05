@@ -54,7 +54,7 @@
 </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
@@ -67,12 +67,15 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available."
-            app:autoSizeTextType="uniform"
-            android:padding="10dp"
+            android:layout_height="800dp"
             android:layout_marginTop="10dp"
-            android:textColor="@color/black"/>
+            android:padding="10dp"
+            android:singleLine="false"
+            android:text="@string/Terms_and_Condition"
+            android:textColor="@color/black"
+            app:autoSizeMaxTextSize="17sp"
+            app:autoSizeMinTextSize="15sp"
+            app:autoSizeTextType="uniform" />
 
 
 
@@ -193,7 +196,7 @@
                 android:layout_marginTop="10dp"
                 android:padding="10dp"
                 android:textColor="@color/white"
-                android:autoSizeTextType="uniform"
+                app:autoSizeTextType="uniform"
                 android:text="In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available."/>
         </LinearLayout>
 

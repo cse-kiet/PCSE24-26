@@ -38,6 +38,21 @@
     <string name="foodyhome_special_discount">FoodyHome Special Discount</string>
     <string name="Select_Store">Select Store</string>
     <string name="choice_of_add_on_s">Choice Of Add On\'s</string>
+    <string name="Terms_and_Condition">1) The FDP shall make it clear that it is not either a  manufacturer or a seller or distributor of food or beverages but only places an order against the partner restaurant on behalf of the User customer pursuant to the aforesaid contract and facilitate the sale and purchase of food and beverages between the two, under the contract for sale and purchase of food and beverages.
+
+    </string>
+    <string name="Refund_Policy">
+        A.    The user  shall be entitled to a refund only if you pre-pay for your order at the time of placing your order on the Platform and only in the event of any of the following circumstances:
+        <br /><br />
+      1.    The  order packaging has been tampered or damaged at the time of delivery;
+        
+    </string>
+    <string name="Privacy_Policy">
+        A.    The user  shall be entitled to a refund only if you pre-pay for your order at the time of placing your order on the Platform and only in the event of any of the following circumstances:
+        <br /><br />
+      1.    The  order packaging has been tampered or damaged at the time of delivery;
+        
+    </string>
     <string-array name="Select_Store">
         <item>Select Store</item>
         <item>Pizza Buzzer</item>
