@@ -53,6 +53,7 @@
       1.    The  order packaging has been tampered or damaged at the time of delivery;
         
     </string>
+    <string name="orders">Orders</string>
     <string-array name="Select_Store">
         <item>Select Store</item>
         <item>Pizza Buzzer</item>

@@ -11,12 +11,8 @@
             android:title="@string/my_menu" />
         <item
             android:id="@+id/Drawer_My_WishList"
-            android:icon="@drawable/ic_twotone_favorite_24"
+            android:icon="@drawable/ic_baseline_shopping_bag_24"
             android:title="@string/my_wishlist" />
-        <item
-            android:id="@+id/Drawer_Discount_and_Offers"
-            android:icon="@drawable/ic_twotone_local_offer_24"
-            android:title="@string/discount_and_offers" />
 
         <item
             android:id="@+id/Drawer_Terms_of_Use"

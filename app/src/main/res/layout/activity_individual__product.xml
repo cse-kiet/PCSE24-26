@@ -18,6 +18,7 @@
             android:id="@+id/Individual_Product_Activity_Product_Image"
             android:layout_width="match_parent"
             android:layout_height="300dp"
+            android:scaleType="fitXY"
             android:background="#171717"
             android:src="@drawable/logo" />
 
@@ -107,15 +108,13 @@
 
             <View
                 android:id="@+id/MRP_Individual_Product_View"
-                android:layout_width="110dp"
+                android:layout_width="80dp"
                 android:layout_height="1.5dp"
-                android:layout_marginStart="122dp"
-                android:layout_marginLeft="122dp"
+                android:layout_marginStart="110dp"
                 android:layout_marginEnd="38dp"
-                android:layout_marginRight="38dp"
                 android:alpha="0.9"
                 android:background="@color/white"
-                android:rotation="-15"
+                android:rotation="-10"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/cardView"
                 app:layout_constraintStart_toStartOf="parent"
@@ -221,12 +220,42 @@
             app:autoSizeTextType="uniform"
             tools:ignore="RtlHardcoded" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/Individual_Product_Activity_AddOn_RV"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical" />
+            android:layout_height="200dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Individual_Product_Activity_AddOn_RV"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/TV_Choices_of_AddOn_IndividualActivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="There is no Add On Choices for this Product"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:visibility="gone"
+                android:singleLine="false"
+                app:autoSizeMaxTextSize="18sp"
+                app:autoSizeMinTextSize="5sp"
+                app:autoSizeTextType="uniform"
+                android:layout_margin="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         <!-- Checked-->
         <!--        -->

@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     AllProductAdapter MostPopularAdapter;
     IndividualCategoryAdapter PizzaTreatAdapter,BurgerTreatAdapter,ComboForFamilyAdapter,BeveragesAdapter,DifferentWorldAdapter;
     //See All TextView of all Topics
-    TextView PizzaSeeAll,BurgerSeeAll,FamilyComboSeeAll,MostPopularSeeAll,BeveragesSeeAll,DifferentWorldSeeAll,AvailTV;
+    TextView PizzaSeeAll,BurgerSeeAll,FamilyComboSeeAll,MostPopularSeeAll,BeveragesSeeAll,DifferentWorldSeeAll,AvailTV,FoodySpecialSeeAll;
     private NavigationBarView bottomNavigationView;
     ImageButton PizzaIB,BurgerIB,PastaIB,IceCreamIB,FoodyOffersIB;
     List<SlideModel> sliderImages=new ArrayList<SlideModel>();
@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         startActivity(intent);
                         break;
                     case R.id.Toolbar_Notification_bell:
-                        startActivity(new Intent(MainActivity.this,location.class));
+                        startActivity(new Intent(MainActivity.this,YourOrder_1.class));
                         break;
                     case R.id.Toolbar_share:
 
@@ -291,6 +291,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BeveragesSeeAll=findViewById(R.id.Beverages_and_IceCreams_See_All);
         MostPopularSeeAll=findViewById(R.id.Most_Popular_Treat_See_All);
         DifferentWorldSeeAll=findViewById(R.id.Different_World_See_All);
+        FoodySpecialSeeAll=findViewById(R.id.SeeAll_FoodySpecialTreat);
 
         //Calling Onclick Method for See All of all Topics
         PizzaSeeAll.setOnClickListener(this);
@@ -299,6 +300,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BeveragesSeeAll.setOnClickListener(this);
         MostPopularSeeAll.setOnClickListener(this);
         DifferentWorldSeeAll.setOnClickListener(this);
+        FoodySpecialSeeAll.setOnClickListener(this);
         PizzaIB.setOnClickListener(this);
         PastaIB.setOnClickListener(this);
         BurgerIB.setOnClickListener(this);
@@ -422,7 +424,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         DocumentReference documentReference=Store.collection("Users").document(UserId);
         documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onSuccess(Void aVoid) {
+            public void onSuccess(@NonNull Void aVoid) {
                 PList.add(ProductID);
                 SaveSharedPreferences();
                 progressBar.dismissDialog();
@@ -493,6 +495,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 SendSeeAllIntent();
                 break;
             }
+            case R.id.SeeAll_FoodySpecialTreat:{
+                startActivity(new Intent(MainActivity.this,AllCombo.class));
+                break;
+            }
             case R.id.Pizza_Treat_See_All:{
                 startActivity(new Intent(MainActivity.this,SeeAllCategories.class));
                 break;
@@ -535,8 +541,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             case R.id.FoodyOfferTopCategoryImageButton: {
                 progressBar.startLoadingDialog();
-                TopCategory="foody offer";
-                sendTopCategory();
+                startActivity(new Intent(MainActivity.this,AllCombo.class));
                 break;
             }
             case R.id.PastaTopCategoryImageButton: {
@@ -607,15 +612,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+
             return;
         }
         LocationServices.getFusedLocationProviderClient(MainActivity.this)
                 .requestLocationUpdates(locationrequest, new LocationCallback() {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onLocationResult(LocationResult locationResult) {
                         super.onLocationResult(locationResult);
@@ -625,10 +627,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             int LatestLocationIndex = locationResult.getLocations().size() - 1;
                             double latitude = locationResult.getLocations().get(LatestLocationIndex).getLatitude();
                             double longitude = locationResult.getLocations().get(LatestLocationIndex).getLongitude();
-//                            textLatlong.setText(
-
-
-//                            );
+//
                             Toast.makeText(MainActivity.this,  String.format(
                                     "Latitude: %s\nLongitude: %s",
                                     latitude,
@@ -637,11 +636,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             latitude*=100;
                             longitude*=100;
                             if ((latitude >= 2925) && (latitude <= 2930) && (longitude >= 7743) && (longitude <= 7750)){
-                                Toast.makeText(MainActivity.this, "Our Services are available at your location", Toast.LENGTH_SHORT).show();
+                                AvailTV.setText("Congratulations, We are working at full potential in your Area");
                             }
                             else {
-                                AvailTV.setVisibility(View.VISIBLE);
+                                AvailTV.setText("Sorry!! But our Services are not Available at your current location");
                             }
+                            AvailTV.setVisibility(View.VISIBLE);
 
 
                         }

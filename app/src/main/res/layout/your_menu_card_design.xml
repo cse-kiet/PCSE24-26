@@ -57,6 +57,8 @@
                         android:text="Product Name"
                         android:textColor="@color/black"
                         app:autoSizeTextType="uniform"
+                        app:autoSizeMaxTextSize="17sp"
+                        app:autoSizeMinTextSize="3sp"
                         android:textStyle="bold"
                         tools:ignore="NestedWeights" />
                     <TextView

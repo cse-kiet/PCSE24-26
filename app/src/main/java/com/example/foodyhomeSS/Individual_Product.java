@@ -51,7 +51,7 @@ import java.util.Objects;
 
 public class Individual_Product extends AppCompatActivity {
     ImageView PImage,Star1,Star2,Star3,Star4,Star5;
-    TextView PName,PPRice,PDescription,MRP,Discount;
+    TextView PName,PPRice,PDescription,MRP,Discount,AddOnTV;
     String SName;
     String SPrice;
     String SDescription;
@@ -113,6 +113,7 @@ public class Individual_Product extends AppCompatActivity {
         RecommendedRV=findViewById(R.id.Individual_Product_Recommended_Product_RecyclerView);
         RMLRecyclerView=findViewById(R.id.RML_RecyclerView);
         MRPView=findViewById(R.id.MRP_Individual_Product_View);
+        AddOnTV=findViewById(R.id.TV_Choices_of_AddOn_IndividualActivity);
         Star1=findViewById(R.id.Individual_Product_Star_1);
         Star2=findViewById(R.id.Individual_Product_Star_2);
         Star3=findViewById(R.id.Individual_Product_Star_3);
@@ -131,6 +132,29 @@ public class Individual_Product extends AppCompatActivity {
                 fillRMLRecyclerView();
                 if (!TextUtils.isEmpty(SName)){
                     loadingDialog.dismissDialog();
+                    new CountDownTimer(5000,1000){
+
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+                            if (CheesingRV.getChildCount()==0){
+                                AddOnTV.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                AddOnTV.setVisibility(View.GONE);
+                            }
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            if (CheesingRV.getChildCount()==0){
+                                AddOnTV.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                AddOnTV.setVisibility(View.GONE);
+                            }
+
+                        }
+                    }.start();
                     AddToMenuButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -175,7 +199,6 @@ public class Individual_Product extends AppCompatActivity {
                 public void onItemClick(DataSnapshot dataSnapshot, int position) {
                     RMLKey = dataSnapshot.getKey();
                     Size= Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
-                    Toast.makeText(Individual_Product.this, ""+Size, Toast.LENGTH_SHORT).show();
                     fillDetails();
                 }
             });
@@ -204,9 +227,8 @@ public class Individual_Product extends AppCompatActivity {
                 DocumentReference documentReference=Store.collection("Users").document(UserId);
                 documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(Void aVoid) {
+                    public void onSuccess(@NonNull Void aVoid) {
                         loadingDialog2.dismissDialog();
-                        Toast.makeText(Individual_Product.this, HomePID+" is added", Toast.LENGTH_SHORT).show();
                         PList.add(HomePID);
                         SaveSharedPreferences();
                         startActivity(new Intent(Individual_Product.this,Individual_Product.class));
@@ -362,6 +384,7 @@ public class Individual_Product extends AppCompatActivity {
             CheesingRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
             CheesingRV.setAdapter(Cheesing);
             Cheesing.startListening();
+
             Cheesing.setOnItemCLickListener(new IndividualCategoryAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(DataSnapshot dataSnapshot, int position) {
@@ -376,7 +399,6 @@ public class Individual_Product extends AppCompatActivity {
                     String tAO= Objects.requireNonNull(dataSnapshot.child("Price").getValue()).toString()
                             .replace("Rs ","").replace("/-","");
                     temp=Integer.parseInt(tAO);
-                    Toast.makeText(Individual_Product.this, ""+tAO, Toast.LENGTH_SHORT).show();
                     TAddOn+=temp;
                     AddOns.add(s);
                     SaveSharedPreferences();

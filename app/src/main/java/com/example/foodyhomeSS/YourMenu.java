@@ -66,7 +66,7 @@ public class YourMenu extends AppCompatActivity {
            @Override
            public void onClick(View v) {
                updatePayment();
-               if (TotalPay>=300){
+               if (TotalPay>=200){
                    SharedPreferences sharedPreferences=getSharedPreferences("Shared Preferences",MODE_PRIVATE);
                    @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor=sharedPreferences.edit();
                    editor.putInt("TotalPay",TotalPay);

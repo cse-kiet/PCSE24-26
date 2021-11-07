@@ -15,8 +15,8 @@
 
     <item
         android:id="@+id/Toolbar_Notification_bell"
-        android:title="@string/notifications"
-        android:icon="@drawable/ic_twotone_notifications_active_24"
+        android:title="@string/orders"
+        android:icon="@drawable/ic_baseline_shopping_bag_24"
         app:showAsAction="always" />
 
 </menu>

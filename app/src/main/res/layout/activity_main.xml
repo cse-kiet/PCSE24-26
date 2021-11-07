@@ -291,6 +291,22 @@
                 android:paddingLeft="20sp"
                 tools:ignore="RtlSymmetry" />
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="See All"
+                android:id="@+id/SeeAll_FoodySpecialTreat"
+                android:paddingStart="20sp"
+                android:layout_weight="0.7"
+                android:gravity="center"
+                android:textAlignment="textEnd"
+                android:paddingHorizontal="20sp"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMaxTextSize="16sp"
+                app:autoSizeMinTextSize="5sp"
+                android:textStyle="italic"
+                android:textColor="@color/Yellow"
+                tools:ignore="RtlCompat,RtlSymmetry" />
 
         </LinearLayout>
 
@@ -309,7 +325,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:iss_auto_cycle="true"
-                app:iss_period="1200"
+                app:iss_period="2000"
                 app:iss_corner_radius="20"
                 app:iss_delay="0"
                 app:iss_title_background="?actionBarItemBackground"
