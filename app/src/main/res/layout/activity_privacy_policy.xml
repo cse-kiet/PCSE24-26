@@ -61,10 +61,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Privacy Policy"
                     android:textColor="@color/black"
+                    android:gravity="center"
                     app:autoSizeTextType="uniform"
                     app:autoSizeMaxTextSize="17sp"
                     app:autoSizeMinTextSize="15sp"
@@ -73,11 +74,11 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="800dp"
+                    android:layout_height="5000dp"
                     android:layout_marginTop="10dp"
                     android:padding="10dp"
                     android:singleLine="false"
-                    android:text="@string/Refund_Policy"
+                    android:text="@string/Privacy_Policy"
                     android:textColor="@color/black"
                     app:autoSizeMaxTextSize="17sp"
                     app:autoSizeMinTextSize="15sp"
@@ -86,124 +87,6 @@
 
 
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="800dp"
-                android:orientation="vertical"
-                android:background="@color/black">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="company"
-                    android:textColor="@color/white"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="18dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:padding="10dp"
-                    android:textColor="@color/white"
-                    android:autoSizeTextType="uniform"
-                    android:text="In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available."/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="FOR FOODIES"
-                    android:textColor="@color/white"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="18dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:padding="10dp"
-                    android:textColor="@color/white"
-                    android:autoSizeTextType="uniform"
-                    android:text="In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available."/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="FOR RESTAURENTS"
-                    android:textColor="@color/white"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="18dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:padding="10dp"
-                    android:textColor="@color/white"
-                    android:autoSizeTextType="uniform"
-                    android:text="In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available."/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="FOR YOU"
-                    android:textColor="@color/white"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="18dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:padding="10dp"
-                    android:textColor="@color/white"
-                    android:autoSizeTextType="uniform"
-                    android:text="In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available."/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="SOCIAL LINKS"
-                    android:textColor="@color/white"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="18dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:padding="10dp"
-                    android:textColor="@color/white"
-                    android:autoSizeTextType="uniform"
-                    android:text="In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available."/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:orientation="vertical"
-                android:background="#171717">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="FOODY HOME"
-                    android:textColor="@color/white"
-                    android:layout_marginTop="10dp"
-                    android:layout_gravity="center"
-                    android:textSize="24dp"/>
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:padding="10dp"
-                    android:textColor="@color/white"
-                    app:autoSizeTextType="uniform"
-                    android:text="In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available."/>
             </LinearLayout>
 
         </LinearLayout>
