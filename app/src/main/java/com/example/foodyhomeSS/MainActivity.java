@@ -491,7 +491,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.Most_Popular_Treat_See_All:{
                 progressBar.startLoadingDialog();
-                SeeAll="most popular";
+                SeeAll="";
                 SendSeeAllIntent();
                 break;
             }
@@ -637,11 +637,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             longitude*=100;
                             if ((latitude >= 2925) && (latitude <= 2930) && (longitude >= 7743) && (longitude <= 7750)){
                                 AvailTV.setText("Congratulations, We are working at full potential in your Area");
+                                new CountDownTimer(5000,1000){
+
+                                    @Override
+                                    public void onTick(long millisUntilFinished) {
+
+                                    }
+
+                                    @Override
+                                    public void onFinish() {
+                                        AvailTV.setVisibility(View.GONE);
+                                    }
+                                }.start();
+
                             }
                             else {
                                 AvailTV.setText("Sorry!! But our Services are not Available at your current location");
+                                AvailTV.setVisibility(View.VISIBLE);
                             }
-                            AvailTV.setVisibility(View.VISIBLE);
+
 
 
                         }

@@ -15,6 +15,8 @@
     <uses-permission
         android:name="android.permission.ACCESS_COARSE_LOCATION"
         android:required="true" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"
+        android:required="true" />
     <uses-permission
         android:name="android.permission.SEND_SMS"
         android:required="true" />
@@ -26,7 +28,7 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodyHome">
-        <activity android:name=".AllCombo"></activity>
+        <activity android:name=".AllCombo"/>
         <activity android:name=".PrivacyPolicy" />
         <activity android:name=".RefundPolicy" />
         <activity android:name=".OrderTracking" />
