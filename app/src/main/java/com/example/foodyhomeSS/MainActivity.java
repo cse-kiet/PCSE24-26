@@ -275,10 +275,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
                     }
                     case R.id.Drawer_Refund_Policy:{
-                        startActivity(new Intent(MainActivity.this,SelectStore.class));
+                        startActivity(new Intent(MainActivity.this,RefundPolicy.class));
                         break;
                     }
-
+                    case R.id.Drawer_Privacy_Policy:{
+                        startActivity(new Intent(MainActivity.this,PrivacyPolicy.class));
+                        break;
+                    }
                 }
                 return true;
             }
