@@ -137,7 +137,7 @@
                                 android:layout_height="match_parent"
                                 android:scaleType="fitXY"
                                 android:padding="10dp"
-                                android:src="@drawable/burger"
+                                android:src="@drawable/offer"
                                 tools:ignore="ContentDescription" />
                         </androidx.cardview.widget.CardView>
 
@@ -303,8 +303,8 @@
                 android:paddingHorizontal="20sp"
                 app:autoSizeTextType="uniform"
                 app:autoSizeMaxTextSize="13sp"
+                android:layout_marginEnd="15dp"
                 app:autoSizeMinTextSize="5sp"
-                android:textStyle="italic"
                 android:textColor="@color/Yellow"
                 tools:ignore="RtlCompat,RtlSymmetry" />
 
@@ -360,7 +360,6 @@
                 app:autoSizeMinTextSize="5sp"
                 android:textStyle="italic"
                 android:textColor="@color/white"
-                android:paddingLeft="20sp"
                 tools:ignore="RtlSymmetry" />
 
             <TextView
@@ -373,6 +372,7 @@
                 android:layout_weight="0.7"
                 android:gravity="end"
                 android:text="See All"
+                android:layout_marginEnd="20dp"
                 android:textAlignment="textEnd"
                 android:textColor="@color/Yellow"
                 app:autoSizeMaxTextSize="13sp"

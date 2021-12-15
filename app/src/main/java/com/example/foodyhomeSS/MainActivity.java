@@ -2,7 +2,9 @@ package com.example.foodyhomeSS;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -34,11 +37,18 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.interfaces.ItemClickListener;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -80,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     List<SlideModel> sliderImages=new ArrayList<SlideModel>();
     ImageSlider top_sliderView;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
-
+    LocationRequest locationRequestG;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         PList.clear();
 
 
+        //Asking user to turn on location if it is not
         // RecyclerViews Definitions
 
 
@@ -575,7 +586,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         DocumentReference documentReference=Store.collection("Users").document(UserId);
         documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onSuccess(Void aVoid) {
+            public void onSuccess(@NonNull Void aVoid) {
                 progressBar.dismissDialog();
                 startActivity(new Intent(MainActivity.this,AllProduct.class));
             }
@@ -608,10 +619,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         LocationRequest locationrequest = new LocationRequest();
         locationrequest.setInterval(10000);
-        locationrequest.setFastestInterval(3000);
+        locationrequest.setFastestInterval(2000);
         locationrequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequestG=LocationRequest.create();
+        LocationSettingsRequest.Builder builder=new LocationSettingsRequest.Builder()
+                .addLocationRequest(locationRequestG);
+        builder.setAlwaysShow(true);
+        Task<LocationSettingsResponse> result=LocationServices.getSettingsClient(getApplicationContext())
+                .checkLocationSettings(builder.build());
+        result.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {
+            @Override
+            public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
+                try {
+                    LocationSettingsResponse response=task.getResult(ApiException.class);
+                } catch (ApiException e) {
+                    switch (e.getStatusCode()){
+                        case LocationSettingsStatusCodes
+                                .RESOLUTION_REQUIRED:
+                            try {
+                                ResolvableApiException resolvableApiException=(ResolvableApiException)e;
+                                resolvableApiException.startResolutionForResult(MainActivity.this,REQUEST_LOCATION_PERMISSION);
+                            } catch (IntentSender.SendIntentException sendIntentException) {
+                                sendIntentException.printStackTrace();
+                            }
+                            break;
+                        case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                            break;
+                    }
+                }
+            }
+        });
 //
 //
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -631,11 +671,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             double latitude = locationResult.getLocations().get(LatestLocationIndex).getLatitude();
                             double longitude = locationResult.getLocations().get(LatestLocationIndex).getLongitude();
 //
-                            Toast.makeText(MainActivity.this,  String.format(
-                                    "Latitude: %s\nLongitude: %s",
-                                    latitude,
-                                    longitude
-                            ), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(MainActivity.this,  String.format(
+//                                    "Latitude: %s\nLongitude: %s",
+//                                    latitude,
+//                                    longitude
+//                            ), Toast.LENGTH_SHORT).show();
                             latitude*=100;
                             longitude*=100;
                             if ((latitude >= 2925) && (latitude <= 2930) && (longitude >= 7743) && (longitude <= 7750)){
@@ -681,4 +721,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==REQUEST_LOCATION_PERMISSION){
+            switch (resultCode){
+                case Activity
+                        .RESULT_OK:
+
+                break;
+                case Activity.RESULT_CANCELED:
+
+            }
+        }
+    }
 }

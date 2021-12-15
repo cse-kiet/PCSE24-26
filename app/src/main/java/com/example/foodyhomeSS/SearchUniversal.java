@@ -167,10 +167,10 @@ public class SearchUniversal extends AppCompatActivity {
                 Map<String, Object> user = new HashMap<>();
                 user.put("HomePID", ProductID);
                 String UserId= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-                DocumentReference documentReference=Store.collection("users").document(UserId);
-                documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                DocumentReference documentReference=Store.collection("Users").document(UserId);
+                documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(Void aVoid) {
+                    public void onSuccess(@NonNull Void aVoid) {
                         PList.add(ProductID);
                         SaveSharedPreferences();
                         loadingDialog.dismissDialog();

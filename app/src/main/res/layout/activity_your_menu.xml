@@ -29,6 +29,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/YourMenu_TextView_No_Item"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="20sp"
+        android:singleLine="false"
+        android:visibility="gone"
+        android:text="No Item in Menu Do you want to add then Click on Add"
+        android:textColor="@color/white"
+        app:autoSizeMaxTextSize="20sp"
+        app:autoSizeMinTextSize="18sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/Spanish_Yellow"
+        android:text="Add"
+        android:visibility="gone"
+        android:id="@+id/YourMenuAddItem_Button"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.455"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/YourMenu_TextView_No_Item"
+        tools:ignore="UnusedAttribute" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/YourMenu_RecyclerView"
         android:layout_width="match_parent"
@@ -36,6 +69,7 @@
         android:layout_marginVertical="70dp" />
 
     <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:orientation="horizontal"

@@ -119,6 +119,7 @@ public class Individual_Product extends AppCompatActivity {
         Star3=findViewById(R.id.Individual_Product_Star_3);
         Star4=findViewById(R.id.Individual_Product_Star_4);
         Star5=findViewById(R.id.Individual_Product_Star_5);
+        RMLRecyclerView.setVisibility(View.VISIBLE);
         fillDetails();
 
 
@@ -162,7 +163,7 @@ public class Individual_Product extends AppCompatActivity {
                              AddToMenu();
                         }
 
-                            Toast.makeText(Individual_Product.this, "Clicked", Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(Individual_Product.this, "Clicked", Toast.LENGTH_SHORT).show();
                         }
                     });
                     if (sMRP.equals(SPrice)){
@@ -202,7 +203,36 @@ public class Individual_Product extends AppCompatActivity {
                     fillDetails();
                 }
             });
+            checkRMLRecyclerView();
         }
+    }
+
+    private void checkRMLRecyclerView() {
+        new CountDownTimer(10000,1000){
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                if (RMLRecyclerView.getChildCount()==0){
+//                    Toast.makeText(Individual_Product.this, "GOne", Toast.LENGTH_SHORT).show();
+                    RMLRecyclerView.setVisibility(View.GONE);
+                }
+                else{
+                    RMLRecyclerView.setVisibility(View.VISIBLE);
+                }
+                Toast.makeText(Individual_Product.this, ""+RMLRecyclerView.getChildCount(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFinish() {
+                if (RMLRecyclerView.getChildCount()==0){
+                    RMLRecyclerView.setVisibility(View.GONE);
+                }
+                else{
+                    RMLRecyclerView.setVisibility(View.VISIBLE);
+                }
+            }
+        }.start();
+
     }
 
 

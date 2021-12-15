@@ -78,25 +78,34 @@ public class Login_1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final  EditText resetMail=new EditText(v.getContext());
-                final AlertDialog.Builder PasswordResetDialog= new AlertDialog.Builder((v.getContext()));
+                final AlertDialog.Builder PasswordResetDialog= new AlertDialog.Builder(v.getContext(),R.style.DialogTheme);
                 PasswordResetDialog.setTitle("Reset PassWord");
-                PasswordResetDialog.setMessage("Enter Your Email to receive reset link");
+                PasswordResetDialog.setMessage("Enter Your Email");
                 PasswordResetDialog.setView(resetMail);
                 PasswordResetDialog.setPositiveButton("Send", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String Mail=resetMail.getText().toString();
-                        Auth.sendPasswordResetEmail(Mail).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(@NonNull Void aVoid) {
-                                Toast.makeText(Login_1.this, "Reset Link Sent to your Email", Toast.LENGTH_SHORT).show();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(Login_1.this, "Error! Please try Again " +e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                        if (Mail.isEmpty()){
+                            resetMail.setError("Required");
+                        }
+                        else if (!Mail.contains("@")){
+                            resetMail.setError("Enter a Valid Email");
+                        }
+                        else{
+                            Auth.sendPasswordResetEmail(Mail).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(@NonNull Void aVoid) {
+                                    Toast.makeText(Login_1.this, "Reset Link Sent to your Email", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(Login_1.this, "Error! Please try Again " +e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
                     }
                 });
                 PasswordResetDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

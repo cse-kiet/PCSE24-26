@@ -37,12 +37,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="2dp"
+            android:layout_marginTop="20dp"
             app:cardElevation="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#AD04C3AC"
+                android:background="#AD1AF8DD"
                 android:orientation="vertical">
 
 
@@ -91,169 +92,171 @@
             android:background="@color/teal_200" />
 
 
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:textStyle="bold|italic"-->
+<!--                android:text="Do You Want to Give Tip"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="17sp" />-->
+
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1.5dp"-->
+<!--                android:layout_marginVertical="5dp"-->
+<!--                android:background="@color/teal_200" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:text="Support our work and Choose any one from the Below (Note:- This is Optional)"-->
+<!--                android:textColor="#673AB7"-->
+<!--                android:textSize="12sp" />-->
+
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1.5dp"-->
+<!--                android:layout_marginVertical="5dp"-->
+<!--                android:background="@color/teal_200" />-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="80dp"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:layout_width="80dp"-->
+<!--                    android:layout_height="60dp"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_marginLeft="10dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+
+<!--                    app:cardCornerRadius="10dp"-->
+<!--                    app:cardElevation="10dp">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:gravity="center"-->
+<!--                        android:text="Rs 25/-"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textStyle="bold|italic"-->
+<!--                        app:autoSizeTextType="uniform" />-->
+<!--                    <Button-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:background="?android:actionBarItemBackground"-->
+<!--                        android:id="@+id/Tip_25_Payment_Activity"/>-->
+
+<!--                </com.google.android.material.card.MaterialCardView>-->
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:layout_width="80dp"-->
+<!--                    android:layout_height="60dp"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_marginLeft="10dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+
+<!--                    app:cardCornerRadius="10dp"-->
+<!--                    app:cardElevation="10dp">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:gravity="center"-->
+<!--                        android:text="Rs 50/-"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textStyle="bold|italic"-->
+<!--                        app:autoSizeTextType="uniform" />-->
+<!--                    <Button-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:background="?android:actionBarItemBackground"-->
+<!--                        android:id="@+id/Tip_50_Payment_Activity"/>-->
+
+<!--                </com.google.android.material.card.MaterialCardView>-->
+
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:layout_width="80dp"-->
+<!--                    android:layout_height="60dp"-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    app:cardCornerRadius="10dp"-->
+<!--                    app:cardElevation="10dp">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:gravity="center"-->
+<!--                        android:text="Rs 75/-"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textStyle="bold|italic"-->
+<!--                        app:autoSizeTextType="uniform" />-->
+<!--                    <Button-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:background="?android:actionBarItemBackground"-->
+<!--                        android:id="@+id/Tip_75_Payment_Activity"/>-->
+
+<!--                </com.google.android.material.card.MaterialCardView>-->
+
+
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:layout_width="80dp"-->
+<!--                    android:layout_height="60dp"-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    app:cardCornerRadius="10dp"-->
+<!--                    app:cardElevation="10dp">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:gravity="center"-->
+<!--                        android:text="Rs  10/-"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textStyle="bold|italic"-->
+<!--                        app:autoSizeTextType="uniform" />-->
+<!--                    <Button-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:background="?android:actionBarItemBackground"-->
+<!--                        android:id="@+id/Tip_10_Payment_Activity"/>-->
+
+
+<!--                </com.google.android.material.card.MaterialCardView>-->
+
+
+<!--            </LinearLayout>-->
+
+
+<!--        </LinearLayout>-->
+
+<!--        <View-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="5dp"-->
+<!--            android:background="@color/teal_200" />-->
+
         <LinearLayout
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:textStyle="bold|italic"
-                android:text="Do You Want to Give Tip"
-                android:textColor="@color/black"
-                android:textSize="17sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1.5dp"
-                android:layout_marginVertical="5dp"
-                android:background="@color/teal_200" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="Support our work and Choose any one from the Below (Note:- This is Optional)"
-                android:textColor="#673AB7"
-                android:textSize="12sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1.5dp"
-                android:layout_marginVertical="5dp"
-                android:background="@color/teal_200" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:orientation="horizontal">
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="80dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Rs 25/-"
-                        android:textColor="@color/black"
-                        android:textStyle="bold|italic"
-                        app:autoSizeTextType="uniform" />
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="?android:actionBarItemBackground"
-                        android:id="@+id/Tip_25_Payment_Activity"/>
-
-                </com.google.android.material.card.MaterialCardView>
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="80dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Rs 50/-"
-                        android:textColor="@color/black"
-                        android:textStyle="bold|italic"
-                        app:autoSizeTextType="uniform" />
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="?android:actionBarItemBackground"
-                        android:id="@+id/Tip_50_Payment_Activity"/>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="80dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Rs 75/-"
-                        android:textColor="@color/black"
-                        android:textStyle="bold|italic"
-                        app:autoSizeTextType="uniform" />
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="?android:actionBarItemBackground"
-                        android:id="@+id/Tip_75_Payment_Activity"/>
-
-                </com.google.android.material.card.MaterialCardView>
-
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="80dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Rs  10/-"
-                        android:textColor="@color/black"
-                        android:textStyle="bold|italic"
-                        app:autoSizeTextType="uniform" />
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="?android:actionBarItemBackground"
-                        android:id="@+id/Tip_10_Payment_Activity"/>
-
-
-                </com.google.android.material.card.MaterialCardView>
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="@color/teal_200" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#AD04C3AC"
+            android:background="#AD0FF8DC"
             android:orientation="vertical">
 
             <LinearLayout
@@ -438,6 +441,7 @@
         </LinearLayout>
 
         <Button
+            android:layout_marginTop="10dp"
             android:id="@+id/Place_order_Payment_Activity"
             android:layout_width="match_parent"
             android:layout_height="60dp"
