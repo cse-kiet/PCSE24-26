@@ -16,7 +16,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.foodyhomeSS"
+        applicationId "com.samshor.foodyhomeSS"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 1

@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.foodyhome.foodyhomeSS">
+    package="com.samshor.foodyhomeSS">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission
         android:name="android.permission.CALL_PHONE"
-        android:required="true" />
-    <uses-permission
-        android:name="android.permission.READ_CONTACTS"
         android:required="true" />
     <uses-permission
         android:name="android.permission.ACCESS_FINE_LOCATION"
@@ -28,47 +25,47 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodyHome">
-        <activity android:name="com.foodyhome.foodyhomeSS.AllCombo"/>
-        <activity android:name="com.foodyhome.foodyhomeSS.PrivacyPolicy" />
-        <activity android:name="com.foodyhome.foodyhomeSS.RefundPolicy" />
-        <activity android:name="com.foodyhome.foodyhomeSS.OrderTracking" />
+        <activity android:name="com.samshor.foodyhomeSS.AllCombo"/>
+        <activity android:name="com.samshor.foodyhomeSS.PrivacyPolicy" />
+        <activity android:name="com.samshor.foodyhomeSS.RefundPolicy" />
+        <activity android:name="com.samshor.foodyhomeSS.OrderTracking" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAN4schyVD-uELoDkN1yXL3cxoGWOYEr4o" />
 
-        <activity android:name="com.foodyhome.foodyhomeSS.location" />
-        <activity android:name="com.foodyhome.foodyhomeSS.profile" />
-        <activity android:name="com.foodyhome.foodyhomeSS.YourOrder_1" />
-        <activity android:name="com.foodyhome.foodyhomeSS.AllAddresses" />
-        <activity android:name="com.foodyhome.foodyhomeSS.NoConnection" />
-        <activity android:name="com.foodyhome.foodyhomeSS.YourOrders" />
-        <activity android:name="com.foodyhome.foodyhomeSS.Razorpay" />
-        <activity android:name="com.foodyhome.foodyhomeSS.Payment_Activity" />
-        <activity android:name="com.foodyhome.foodyhomeSS.TopCategories" />
-        <activity android:name="com.foodyhome.foodyhomeSS.AllProduct" />
-        <activity android:name="com.foodyhome.foodyhomeSS.YourMenu" />
-        <activity android:name="com.foodyhome.foodyhomeSS.OrderDetails" />
-        <activity android:name="com.foodyhome.foodyhomeSS.SelectStore" />
-        <activity android:name="com.foodyhome.foodyhomeSS.Individual_Product" />
+        <activity android:name="com.samshor.foodyhomeSS.location" />
+        <activity android:name="com.samshor.foodyhomeSS.profile" />
+        <activity android:name="com.samshor.foodyhomeSS.YourOrder_1" />
+        <activity android:name="com.samshor.foodyhomeSS.AllAddresses" />
+        <activity android:name="com.samshor.foodyhomeSS.NoConnection" />
+        <activity android:name="com.samshor.foodyhomeSS.YourOrders" />
+        <activity android:name="com.samshor.foodyhomeSS.Razorpay" />
+        <activity android:name="com.samshor.foodyhomeSS.Payment_Activity" />
+        <activity android:name="com.samshor.foodyhomeSS.TopCategories" />
+        <activity android:name="com.samshor.foodyhomeSS.AllProduct" />
+        <activity android:name="com.samshor.foodyhomeSS.YourMenu" />
+        <activity android:name="com.samshor.foodyhomeSS.OrderDetails" />
+        <activity android:name="com.samshor.foodyhomeSS.SelectStore" />
+        <activity android:name="com.samshor.foodyhomeSS.Individual_Product" />
         <activity
-            android:name="com.foodyhome.foodyhomeSS.Termandcondition"
-            android:parentActivityName="com.foodyhome.foodyhomeSS.MainActivity" />
-        <activity android:name="com.foodyhome.foodyhomeSS.SeeAllCategories" />
-        <activity android:name="com.foodyhome.foodyhomeSS.otp_login" />
-        <activity android:name="com.foodyhome.foodyhomeSS.Sign_up_activity" />
-        <activity android:name="com.foodyhome.foodyhomeSS.SearchUniversal" />
-        <activity android:name="com.foodyhome.foodyhomeSS.SignUp" />
-        <activity android:name="com.foodyhome.foodyhomeSS.Login_1" />
-        <activity android:name="com.foodyhome.foodyhomeSS.EditAddress" />
-        <activity android:name="com.foodyhome.foodyhomeSS.LogoLauncher">
+            android:name="com.samshor.foodyhomeSS.Termandcondition"
+            android:parentActivityName="com.samshor.foodyhomeSS.MainActivity" />
+        <activity android:name="com.samshor.foodyhomeSS.SeeAllCategories" />
+        <activity android:name="com.samshor.foodyhomeSS.otp_login" />
+        <activity android:name="com.samshor.foodyhomeSS.Sign_up_activity" />
+        <activity android:name="com.samshor.foodyhomeSS.SearchUniversal" />
+        <activity android:name="com.samshor.foodyhomeSS.SignUp" />
+        <activity android:name="com.samshor.foodyhomeSS.Login_1" />
+        <activity android:name="com.samshor.foodyhomeSS.EditAddress" />
+        <activity android:name="com.samshor.foodyhomeSS.LogoLauncher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.foodyhome.foodyhomeSS.MainActivity" />
+        <activity android:name="com.samshor.foodyhomeSS.MainActivity" />
     </application>
 
 </manifest>
