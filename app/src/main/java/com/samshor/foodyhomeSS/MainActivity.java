@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     AllProductAdapter MostPopularAdapter;
     IndividualCategoryAdapter PizzaTreatAdapter,BurgerTreatAdapter,ComboForFamilyAdapter,BeveragesAdapter,DifferentWorldAdapter;
     //See All TextView of all Topics
-    TextView PizzaSeeAll,BurgerSeeAll,FamilyComboSeeAll,MostPopularSeeAll,BeveragesSeeAll,DifferentWorldSeeAll,AvailTV,FoodySpecialSeeAll;
+    TextView PizzaSeeAll,BurgerSeeAll,FamilyComboSeeAll,MostPopularSeeAll,BeveragesSeeAll,DifferentWorldSeeAll,FoodySpecialSeeAll;
     private NavigationBarView bottomNavigationView;
     ImageButton PizzaIB,BurgerIB,PastaIB,IceCreamIB,FoodyOffersIB;
     List<SlideModel> sliderImages=new ArrayList<SlideModel>();
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ComboForFamilyRV=findViewById(R.id.Family_Treat_RecyclerView_Home);
         BeveragesRV=findViewById(R.id.Beverages_and_IceCreams_RecyclerView_Home);
         DifferentWorldRV=findViewById(R.id.Different_World_Treat_RecyclerView_Home);
-        AvailTV=findViewById(R.id.Availability_TV_MainActivity);
+
 
         // RecyclerViews Definitions
 
@@ -153,16 +153,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }.start();
 
-        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
-
-        } else {
-
-
-            getCurrentLocation();
-
-
-        }
+//        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
+//
+//        } else {
+//
+//
+//            getCurrentLocation();
+//
+//
+//        }
 
         //Filling RecyclerViews
 
@@ -260,8 +260,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     case R.id.Drawer_Chat_with_us: {
 
-                        Intent Query=new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"+"8218655014"));
-                        startActivity(Query);
+//                        Intent Query=new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"+"8218655014"));
+//                        startActivity(Query);
                         break;
                     }
                     case R.id.Drawer_logout: {
@@ -613,126 +613,126 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.apply();
 
     }
-    private void getCurrentLocation() {
-
-
-
-        LocationRequest locationrequest = new LocationRequest();
-        locationrequest.setInterval(10000);
-        locationrequest.setFastestInterval(2000);
-        locationrequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        locationRequestG=LocationRequest.create();
-        LocationSettingsRequest.Builder builder=new LocationSettingsRequest.Builder()
-                .addLocationRequest(locationRequestG);
-        builder.setAlwaysShow(true);
-        Task<LocationSettingsResponse> result=LocationServices.getSettingsClient(getApplicationContext())
-                .checkLocationSettings(builder.build());
-        result.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {
-            @Override
-            public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
-                try {
-                    LocationSettingsResponse response=task.getResult(ApiException.class);
-                } catch (ApiException e) {
-                    switch (e.getStatusCode()){
-                        case LocationSettingsStatusCodes
-                                .RESOLUTION_REQUIRED:
-                            try {
-                                ResolvableApiException resolvableApiException=(ResolvableApiException)e;
-                                resolvableApiException.startResolutionForResult(MainActivity.this,REQUEST_LOCATION_PERMISSION);
-                            } catch (IntentSender.SendIntentException sendIntentException) {
-                                sendIntentException.printStackTrace();
-                            }
-                            break;
-                        case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                            break;
-                    }
-                }
-            }
-        });
+//    private void getCurrentLocation() {
 //
 //
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-
-            return;
-        }
-        LocationServices.getFusedLocationProviderClient(MainActivity.this)
-                .requestLocationUpdates(locationrequest, new LocationCallback() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onLocationResult(LocationResult locationResult) {
-                        super.onLocationResult(locationResult);
-                        LocationServices.getFusedLocationProviderClient(MainActivity.this)
-                                .removeLocationUpdates(this);
-                        if (locationResult != null && locationResult.getLocations().size() > 0) {
-                            int LatestLocationIndex = locationResult.getLocations().size() - 1;
-                            double latitude = locationResult.getLocations().get(LatestLocationIndex).getLatitude();
-                            double longitude = locationResult.getLocations().get(LatestLocationIndex).getLongitude();
 //
-//                            Toast.makeText(MainActivity.this,  String.format(
-//                                    "Latitude: %s\nLongitude: %s",
-//                                    latitude,
-//                                    longitude
-//                            ), Toast.LENGTH_SHORT).show();
-                            latitude*=100;
-                            longitude*=100;
-                            if ((latitude >= 2925) && (latitude <= 2930) && (longitude >= 7743) && (longitude <= 7750)){
-                                AvailTV.setText("Congratulations, We are working at full potential in your Area");
-                                new CountDownTimer(5000,1000){
+////        LocationRequest locationrequest = new LocationRequest();
+////        locationrequest.setInterval(10000);
+////        locationrequest.setFastestInterval(2000);
+////        locationrequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+////        locationRequestG=LocationRequest.create();
+////        LocationSettingsRequest.Builder builder=new LocationSettingsRequest.Builder()
+////                .addLocationRequest(locationRequestG);
+////        builder.setAlwaysShow(true);
+////        Task<LocationSettingsResponse> result=LocationServices.getSettingsClient(getApplicationContext())
+////                .checkLocationSettings(builder.build());
+////        result.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {
+////            @Override
+////            public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
+////                try {
+////                    LocationSettingsResponse response=task.getResult(ApiException.class);
+////                } catch (ApiException e) {
+////                    switch (e.getStatusCode()){
+////                        case LocationSettingsStatusCodes
+////                                .RESOLUTION_REQUIRED:
+////                            try {
+////                                ResolvableApiException resolvableApiException=(ResolvableApiException)e;
+////                                resolvableApiException.startResolutionForResult(MainActivity.this,REQUEST_LOCATION_PERMISSION);
+////                            } catch (IntentSender.SendIntentException sendIntentException) {
+////                                sendIntentException.printStackTrace();
+////                            }
+////                            break;
+////                        case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+////                            break;
+////                    }
+////                }
+////            }
+////        });
+////
+////
+//
+////        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+////            // TODO: Consider calling
+////            //    ActivityCompat#requestPermissions
+////
+////            return;
+////        }
+////        LocationServices.getFusedLocationProviderClient(MainActivity.this)
+////                .requestLocationUpdates(locationrequest, new LocationCallback() {
+////                    @SuppressLint("SetTextI18n")
+////                    @Override
+////                    public void onLocationResult(LocationResult locationResult) {
+////                        super.onLocationResult(locationResult);
+////                        LocationServices.getFusedLocationProviderClient(MainActivity.this)
+////                                .removeLocationUpdates(this);
+////                        if (locationResult != null && locationResult.getLocations().size() > 0) {
+////                            int LatestLocationIndex = locationResult.getLocations().size() - 1;
+////                            double latitude = locationResult.getLocations().get(LatestLocationIndex).getLatitude();
+////                            double longitude = locationResult.getLocations().get(LatestLocationIndex).getLongitude();
+//////
+//////                            Toast.makeText(MainActivity.this,  String.format(
+//////                                    "Latitude: %s\nLongitude: %s",
+//////                                    latitude,
+//////                                    longitude
+//////                            ), Toast.LENGTH_SHORT).show();
+////                            latitude*=100;
+////                            longitude*=100;
+////                            if ((latitude >= 2925) && (latitude <= 2930) && (longitude >= 7743) && (longitude <= 7750)){
+////                                AvailTV.setText("Congratulations, We are working at full potential in your Area");
+////                                new CountDownTimer(5000,1000){
+////
+////                                    @Override
+////                                    public void onTick(long millisUntilFinished) {
+////
+////                                    }
+////
+////                                    @Override
+////                                    public void onFinish() {
+////                                        AvailTV.setVisibility(View.GONE);
+////                                    }
+////                                }.start();
+////
+////                            }
+////                            else {
+////                                AvailTV.setText("Sorry!! But our Services are not Available at your current location");
+////                                AvailTV.setVisibility(View.VISIBLE);
+////                            }
+////
+////
+////
+////                        }
+////
+////                    }
+////                }, Looper.getMainLooper());
+//
+//
+//    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        if (requestCode == REQUEST_LOCATION_PERMISSION && grantResults.length > 0) {
+//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//
+//                getCurrentLocation();
+//            } else {
+//                Toast.makeText(this, "Permisssion Denied", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+//    }
 
-                                    @Override
-                                    public void onTick(long millisUntilFinished) {
-
-                                    }
-
-                                    @Override
-                                    public void onFinish() {
-                                        AvailTV.setVisibility(View.GONE);
-                                    }
-                                }.start();
-
-                            }
-                            else {
-                                AvailTV.setText("Sorry!! But our Services are not Available at your current location");
-                                AvailTV.setVisibility(View.VISIBLE);
-                            }
-
-
-
-                        }
-
-                    }
-                }, Looper.getMainLooper());
-
-
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_LOCATION_PERMISSION && grantResults.length > 0) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                getCurrentLocation();
-            } else {
-                Toast.makeText(this, "Permisssion Denied", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==REQUEST_LOCATION_PERMISSION){
-            switch (resultCode){
-                case Activity
-                        .RESULT_OK:
-
-                break;
-                case Activity.RESULT_CANCELED:
-
-            }
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode==REQUEST_LOCATION_PERMISSION){
+//            switch (resultCode){
+//                case Activity
+//                        .RESULT_OK:
+//
+//                break;
+//                case Activity.RESULT_CANCELED:
+//
+//            }
+//        }
+//    }
 }
