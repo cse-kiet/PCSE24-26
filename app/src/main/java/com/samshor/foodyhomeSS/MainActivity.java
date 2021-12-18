@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageSlider top_sliderView;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     LocationRequest locationRequestG;
+    Button CheckAvailability;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +124,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         IceCreamIB=findViewById(R.id.BeveragesTopCategoryImageButton);
         FoodyOffersIB=findViewById(R.id.FoodyOfferTopCategoryImageButton);
         top_sliderView = findViewById(R.id.Top_Slider_View);
+        CheckAvailability=findViewById(R.id.CheckButton_MainActivity);
+
         //Top Category Image Button Definitions
 
         progressBar=new LoadingDialog(this);
@@ -228,7 +232,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         drawerLayout.closeDrawer(Gravity.LEFT);
                         break;
                     }
-                    case R.id.Drawer_Call_us: {
+                    case R.id.Drawer_Call_us:
+
+
+                    case R.id.Drawer_Chat_with_us: {
 //                        int result = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE);
 //                        if (result == PackageManager.PERMISSION_GRANTED) {
 //                            Intent call=new Intent(Intent.ACTION_CALL);
@@ -259,17 +266,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         startActivity(new Intent(MainActivity.this,YourMenu.class));
                         break;
                     }
-
-
-                    case R.id.Drawer_Chat_with_us: {
-                        Intent i=new Intent(MainActivity.this ,ContactUs.class);
-                        startActivity(i);
-                        break;
-                    }
-//                        Intent Query=new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"+"8218655014"));
-//                        startActivity(Query);
-//                        break;
-//                    }
                     case R.id.Drawer_logout: {
                         Auth.signOut();
                         Toast.makeText(MainActivity.this, "Logged out Successfully", Toast.LENGTH_SHORT).show();
@@ -326,6 +322,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BurgerIB.setOnClickListener(this);
         IceCreamIB.setOnClickListener(this);
         FoodyOffersIB.setOnClickListener(this);
+        CheckAvailability.setOnClickListener(this);
 
     }
 
@@ -515,6 +512,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 SendSeeAllIntent();
                 break;
             }
+            case R.id.CheckButton_MainActivity:{
+                startActivity(new Intent(MainActivity.this,Availability.class));
+                break;
+            }
+
             case R.id.SeeAll_FoodySpecialTreat:{
                 startActivity(new Intent(MainActivity.this,AllCombo.class));
                 break;
