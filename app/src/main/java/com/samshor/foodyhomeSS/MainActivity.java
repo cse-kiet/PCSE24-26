@@ -246,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                        else {
 //                            ActivityCompat.requestPermissions(MainActivity.this, new String[] { Manifest.permission.CALL_PHONE },1);
 //                            break;
-                        Intent i=new Intent(MainActivity.this ,ContactUs.class);
+                        Intent i = new Intent(MainActivity.this, ContactUs.class);
                         startActivity(i);
                         break;
                         }
