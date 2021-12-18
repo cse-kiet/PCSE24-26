@@ -229,20 +229,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
                     }
                     case R.id.Drawer_Call_us: {
-                        int result = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE);
-                        if (result == PackageManager.PERMISSION_GRANTED) {
-                            Intent call=new Intent(Intent.ACTION_CALL);
-                            call.setData(Uri.parse("tel:" +"9410264395"));
-                            startActivity(call);
-                            break;
-                        }
-                        else {
-                            ActivityCompat.requestPermissions(MainActivity.this, new String[] { Manifest.permission.CALL_PHONE },1);
-                            break;
+//                        int result = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE);
+//                        if (result == PackageManager.PERMISSION_GRANTED) {
+//                            Intent call=new Intent(Intent.ACTION_CALL);
+//                            call.setData(Uri.parse("tel:" +"9410264395"));
+//                            startActivity(call);
+//                            break;
+//                        }
+//                        else {
+//                            ActivityCompat.requestPermissions(MainActivity.this, new String[] { Manifest.permission.CALL_PHONE },1);
+//                            break;
+                        Intent i=new Intent(MainActivity.this ,ContactUs.class);
+                        startActivity(i);
+                        break;
                         }
 
 
-                    }
+
                     case R.id.Drawer_share_app: {
                         Intent sendIntent = new Intent();
                         sendIntent.setAction(Intent.ACTION_SEND);
@@ -259,11 +262,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                     case R.id.Drawer_Chat_with_us: {
-
-//                        Intent Query=new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"+"8218655014"));
-//                        startActivity(Query);
+                        Intent i=new Intent(MainActivity.this ,ContactUs.class);
+                        startActivity(i);
                         break;
                     }
+//                        Intent Query=new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"+"8218655014"));
+//                        startActivity(Query);
+//                        break;
+//                    }
                     case R.id.Drawer_logout: {
                         Auth.signOut();
                         Toast.makeText(MainActivity.this, "Logged out Successfully", Toast.LENGTH_SHORT).show();
