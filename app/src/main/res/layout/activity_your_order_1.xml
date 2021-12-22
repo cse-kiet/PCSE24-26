@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="#171717"
     tools:context=".YourOrder_1">
+
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -28,11 +29,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/No_Order_TextView_YourOrder1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="20dp"
+        android:text="You have not Placed any orders yet. Place Order and then comeback here."
+        android:textColor="@color/white"
+        android:singleLine="false"
+        android:visibility="gone"
+        app:autoSizeTextType="uniform"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="60dp"
         android:id="@+id/YourOrder1_RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
         tools:layout_editor_absoluteX="243dp"
         tools:layout_editor_absoluteY="337dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

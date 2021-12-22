@@ -159,17 +159,20 @@ public class YourMenu extends AppCompatActivity {
     }
 
     private void checkItemRecyclerView() {
-        new CountDownTimer(10000,1000){
+        new CountDownTimer(3000,1000){
 
             @Override
             public void onTick(long millisUntilFinished) {
                 if (recyclerView.getChildCount()==0){
                     NoItem.setVisibility(View.VISIBLE);
                     Add_NoItem.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
+                    PlaceOrder.setVisibility(View.GONE);
                 }
                 else{
                     NoItem.setVisibility(View.GONE);
                     Add_NoItem.setVisibility(View.GONE);
+                    PlaceOrder.setVisibility(View.VISIBLE);
                 }
             }
 

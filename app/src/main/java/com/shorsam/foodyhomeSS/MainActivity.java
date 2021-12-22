@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         layout.setVisibility(View.VISIBLE);
                         Intent sendIntent = new Intent();
                         sendIntent.setAction(Intent.ACTION_SEND);
-                        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey check out my app at:https://play.google.com/store/apps/details?id=com.shorsam.foodyhomeSS"+ BuildConfig.APPLICATION_ID);
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey Order Pizza and Burger Now from your bed: https://play.google.com/store/apps/details?id=com.shorsam.foodyhomeSS"+ BuildConfig.APPLICATION_ID);
                         sendIntent.setType("text/plain");
                         Intent.createChooser(sendIntent,"Share via");
                         startActivity(sendIntent);
@@ -239,9 +239,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case R.id.Drawer_share_app: {
                         Intent sendIntent = new Intent();
                         sendIntent.setAction(Intent.ACTION_SEND);
-                        sendIntent.putExtra(Intent.EXTRA_TEXT,"Hey check out my app at:https://play.google.com/store/apps/details?id=com.shorsam.foodyhomeSS"+ BuildConfig.APPLICATION_ID);
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey Order Pizza and Burger Now from your bed: https://play.google.com/store/apps/details?id=com.shorsam.foodyhomeSS"+ BuildConfig.APPLICATION_ID);
                         sendIntent.setType("text/plain");
-                        Intent.createChooser(sendIntent, "Share via");
+                        Intent.createChooser(sendIntent,"Share via");
                         startActivity(sendIntent);
                         break;
                     }

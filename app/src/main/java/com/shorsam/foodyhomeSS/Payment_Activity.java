@@ -79,12 +79,15 @@ public class Payment_Activity extends AppCompatActivity {
 
                 if(TextUtils.isEmpty(NameAS.getText().toString())){
                     NameAS.setError("Required");
+                    Toast.makeText(Payment_Activity.this, "Name is Required", Toast.LENGTH_SHORT).show();
                 }
                 if(TextUtils.isEmpty(PhoneAS.getText().toString())){
                     PhoneAS.setError("Required");
+                    Toast.makeText(Payment_Activity.this, "Phone Number is Required", Toast.LENGTH_SHORT).show();
                 }
                 if(TextUtils.isEmpty(AddressAS.getText().toString())){
                     AddressAS.setError("Required");
+                    Toast.makeText(Payment_Activity.this, "Address is Required", Toast.LENGTH_SHORT).show();
                 }
                if (!TextUtils.isEmpty(NameAS.getText().toString()) && !TextUtils.isEmpty(PhoneAS.getText().toString()) && !TextUtils.isEmpty(AddressAS.getText().toString()))
                     if (Info0!=null){
