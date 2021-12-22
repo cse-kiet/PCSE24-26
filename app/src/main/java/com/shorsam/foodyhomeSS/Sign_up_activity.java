@@ -69,13 +69,13 @@ public class Sign_up_activity extends AppCompatActivity {
        Address= findViewById(R.id.Register_Address);
         progressBar=findViewById(R.id.progressBar_Register_With_Email);
         EYE=findViewById(R.id.Password_Email_Signup_Visibility_BUtton);
-        OTP=findViewById(R.id.Phone_number_Login_Button_SignUp_Activity);
-        OTP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Sign_up_activity.this,otp_login.class));
-            }
-        });
+//        OTP=findViewById(R.id.Phone_number_Login_Button_SignUp_Activity);
+//        OTP.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(Sign_up_activity.this,otp_login.class));
+//            }
+//        });
 
 
 
