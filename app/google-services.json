@@ -90,17 +90,25 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1042709767127:android:bbde0d8879e957245b2192",
+        "mobilesdk_app_id": "1:1042709767127:android:026d589d6d0fc0af5b2192",
         "android_client_info": {
-          "package_name": "com.samshor.foodyhomeSS"
+          "package_name": "com.shorsam.foodyhomeSS"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1042709767127-861lhilf0q748d16i05d5s34oeco59kq.apps.googleusercontent.com",
+          "client_id": "1042709767127-aqrvapv0j6ut09bvtvg7njqearjdlnq5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.samshor.foodyhomeSS",
+            "package_name": "com.shorsam.foodyhomeSS",
+            "certificate_hash": "1a8c6d6b16915b5137f46b37474aaa32cd1d9e85"
+          }
+        },
+        {
+          "client_id": "1042709767127-vj2m8ehf16ej14ckjl41kjev4i3b35vr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shorsam.foodyhomeSS",
             "certificate_hash": "a346132a75c6737987cd78e0f8e6b0aa8289cbb1"
           }
         },

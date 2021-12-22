@@ -97,7 +97,9 @@
                         android:paddingHorizontal="15dp"
                         android:textColor="#103059"
                         android:textColorHint="#191970"
-                        app:autoSizeTextType="uniform" />
+                        app:autoSizeTextType="uniform"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:layout_editor_absoluteY="0dp" />
 
                     <ImageButton
                         android:id="@+id/Password_Email_Signup_Visibility_BUtton"
