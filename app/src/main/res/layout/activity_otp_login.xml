@@ -112,32 +112,22 @@
             app:layout_constraintStart_toStartOf="@+id/country_code"
             app:layout_constraintTop_toBottomOf="@+id/country_code" />
 
-        <androidx.cardview.widget.CardView
 
-            android:layout_width="100dp"
-            android:layout_height="50dp"
+        <Button
+            android:id="@+id/login_1_next_button"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginBottom="20dp"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="15dp"
+            android:background="@drawable/custom_button"
+            android:text="Next"
+            android:textColor="@color/black"
+            app:autoSizeTextType="uniform"
+            app:backgroundTint="#FFEB3B"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextOTP">
+            app:layout_constraintEnd_toEndOf="@+id/Get_OTP_button"
+            app:layout_constraintStart_toStartOf="@+id/Get_OTP_button"
+            app:layout_constraintTop_toBottomOf="@+id/editTextOTP" />
 
-
-            <Button
-                android:id="@+id/login_1_next_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/custom_button"
-                android:text="Next"
-                android:textColor="@color/black"
-                app:autoSizeTextType="uniform"
-                app:backgroundTint="#FFEB3B" />
-
-        </androidx.cardview.widget.CardView>
 
         <ProgressBar
             android:id="@+id/Progress_Bar_Login_With_Phone_Next_Button"
@@ -145,7 +135,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/login_1_next_button"
             app:layout_constraintStart_toStartOf="@+id/User_Phone_number_login"
             app:layout_constraintTop_toBottomOf="@+id/User_Phone_number_login" />
         <ProgressBar

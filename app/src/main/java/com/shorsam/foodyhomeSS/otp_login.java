@@ -28,6 +28,7 @@ import com.hbb20.CountryCodePicker;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class otp_login extends AppCompatActivity {
@@ -36,6 +37,7 @@ public class otp_login extends AppCompatActivity {
     String otpid;
     FirebaseAuth Auth;
     String UserPhoneNumber;
+    PhoneAuthProvider.ForceResendingToken mResendToken;
     EditText EditTextPhoneNumber;
     ProgressBar progressBar,NextButtonProgress;
     CountryCodePicker countryCodePicker;
@@ -106,9 +108,7 @@ public class otp_login extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Blank field can not be processed", Toast.LENGTH_LONG).show();
                 else if (OTP.getText().toString().length() != 6)
                     Toast.makeText(getApplicationContext(), "INVALID OTP", Toast.LENGTH_LONG).show();
-
                 else {
-                    next.setVisibility(View.GONE);
                     NextButtonProgress.setVisibility(View.VISIBLE);
                     PhoneAuthCredential credentials= PhoneAuthProvider.getCredential(otpid , OTP.getText().toString());
                     signInWithPhoneAuthCredential(credentials);
@@ -130,8 +130,9 @@ public class otp_login extends AppCompatActivity {
                 new PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
 
                     @Override
-                    public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                    public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken token) {
                         otpid = s;
+                        mResendToken = token;
                     }
 
                     @Override
@@ -142,7 +143,6 @@ public class otp_login extends AppCompatActivity {
                     @Override
                     public void onVerificationFailed(@NonNull FirebaseException e) {
                         Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-
                     }
 
                 });
@@ -152,9 +152,9 @@ public class otp_login extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isComplete()) {
+                        if (task.isSuccessful()) {
 
-                            String UserID=Auth.getCurrentUser().getUid();
+                            String UserID= Objects.requireNonNull(Auth.getCurrentUser()).getUid();
                             DocumentReference documentReference=FireStore.collection("Users").document(UserID);
                             Map<String,Object> user= new HashMap<>();
                             user.put("Phone",UserPhoneNumber);
