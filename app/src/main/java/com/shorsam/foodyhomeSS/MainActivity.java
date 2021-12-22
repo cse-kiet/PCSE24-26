@@ -239,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case R.id.Drawer_share_app: {
                         Intent sendIntent = new Intent();
                         sendIntent.setAction(Intent.ACTION_SEND);
-                        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hello ! we are foodyhome and we are providing you a platform which will deliver item to you within 1 hour");
+                        sendIntent.putExtra(Intent.EXTRA_TEXT,"Hey check out my app at:https://play.google.com/store/apps/details?id=com.shorsam.foodyhomeSS"+ BuildConfig.APPLICATION_ID);
                         sendIntent.setType("text/plain");
                         Intent.createChooser(sendIntent, "Share via");
                         startActivity(sendIntent);
