@@ -37,7 +37,7 @@ import java.util.Objects;
 public class Razorpay extends AppCompatActivity  implements PaymentResultListener {
     TextView Paytext;
     FirebaseAuth Auth;
-    String currentuser,DateCode,Date;
+    String DateCode,Date;
     ArrayList<YourMenuPayModel> DataList;
     FirebaseFirestore Store;
     String UserId,Address,Name,Phone,Email,shop,OrderId;
@@ -104,7 +104,7 @@ public class Razorpay extends AppCompatActivity  implements PaymentResultListene
     public void startPayment() {
         Checkout checkout = new Checkout();
 
-        checkout.setKeyID("rzp_test_LAbzilpeXRuXB9");
+        checkout.setKeyID("rzp_live_kXO9LArsRX4SYt");
         /**
          * Instantiate Checkout
          */

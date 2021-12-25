@@ -11,49 +11,50 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodyHome">
-        <activity android:name="com.shorsam.foodyhomeSS.ContactUs"></activity>
-        <activity android:name="com.shorsam.foodyhomeSS.Availability" />
-        <activity android:name="com.shorsam.foodyhomeSS.AllCombo" />
-        <activity android:name="com.shorsam.foodyhomeSS.PrivacyPolicy" />
-        <activity android:name="com.shorsam.foodyhomeSS.RefundPolicy" />
-        <activity android:name="com.shorsam.foodyhomeSS.OrderTracking" />
+        <activity android:name=".SelectOrder2"></activity>
+        <activity android:name=".ContactUs" />
+        <activity android:name=".Availability" />
+        <activity android:name=".AllCombo" />
+        <activity android:name=".PrivacyPolicy" />
+        <activity android:name=".RefundPolicy" />
+        <activity android:name=".OrderTracking" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAN4schyVD-uELoDkN1yXL3cxoGWOYEr4o" />
 
-        <activity android:name="com.shorsam.foodyhomeSS.location" />
-        <activity android:name="com.shorsam.foodyhomeSS.profile" />
-        <activity android:name="com.shorsam.foodyhomeSS.YourOrder_1" />
-        <activity android:name="com.shorsam.foodyhomeSS.AllAddresses" />
-        <activity android:name="com.shorsam.foodyhomeSS.NoConnection" />
-        <activity android:name="com.shorsam.foodyhomeSS.YourOrders" />
-        <activity android:name="com.shorsam.foodyhomeSS.Razorpay" />
-        <activity android:name="com.shorsam.foodyhomeSS.Payment_Activity" />
-        <activity android:name="com.shorsam.foodyhomeSS.TopCategories" />
-        <activity android:name="com.shorsam.foodyhomeSS.AllProduct" />
-        <activity android:name="com.shorsam.foodyhomeSS.YourMenu" />
-        <activity android:name="com.shorsam.foodyhomeSS.OrderDetails" />
-        <activity android:name="com.shorsam.foodyhomeSS.SelectStore" />
-        <activity android:name="com.shorsam.foodyhomeSS.Individual_Product" />
+        <activity android:name=".location" />
+        <activity android:name=".profile" />
+        <activity android:name=".YourOrder_1" />
+        <activity android:name=".AllAddresses" />
+        <activity android:name=".NoConnection" />
+        <activity android:name=".YourOrders" />
+        <activity android:name=".Razorpay" />
+        <activity android:name=".Payment_Activity" />
+        <activity android:name=".TopCategories" />
+        <activity android:name=".AllProduct" />
+        <activity android:name=".YourMenu" />
+        <activity android:name=".OrderDetails" />
+        <activity android:name=".SelectStore" />
+        <activity android:name=".Individual_Product" />
         <activity
-            android:name="com.shorsam.foodyhomeSS.Termandcondition"
-            android:parentActivityName="com.shorsam.foodyhomeSS.MainActivity" />
-        <activity android:name="com.shorsam.foodyhomeSS.SeeAllCategories" />
-        <activity android:name="com.shorsam.foodyhomeSS.otp_login" />
-        <activity android:name="com.shorsam.foodyhomeSS.Sign_up_activity" />
-        <activity android:name="com.shorsam.foodyhomeSS.SearchUniversal" />
-        <activity android:name="com.shorsam.foodyhomeSS.SignUp" />
-        <activity android:name="com.shorsam.foodyhomeSS.Login_1" />
-        <activity android:name="com.shorsam.foodyhomeSS.EditAddress" />
-        <activity android:name="com.shorsam.foodyhomeSS.LogoLauncher">
+            android:name=".Termandcondition"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".SeeAllCategories" />
+        <activity android:name=".otp_login" />
+        <activity android:name=".Sign_up_activity" />
+        <activity android:name=".SearchUniversal" />
+        <activity android:name=".SignUp" />
+        <activity android:name=".Login_1" />
+        <activity android:name=".EditAddress" />
+        <activity android:name=".LogoLauncher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.shorsam.foodyhomeSS.MainActivity" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

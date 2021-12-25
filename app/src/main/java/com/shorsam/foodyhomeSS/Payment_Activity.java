@@ -40,7 +40,7 @@ public class Payment_Activity extends AppCompatActivity {
     String UserId;
     PaymentItemAdapter adapter;
     LoadingDialog loadingDialog;
-    Button ChangeAddress,PlaceOrder,B10,B25,B50,B75;
+    Button ChangeAddress,PlaceOrder,B10,B25,B50,B75,POD;
     TextView NameAS,AddressAS,PhoneAS,TotalItem,TotalPrice,OtherTaxes,SpecialDiscount,GrandTotal;
     String Info0,Name0,Phone0,Email0;
     int ITotal=0;
@@ -60,17 +60,41 @@ public class Payment_Activity extends AppCompatActivity {
         NameAS=findViewById(R.id.Name_Address_Section_Activity_Payment);
         AddressAS=findViewById(R.id.Address_Address_Section_Activity_Payment);
         PhoneAS =findViewById(R.id.Phone_Address_Section_Activity_Payment);
-        PlaceOrder=findViewById(R.id.Place_order_Payment_Activity);
+        PlaceOrder=findViewById(R.id.Place_order_Payment_Activity_PayOnline);
         TotalItem=findViewById(R.id.Total_ItemsTV_Payment_Activity);
         TotalPrice=findViewById(R.id.Total_Price_TV_Payment_Activity);
         OtherTaxes=findViewById(R.id.Other_Taxes_TV_Payment_Activity);
         SpecialDiscount=findViewById(R.id.FoodyHome_Special_DiscountTV_Payment_Activity);
         GrandTotal=findViewById(R.id.Grand_TotalTV_DiscountTV_Payment_Activity);
+        POD=findViewById(R.id.Place_order_Payment_Activity_POD);
 
         ChangeAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Payment_Activity.this,AllAddresses.class));
+            }
+        });
+        POD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TextUtils.isEmpty(NameAS.getText().toString())){
+                    NameAS.setError("Required");
+                    Toast.makeText(Payment_Activity.this, "Name is Required", Toast.LENGTH_SHORT).show();
+                }
+                if(TextUtils.isEmpty(PhoneAS.getText().toString())){
+                    PhoneAS.setError("Required");
+                    Toast.makeText(Payment_Activity.this, "Phone Number is Required", Toast.LENGTH_SHORT).show();
+                }
+                if(TextUtils.isEmpty(AddressAS.getText().toString())){
+                    AddressAS.setError("Required");
+                    Toast.makeText(Payment_Activity.this, "Address is Required", Toast.LENGTH_SHORT).show();
+                }
+                if (!TextUtils.isEmpty(NameAS.getText().toString()) && !TextUtils.isEmpty(PhoneAS.getText().toString()) && !TextUtils.isEmpty(AddressAS.getText().toString()))
+                    if (Info0!=null){
+                        Info0=Name0+Info0+Phone0;
+                        SaveSharedPreferences();
+                        startActivity(new Intent(Payment_Activity.this,SelectOrder2.class));
+                    }
             }
         });
         PlaceOrder.setOnClickListener(new View.OnClickListener() {
@@ -95,9 +119,6 @@ public class Payment_Activity extends AppCompatActivity {
                         SaveSharedPreferences();
                         startActivity(new Intent(Payment_Activity.this,SelectStore.class));
                     }
-
-
-
             }
         });
         DownloadDataList();

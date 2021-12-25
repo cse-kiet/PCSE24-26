@@ -442,12 +442,20 @@
 
         <Button
             android:layout_marginTop="10dp"
-            android:id="@+id/Place_order_Payment_Activity"
+            android:id="@+id/Place_order_Payment_Activity_PayOnline"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:textColor="@color/black"
            app:backgroundTint="@color/Spanish_Yellow"
-            android:text="Place order" />
+            android:text="Pay Online" />
+        <Button
+            android:layout_marginTop="10dp"
+            android:id="@+id/Place_order_Payment_Activity_POD"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:textColor="@color/black"
+            app:backgroundTint="@color/Spanish_Yellow"
+            android:text="Pay On Delivery" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
