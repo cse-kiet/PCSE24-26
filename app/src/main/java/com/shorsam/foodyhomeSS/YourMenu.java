@@ -83,7 +83,7 @@ public class YourMenu extends AppCompatActivity {
                    startActivity(new Intent(YourMenu.this,Payment_Activity.class));
                }
                else{
-                   Toast.makeText(YourMenu.this, "Total Amount should be greater than 200", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(YourMenu.this, "Total Amount should be greater than 150", Toast.LENGTH_SHORT).show();
                }
 
            }
