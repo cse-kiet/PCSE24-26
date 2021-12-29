@@ -59,7 +59,6 @@ public class Razorpay extends AppCompatActivity  implements PaymentResultListene
         LoadSharedPreferences();
         loadingDialog.startLoadingDialog();
         DataList2=new ArrayList<YourMenuModel>();
-        Toast.makeText(this, Phone+" "+Email, Toast.LENGTH_SHORT).show();
         DownloadDataList();
         OrderId=UserId.substring(0,3).toUpperCase()+getDateTime();
         new CountDownTimer(3000,1000){

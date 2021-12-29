@@ -59,9 +59,7 @@ public class SelectOrder2 extends AppCompatActivity {
         UserId= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         FStore=FirebaseFirestore.getInstance();
         LoadSharedPreferences();
-        loadingDialog.startLoadingDialog();
         DataList2=new ArrayList<YourMenuModel>();
-        Toast.makeText(this, Phone+" "+Email, Toast.LENGTH_SHORT).show();
         DownloadDataList();
         OrderId=UserId.substring(0,3).toUpperCase()+getDateTime();
     }
@@ -125,7 +123,6 @@ public class SelectOrder2 extends AppCompatActivity {
         FirebaseFirestore Store1;
         DateCode=getDateTime();
         Date=getDate();
-
         Store1=FirebaseFirestore.getInstance();
         Map<String, Object> user1 = new HashMap<>();
         DocumentReference documentReference=Store1
@@ -200,7 +197,7 @@ public class SelectOrder2 extends AppCompatActivity {
             user1.put("Address",Address);
         }
         user1.put("Date",Date);
-        user1.put("TotalPay",TotalPay/100);
+        user1.put("TotalPay",TotalPay);
         user1.put("Code",DateCode);
         user1.put("Store",shop);
         user1.put("Email",Email);
