@@ -63,7 +63,7 @@ public class Sign_up_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_activity);
-//        GoogleSignIN = findViewById(R.id.sign_in_with_google);
+
         Email_SignUp =  findViewById(R.id.Sign_up);
         Email=findViewById(R.id.Register_Email);
         Password=findViewById(R.id.Register_Password_Email);
