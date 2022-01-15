@@ -11,7 +11,14 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodyHome">
-        <activity android:name=".SelectOrder2"></activity>
+        <activity android:name=".MainActivity2">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SelectOrder2" />
         <activity android:name=".ContactUs" />
         <activity android:name=".Availability" />
         <activity android:name=".AllCombo" />
@@ -48,11 +55,7 @@
         <activity android:name=".Login_1" />
         <activity android:name=".EditAddress" />
         <activity android:name=".LogoLauncher">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
     </application>

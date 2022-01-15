@@ -1,7 +1,7 @@
 package com.shorsam.foodyhomeSS;
 
 public class YourOrder_1_Model {
-    String Address,Store,OrderId;
+    String Address,Store,OrderId,Type;
 
     public String getAddress() {
         return Address;
@@ -43,12 +43,21 @@ public class YourOrder_1_Model {
         OrderId = orderId;
     }
 
-    public YourOrder_1_Model(String orderId, String address, String store, String date, Integer totalPay) {
+    public String getType() {
+        return Type;
+    }
+
+    public void setType(String type) {
+        Type = type;
+    }
+
+    public YourOrder_1_Model(String orderId, String address, String store, String date, Integer totalPay, String type) {
         Address = address;
         Date = date;
         Store=store;
         TotalPay = totalPay;
         OrderId=orderId;
+        Type=type;
     }
 
     String Date;

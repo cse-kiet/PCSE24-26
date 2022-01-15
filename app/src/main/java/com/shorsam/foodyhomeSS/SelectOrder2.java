@@ -204,6 +204,7 @@ public class SelectOrder2 extends AppCompatActivity {
         user1.put("Status","Pending");
         user1.put("UserId",UserId);
         user1.put("OrderId",OrderId);
+        user1.put("Type","POD");
 
         documentReference
                 .set(user1).addOnSuccessListener(new OnSuccessListener<Void>() {

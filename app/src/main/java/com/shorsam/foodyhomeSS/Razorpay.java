@@ -259,6 +259,7 @@ public class Razorpay extends AppCompatActivity  implements PaymentResultListene
             user1.put("Status","Pending");
             user1.put("UserId",UserId);
             user1.put("OrderId",OrderId);
+            user1.put("Type","Paid");
 
         documentReference
                 .set(user1).addOnSuccessListener(new OnSuccessListener<Void>() {

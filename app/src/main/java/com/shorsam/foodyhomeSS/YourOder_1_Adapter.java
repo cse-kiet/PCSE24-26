@@ -31,10 +31,11 @@ public class YourOder_1_Adapter extends FirestoreRecyclerAdapter<YourOrder_1_Mod
         holder.Address.setText(model.getAddress());
         holder.TotalPay.setText("Rs "+model.getTotalPay().toString()+"/-");
         holder.OrderId.setText("Order Id :  "+ model.getOrderId());
+        holder.Type.setText(model.getType()+"");
         String TDateS=getDate();
         String ODateS=model.getDate();
-        Integer ODateI=Integer.parseInt(ODateS);
-        Integer TDateI=Integer.parseInt(TDateS);
+        int ODateI=Integer.parseInt(ODateS);
+        int TDateI=Integer.parseInt(TDateS);
         int MDiff=(TDateI/100)-(ODateI/100);
         int YDiff=(TDateI/10000)-(ODateI/10000);
         if (YDiff==0) {
@@ -65,7 +66,7 @@ public class YourOder_1_Adapter extends FirestoreRecyclerAdapter<YourOrder_1_Mod
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView Address,TotalPay,Date,Store,OrderId;
+        TextView Address,TotalPay,Date,Store,OrderId,Type;
         Button Track , Help;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -76,6 +77,7 @@ public class YourOder_1_Adapter extends FirestoreRecyclerAdapter<YourOrder_1_Mod
             Help=itemView.findViewById(R.id.YourOrder1_Help_Button);
             Store=itemView.findViewById(R.id.YourOrder1_Store);
             OrderId=itemView.findViewById(R.id.YourOrder1_OrderId);
+            Type=itemView.findViewById(R.id.DeliveryType_YourOrder1);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

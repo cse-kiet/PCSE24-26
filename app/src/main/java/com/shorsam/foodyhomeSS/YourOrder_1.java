@@ -105,6 +105,7 @@ public class YourOrder_1 extends AppCompatActivity {
 
             @Override
             public void onHelpClick(DocumentSnapshot documentSnapshot, int position) {
+                startActivity(new Intent(YourOrder_1.this,ContactUs.class));
 
             }
         });
