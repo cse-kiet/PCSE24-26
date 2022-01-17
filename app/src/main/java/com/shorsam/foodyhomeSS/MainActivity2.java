@@ -3,6 +3,7 @@ package com.shorsam.foodyhomeSS;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,13 +31,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class MainActivity2 extends AppCompatActivity {
-    ScrollView scrollView;
+
     ImageView TopBG,TopToggle;
     CardView SearchCardView;
-    RecyclerView recyclerView;
+    RecyclerView recyclerView,PickYourFavouriteRV;
     CategoryTopAdapter adapter;
     ScrollView MainScrollView;
     List<SlideModel> sliderImages=new ArrayList<SlideModel>();
+    PickYourFavouriteAdapter adapter2;
     ImageSlider CategorySlider;
     ArrayList<String> SliderDataList=new ArrayList<String>();
     int Up=0;
@@ -51,9 +53,22 @@ public class MainActivity2 extends AppCompatActivity {
         recyclerView=findViewById(R.id.Category_RecyclerView_MainActivity2);
         MainScrollView=findViewById(R.id.MainScrollView_MainActivity2);
         CategorySlider=findViewById(R.id.SliderView_Category_MainActivity2);
+        PickYourFavouriteRV=findViewById(R.id.PickYourFavourite_RecyclerView_MainActivity2);
         fillDifferentWorld();
         SetTopContentAnimation();
         fillSlider();
+        fillPickYourFavouriteRV();
+    }
+
+    private void fillPickYourFavouriteRV() {
+        FirebaseRecyclerOptions<CategoryModelTop> options =
+                new FirebaseRecyclerOptions.Builder<CategoryModelTop>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("DifferentTreat"), CategoryModelTop.class)
+                        .build();
+        adapter2= new PickYourFavouriteAdapter(options);
+        PickYourFavouriteRV.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL,false));
+        PickYourFavouriteRV.setAdapter(adapter2);
+        adapter2.startListening();
     }
 
     private void fillSlider() {
