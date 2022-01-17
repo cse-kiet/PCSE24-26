@@ -58,6 +58,14 @@ public class MainActivity2 extends AppCompatActivity {
         SetTopContentAnimation();
         fillSlider();
         fillPickYourFavouriteRV();
+        fillPickYourCategoryRV();
+        fillPickYourShopRV();
+    }
+
+    private void fillPickYourShopRV() {
+    }
+
+    private void fillPickYourCategoryRV() {
     }
 
     private void fillPickYourFavouriteRV() {

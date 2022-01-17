@@ -131,6 +131,15 @@
                 android:layout_marginVertical="10dp"
                 android:id="@+id/PickYourCategory_RecyclerView_MainActivity2"
                 />
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                android:id="@+id/PickYourStore_RecyclerView_MainActivity2"
+                />
 
         </LinearLayout>
 
