@@ -34,7 +34,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     ImageView TopBG,TopToggle;
     CardView SearchCardView;
-    RecyclerView recyclerView,PickYourFavouriteRV,ShopRecyclerView;
+    RecyclerView TopCategoryRV,PickYourFavouriteRV,ShopRecyclerView,PickYourCategoryRV;
     CategoryTopAdapter adapter;
     StoreMainActivity2Adapter adapter3;
     ScrollView MainScrollView;
@@ -51,11 +51,13 @@ public class MainActivity2 extends AppCompatActivity {
         TopBG=findViewById(R.id.Top_ImageView_MainActivity2);
         TopToggle=findViewById(R.id.Menu_Button_MainActivity2);
         SearchCardView=findViewById(R.id.Search_CardView_MainActivity2);
-        recyclerView=findViewById(R.id.Category_RecyclerView_MainActivity2);
+        TopCategoryRV=findViewById(R.id.TopCategory_RecyclerView_MainActivity2);
+        PickYourCategoryRV=findViewById(R.id.PickYourCategory_RecyclerView_MainActivity2);
         MainScrollView=findViewById(R.id.MainScrollView_MainActivity2);
         CategorySlider=findViewById(R.id.SliderView_Category_MainActivity2);
         PickYourFavouriteRV=findViewById(R.id.PickYourFavourite_RecyclerView_MainActivity2);
         ShopRecyclerView=findViewById(R.id.PickYourStore_RecyclerView_MainActivity2);
+        ShopRecyclerView.setNestedScrollingEnabled(false);
         fillDifferentWorld();
         SetTopContentAnimation();
         fillSlider();
@@ -67,10 +69,10 @@ public class MainActivity2 extends AppCompatActivity {
     private void fillPickYourShopRV() {
         FirebaseRecyclerOptions<CategoryModelTop> options =
                 new FirebaseRecyclerOptions.Builder<CategoryModelTop>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("PizzaTreat"), CategoryModelTop.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("DifferentTreat"), CategoryModelTop.class)
                         .build();
         adapter3= new StoreMainActivity2Adapter(options);
-        ShopRecyclerView.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL,false));
+        ShopRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         ShopRecyclerView.setAdapter(adapter3);
         adapter3.startListening();
     }
@@ -78,12 +80,12 @@ public class MainActivity2 extends AppCompatActivity {
     private void fillPickYourCategoryRV() {
         FirebaseRecyclerOptions<CategoryModelTop> options =
                 new FirebaseRecyclerOptions.Builder<CategoryModelTop>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("PizzaTreat"), CategoryModelTop.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("DifferentTreat"), CategoryModelTop.class)
                         .build();
-        adapter= new CategoryTopAdapter(options);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL,false));
-        recyclerView.setAdapter(adapter);
-        adapter.startListening();
+        adapter2= new PickYourFavouriteAdapter(options);
+        PickYourCategoryRV.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL,false));
+        PickYourCategoryRV.setAdapter(adapter2);
+        adapter2.startListening();
     }
 
     private void fillPickYourFavouriteRV() {
@@ -142,12 +144,12 @@ public class MainActivity2 extends AppCompatActivity {
                         SearchCardView.setY(60);
                         Animation animation3= AnimationUtils.loadAnimation(MainActivity2.this,R.anim.translate_up_top_recycler_view);
 
-                        recyclerView.setAnimation(animation3);
-                        recyclerView.setY(220);
+                       TopCategoryRV.setAnimation(animation3);
+                        TopCategoryRV.setY(220);
 
                         Up=1;
                     }
-                    else if (scrollY<=50 && Up==1){
+                    else if (scrollY<=50 && Up==1|| scrollY==0 && Up==1){
                         Animation animation= AnimationUtils.loadAnimation(MainActivity2.this,R.anim.tranlate_down_top_image_view);
 
                         TopBG.setAnimation(animation);
@@ -161,10 +163,8 @@ public class MainActivity2 extends AppCompatActivity {
 
                         Animation animation3= AnimationUtils.loadAnimation(MainActivity2.this,R.anim.tranlate_down_top_recycler_view);
 
-                        recyclerView.setAnimation(animation3);
-                        recyclerView.setTranslationY(0);
-
-
+                        TopCategoryRV.setAnimation(animation3);
+                        TopCategoryRV.setTranslationY(0);
 
                         Up=0;
                     }
@@ -179,8 +179,8 @@ public class MainActivity2 extends AppCompatActivity {
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("DifferentTreat"), CategoryModelTop.class)
                         .build();
         adapter= new CategoryTopAdapter(options);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(adapter);
+        TopCategoryRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
+        TopCategoryRV.setAdapter(adapter);
         adapter.startListening();
 //        adapter.setOnItemCLickListener(new IndividualCategoryAdapter.OnItemClickListener() {
 //            @Override
