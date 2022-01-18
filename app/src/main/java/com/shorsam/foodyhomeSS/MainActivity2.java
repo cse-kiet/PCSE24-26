@@ -34,8 +34,9 @@ public class MainActivity2 extends AppCompatActivity {
 
     ImageView TopBG,TopToggle;
     CardView SearchCardView;
-    RecyclerView recyclerView,PickYourFavouriteRV;
+    RecyclerView recyclerView,PickYourFavouriteRV,ShopRecyclerView;
     CategoryTopAdapter adapter;
+    StoreMainActivity2Adapter adapter3;
     ScrollView MainScrollView;
     List<SlideModel> sliderImages=new ArrayList<SlideModel>();
     PickYourFavouriteAdapter adapter2;
@@ -54,6 +55,7 @@ public class MainActivity2 extends AppCompatActivity {
         MainScrollView=findViewById(R.id.MainScrollView_MainActivity2);
         CategorySlider=findViewById(R.id.SliderView_Category_MainActivity2);
         PickYourFavouriteRV=findViewById(R.id.PickYourFavourite_RecyclerView_MainActivity2);
+        ShopRecyclerView=findViewById(R.id.PickYourStore_RecyclerView_MainActivity2);
         fillDifferentWorld();
         SetTopContentAnimation();
         fillSlider();
@@ -63,9 +65,25 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     private void fillPickYourShopRV() {
+        FirebaseRecyclerOptions<CategoryModelTop> options =
+                new FirebaseRecyclerOptions.Builder<CategoryModelTop>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("PizzaTreat"), CategoryModelTop.class)
+                        .build();
+        adapter3= new StoreMainActivity2Adapter(options);
+        ShopRecyclerView.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL,false));
+        ShopRecyclerView.setAdapter(adapter3);
+        adapter3.startListening();
     }
 
     private void fillPickYourCategoryRV() {
+        FirebaseRecyclerOptions<CategoryModelTop> options =
+                new FirebaseRecyclerOptions.Builder<CategoryModelTop>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("PizzaTreat"), CategoryModelTop.class)
+                        .build();
+        adapter= new CategoryTopAdapter(options);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL,false));
+        recyclerView.setAdapter(adapter);
+        adapter.startListening();
     }
 
     private void fillPickYourFavouriteRV() {
