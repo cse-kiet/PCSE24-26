@@ -3,23 +3,31 @@ package com.shorsam.foodyhomeSS;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.interfaces.ItemClickListener;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +39,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class MainActivity2 extends AppCompatActivity {
-
+    DrawerLayout drawerLayout;
+    FirebaseAuth Auth;
+    NavigationView navigationView;
     ImageView TopBG,TopToggle;
     CardView SearchCardView;
     RecyclerView TopCategoryRV,PickYourFavouriteRV,ShopRecyclerView,PickYourCategoryRV;
@@ -48,24 +58,109 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        TopBG=findViewById(R.id.Top_ImageView_MainActivity2);
-        TopToggle=findViewById(R.id.Menu_Button_MainActivity2);
-        SearchCardView=findViewById(R.id.Search_CardView_MainActivity2);
-        TopCategoryRV=findViewById(R.id.TopCategory_RecyclerView_MainActivity2);
-        PickYourCategoryRV=findViewById(R.id.PickYourCategory_RecyclerView_MainActivity2);
-        MainScrollView=findViewById(R.id.MainScrollView_MainActivity2);
-        CategorySlider=findViewById(R.id.SliderView_Category_MainActivity2);
-        PickYourFavouriteRV=findViewById(R.id.PickYourFavourite_RecyclerView_MainActivity2);
-        ShopRecyclerView=findViewById(R.id.PickYourStore_RecyclerView_MainActivity2);
+        TopBG = findViewById(R.id.Top_ImageView_MainActivity2);
+        TopToggle = findViewById(R.id.Menu_Button_MainActivity2);
+        SearchCardView = findViewById(R.id.Search_CardView_MainActivity2);
+        TopCategoryRV = findViewById(R.id.TopCategory_RecyclerView_MainActivity2);
+        PickYourCategoryRV = findViewById(R.id.PickYourCategory_RecyclerView_MainActivity2);
+        MainScrollView = findViewById(R.id.MainScrollView_MainActivity2);
+        CategorySlider = findViewById(R.id.SliderView_Category_MainActivity2);
+        PickYourFavouriteRV = findViewById(R.id.PickYourFavourite_RecyclerView_MainActivity2);
+        drawerLayout = findViewById(R.id.drawer_layout_mainactivity_2);
+        navigationView = findViewById(R.id.drawer_navigation_view_mainactivity_2);
+        ShopRecyclerView = findViewById(R.id.PickYourStore_RecyclerView_MainActivity2);
         ShopRecyclerView.setNestedScrollingEnabled(false);
+        Auth = FirebaseAuth.getInstance();
         fillDifferentWorld();
         SetTopContentAnimation();
         fillSlider();
         fillPickYourFavouriteRV();
         fillPickYourCategoryRV();
         fillPickYourShopRV();
-    }
 
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
+
+            @SuppressLint("NonConstantResourceId")
+
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.Drawer_Home: {
+                        drawerLayout.closeDrawer(Gravity.LEFT);
+                        break;
+                    }
+                    case R.id.Drawer_Call_us:{
+                        Intent i = new Intent(MainActivity2.this, ContactUs.class);
+                        startActivity(i);
+                        break;
+                    }
+                    case R.id.Drawer_Chat_with_us: {
+//                       int result = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE);
+//                        if (result == PackageManager.PERMISSION_GRANTED) {
+//                            Intent call=new Intent(Intent.ACTION_CALL);
+//                            call.setData(Uri.parse("tel:" +"9410264395"));
+//                            startActivity(call);
+//                            break;
+//                        }
+//                        else {
+//                            ActivityCompat.requestPermissions(MainActivity.this, new String[] { Manifest.permission.CALL_PHONE },1);
+//                            break;
+                        Intent i = new Intent(MainActivity2.this, ContactUs.class);
+                        startActivity(i);
+                        break;
+                     }
+
+
+                    case R.id.Drawer_share_app: {
+                        Intent sendIntent = new Intent();
+                        sendIntent.setAction(Intent.ACTION_SEND);
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey Order Pizza and Burger Now from your bed: https://play.google.com/store/apps/details?id=com.shorsam.foodyhomeSS");
+                        sendIntent.setType("text/plain");
+                        Intent.createChooser(sendIntent, "Share via");
+                        startActivity(sendIntent);
+                        break;
+                    }
+                    case R.id.Drawer_My_Menu: {
+                        startActivity(new Intent(MainActivity2.this, YourMenu.class));
+                        break;
+                    }
+                    case R.id.Drawer_logout: {
+                        Auth.signOut();
+                        Toast.makeText(MainActivity2.this, "Logged out Successfully", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(MainActivity2.this, LogoLauncher.class);
+                        startActivity(i);
+                        finish();
+                        break;
+                    }
+                    case R.id.Drawer_Terms_of_Use: {
+                        Intent i = new Intent(MainActivity2.this, Termandcondition.class);
+                        startActivity(i);
+                        break;
+                    }
+                    case R.id.Drawer_My_WishList: {
+                        startActivity(new Intent(MainActivity2.this, YourOrder_1.class));
+                        break;
+                    }
+                    case R.id.Drawer_Profile: {
+                        startActivity(new Intent(MainActivity2.this, profile.class));
+                        break;
+                    }
+                    case R.id.Drawer_Refund_Policy: {
+                        startActivity(new Intent(MainActivity2.this, RefundPolicy.class));
+                        break;
+                    }
+                    case R.id.Drawer_Privacy_Policy: {
+                        startActivity(new Intent(MainActivity2.this, PrivacyPolicy.class));
+                        break;
+                    }
+                }
+                return true;
+            }
+        });
+    }
     private void fillPickYourShopRV() {
         FirebaseRecyclerOptions<CategoryModelTop> options =
                 new FirebaseRecyclerOptions.Builder<CategoryModelTop>()
@@ -79,6 +174,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     private void fillPickYourCategoryRV() {
         FirebaseRecyclerOptions<CategoryModelTop> options =
+
                 new FirebaseRecyclerOptions.Builder<CategoryModelTop>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("DifferentTreat"), CategoryModelTop.class)
                         .build();
