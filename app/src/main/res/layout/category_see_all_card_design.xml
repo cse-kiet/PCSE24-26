@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="380dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="165dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="2dp"
+        android:layout_marginLeft="15dp"
+
+         android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+        android:orientation="horizontal">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="24dp"
+               android:src="@drawable/category_vegetable"
+             android:scaleType="fitXY"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="24dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:layout_marginLeft="30dp"
+                android:text="Category Name"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:textStyle="italic"/>
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:inputType="textMultiLine"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:text="Foody home is the best food delivery application"
+                android:textSize="12dp"
+                android:textColor="@color/black"
+                android:textStyle="italic"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="30dp"
+
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginLeft="30dp"
+                    android:text="From 20 rs/-"
+                    android:textSize="14dp"
+
+                    android:textColor="@color/black"
+                    android:textStyle="italic"/>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="30dp"
+                        app:cardBackgroundColor="@color/Spanish_Yellow"
+                        app:cardElevation="2dp"
+                        app:cardCornerRadius="50dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="14dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@color/black"
+                            android:text="40%"/>
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="14dp"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@color/black"
+
+                            android:text="OFF"/>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
