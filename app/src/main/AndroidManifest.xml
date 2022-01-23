@@ -11,6 +11,7 @@
         android:roundIcon="@drawable/playstore_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodyHome">
+        <activity android:name=".CategorySeeAll"></activity>
         <activity android:name=".MainActivity2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,9 +58,7 @@
         <activity android:name=".SignUp" />
         <activity android:name=".Login_1" />
         <activity android:name=".EditAddress" />
-        <activity android:name=".LogoLauncher">
-
-        </activity>
+        <activity android:name=".LogoLauncher"></activity>
         <activity android:name=".MainActivity" />
     </application>
 
