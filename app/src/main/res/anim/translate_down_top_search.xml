@@ -8,13 +8,13 @@
 <!--        android:duration="300"/>-->
     <scale android:pivotY="50%"
         android:pivotX="50%"
-        android:fromXScale="0.9"
+        android:fromXScale="0.89"
         android:fromYScale="0.92"
         android:toYScale="1"
         android:duration="500"
         android:toXScale="1"/>
     <alpha
-        android:duration="500"
+        android:duration="499"
         android:fromAlpha="0"
         android:toAlpha="1" />
 

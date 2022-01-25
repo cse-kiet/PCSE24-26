@@ -28,5 +28,8 @@
         <item name="android:background">@color/primary</item>
         <item name="android:textColorPrimary">@color/Yellow</item>
     </style>
+    <style name="Navigation_Drawer" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColorSecondary">#3F51B5</item>
+    </style>
 
 </resources>

@@ -9,7 +9,7 @@
         android:layout_width="380dp"
         android:layout_marginTop="10dp"
         android:layout_height="165dp"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="10dp"
         app:cardElevation="2dp"
         android:layout_marginLeft="15dp"
 
@@ -22,15 +22,14 @@
             <ImageView
                 android:id="@+id/Image_View_See_All"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="24dp"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="20dp"
+                android:layout_marginHorizontal="10dp"
                android:src="@drawable/category_vegetable"
              android:scaleType="fitXY"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginLeft="15dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
             <TextView
@@ -44,7 +43,7 @@
                 android:text="Category Name"
                 android:textSize="18dp"
                 android:textColor="@color/black"
-                android:textStyle="italic"/>
+                android:textStyle="italic|bold"/>
             <TextView
                 android:id="@+id/Description_See_All"
                 android:layout_width="150dp"
@@ -56,7 +55,7 @@
                 android:layout_marginLeft="30dp"
                 android:text="Foody home is the best food delivery application"
                 android:textSize="12dp"
-                android:textColor="@color/black"
+                android:textColor="#F44336"
                 android:textStyle="italic"/>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -74,7 +73,7 @@
                     android:text="From 20 rs/-"
                     android:textSize="14dp"
 
-                    android:textColor="@color/black"
+                    android:textColor="@color/purple_700"
                     android:textStyle="italic"/>
 
                     <com.google.android.material.card.MaterialCardView
@@ -89,7 +88,8 @@
                             android:id="@+id/Discount_See_All"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="14dp"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
                             android:layout_marginTop="5dp"
                             android:layout_marginLeft="10dp"
                             android:textColor="@color/black"
@@ -101,7 +101,6 @@
                             android:layout_marginTop="24dp"
                             android:layout_marginLeft="10dp"
                             android:textColor="@color/black"
-
                             android:text="OFF"/>
 
                     </com.google.android.material.card.MaterialCardView>

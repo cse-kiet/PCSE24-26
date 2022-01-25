@@ -35,7 +35,8 @@
     </group>
 
 
-    <item android:title="@string/contact_us">
+    <item android:title="@string/contact_us"
+         >
         <menu>
             <item
                 android:id="@+id/Drawer_Call_us"
