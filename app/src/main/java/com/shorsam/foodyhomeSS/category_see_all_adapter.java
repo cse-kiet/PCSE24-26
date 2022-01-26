@@ -1,3 +1,4 @@
+package com.shorsam.foodyhomeSS;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.shorsam.foodyhomeSS.CategoryTopAdapter;
+
 import com.shorsam.foodyhomeSS.R;
 
 public class category_see_all_adapter extends FirebaseRecyclerAdapter<Category_See_ALL_Model,category_see_all_adapter.MyViewHolder>{
@@ -22,7 +23,7 @@ public class category_see_all_adapter extends FirebaseRecyclerAdapter<Category_S
 
     @Override
     protected void onBindViewHolder(@NonNull category_see_all_adapter.MyViewHolder holder, int position, @NonNull Category_See_ALL_Model model) {
-        holder.CategoryName.setText(model.getCategoryName());
+        holder.CategoryName.setText(model.getName());
         holder.Description.setText(model.getDescription());
         holder.Discount.setText(model.getDiscount());
         holder.Price.setText(model.getPrice());

@@ -1,15 +1,15 @@
+package com.shorsam.foodyhomeSS;
 public class Category_See_ALL_Model {
-    String CategoryName,Image,Description,Price,Discount;
+    String Name,Image,Description,Price,Discount;
     Category_See_ALL_Model(){
 
     }
 
-    public String getCategoryName() {
-        return CategoryName;
+    public String getName() {
+        return Name;
     }
 
-    public void setCategoryName(String categoryname) {
-        CategoryName = categoryname;
+    public void setName(String name) { Name = name;
     }
 
     public String getImage() {
@@ -23,28 +23,30 @@ public class Category_See_ALL_Model {
         return Price;
     }
 
-    public void getPrice(String price) {
+    public void setPrice(String price) {
         Price = price;
     }
     public String getDiscount() {
         return Discount;
     }
 
-    public void getDiscount(String discount) {
+    public void setDiscount(String discount) {
         Discount = discount;
     }
+
     public String getDescription() {
         return Description;
     }
 
-    public void getdescription(String description) {
+    public void setDescription(String description) {
         Description = description;
     }
 
-    public Category_See_ALL_Model(String categoryname,String price ,String description,String discount,String image) {
-        CategoryName = categoryname;
-        Discount=discount;
+    public Category_See_ALL_Model(String name,String price ,String description,String discount,String image) {
+        Name = name;
+        Price=price;
         Description=description;
+        Discount=discount;
         Price=price;
         Image = image;
     }
