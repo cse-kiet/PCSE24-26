@@ -17,9 +17,6 @@ import android.os.CountDownTimer;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -51,7 +48,7 @@ public class MainActivity2 extends AppCompatActivity {
     CardView SearchCardView;
     RecyclerView TopCategoryRV,PickYourFavouriteRV,ShopRecyclerView,PickYourCategoryRV;
     CategoryTopAdapter adapter;
-    StoreMainActivity2Adapter adapter3;
+    ShopsActivityAdapter adapter3;
     ScrollView MainScrollView;
     List<SlideModel> sliderImages=new ArrayList<SlideModel>();
     PickYourFavouriteAdapter adapter2;
@@ -196,7 +193,7 @@ public class MainActivity2 extends AppCompatActivity {
                 new FirebaseRecyclerOptions.Builder<CategoryModelTop>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("DifferentTreat"), CategoryModelTop.class)
                         .build();
-        adapter3= new StoreMainActivity2Adapter(options);
+        adapter3= new ShopsActivityAdapter(options);
         ShopRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         ShopRecyclerView.setAdapter(adapter3);
         adapter3.startListening();
@@ -315,7 +312,6 @@ public class MainActivity2 extends AppCompatActivity {
                         TopBG.animate().translationY(0).start();
                         MainScrollView.animate().yBy(220).setDuration(200).start();
                         TopCategoryRV_SeeAll.animate().translationY(0).setDuration(200).start();
-
                         Up=0;
                     }
                 }

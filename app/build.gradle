@@ -17,7 +17,8 @@ android {
 
     defaultConfig {
         applicationId "com.shorsam.foodyhomeSS"
-        minSdkVersion 27        targetSdkVersion 30
+        minSdkVersion 27
+        targetSdkVersion 30
         versionCode 7
         versionName "1.2.1"
         multiDexEnabled true

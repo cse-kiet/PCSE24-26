@@ -13,8 +13,6 @@ import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-import java.util.Objects;
-
 public class PickYourFavouriteAdapter extends FirebaseRecyclerAdapter<CategoryModelTop,PickYourFavouriteAdapter.myViewHolder> {
 
     public PickYourFavouriteAdapter(@NonNull FirebaseRecyclerOptions<CategoryModelTop> options) {
@@ -30,7 +28,7 @@ public class PickYourFavouriteAdapter extends FirebaseRecyclerAdapter<CategoryMo
     @NonNull
     @Override
     public PickYourFavouriteAdapter.myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.shops_card_view,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.pick_your_favourite_cardview,parent,false);
         return new myViewHolder(view);
     }
 

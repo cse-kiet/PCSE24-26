@@ -30,14 +30,15 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_marginTop="160dp"
                     android:paddingHorizontal="20dp"
                     android:text="Pick your favourite"
                     android:textColor="#F44336"
                     android:textStyle="bold"
-                    app:autoSizeMaxTextSize="17sp"
-                    app:autoSizeMinTextSize="15sp"
+                    android:gravity="center_vertical"
+                    app:autoSizeMaxTextSize="18sp"
+                    app:autoSizeMinTextSize="16sp"
                     app:autoSizeTextType="uniform" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -47,7 +48,25 @@
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginVertical="10dp"
                     android:orientation="horizontal" />
-
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    app:cardCornerRadius="7dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginHorizontal="15dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="See More"
+                        app:autoSizeTextType="uniform"
+                        app:autoSizeMinTextSize="15sp"
+                        app:autoSizeMaxTextSize="18sp"
+                        android:textColor="@color/black"
+                        android:textStyle="italic"
+                        android:gravity="center"
+                        android:background="#FFFFFF"
+                        app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_24" />
+                </androidx.cardview.widget.CardView>
 
                 <com.denzcoskun.imageslider.ImageSlider
                     android:id="@+id/SliderView_Category_MainActivity2"
@@ -55,10 +74,24 @@
                     android:layout_height="200dp"
                     android:layout_marginHorizontal="20dp"
                     app:iss_auto_cycle="true"
+                    android:layout_marginVertical="10dp"
                     app:iss_corner_radius="20"
                     app:iss_delay="0"
                     app:iss_period="2000"
                     app:iss_title_background="?actionBarItemBackground" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:paddingHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:text="Most Liked Products"
+                    android:textColor="#1C0447"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"
+                    app:autoSizeMaxTextSize="18sp"
+                    app:autoSizeMinTextSize="16sp"
+                    app:autoSizeTextType="uniform" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/PickYourCategory_RecyclerView_MainActivity2"
@@ -68,6 +101,39 @@
                     android:layout_marginVertical="10dp"
                     android:layout_marginTop="20dp"
                     android:orientation="horizontal" />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    app:cardCornerRadius="7dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginHorizontal="15dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="See More"
+                        app:autoSizeTextType="uniform"
+                        app:autoSizeMinTextSize="15sp"
+                        app:autoSizeMaxTextSize="18sp"
+                        android:textColor="@color/black"
+                        android:textStyle="italic"
+                        android:gravity="center"
+                        android:background="#FFFFFF"
+                        app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_24" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:paddingHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:text="Explore Different Tastes"
+                    android:textColor="#1C0447"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"
+                    app:autoSizeMaxTextSize="18sp"
+                    app:autoSizeMinTextSize="16sp"
+                    app:autoSizeTextType="uniform" />
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/PickYourStore_RecyclerView_MainActivity2"
@@ -75,6 +141,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginVertical="10dp"
                     android:layout_marginTop="20dp"
+                    android:background="@drawable/main_activity_bg"
                     android:orientation="horizontal"
                     />
 

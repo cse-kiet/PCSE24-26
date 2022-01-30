@@ -1,7 +1,5 @@
 package com.shorsam.foodyhomeSS;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,16 +9,9 @@ import android.os.Bundle;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-
-import java.util.Objects;
 
 public class Shops_Activity extends AppCompatActivity {
-    StoreMainActivity2Adapter adapter;
+    ShopsActivityAdapter adapter;
     RecyclerView recyclerview;
 //    FirebaseFirestore store;
     FirebaseAuth auth;
@@ -56,7 +47,7 @@ fillRecyclerView();
                     new FirebaseRecyclerOptions.Builder<CategoryModelTop>()
                             .setQuery(FirebaseDatabase.getInstance().getReference().child("PizzaTreat"), CategoryModelTop.class)
                             .build();
-            adapter = new StoreMainActivity2Adapter(options);
+            adapter = new ShopsActivityAdapter(options);
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(Shops_Activity.this, 2);
             recyclerview.setLayoutManager(layoutManager);
             recyclerview.setAdapter(adapter);

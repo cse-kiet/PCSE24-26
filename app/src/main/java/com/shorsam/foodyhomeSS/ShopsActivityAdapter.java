@@ -13,8 +13,8 @@ import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-public class StoreMainActivity2Adapter extends FirebaseRecyclerAdapter<CategoryModelTop,StoreMainActivity2Adapter.holder> {
-public StoreMainActivity2Adapter(@NonNull FirebaseRecyclerOptions<CategoryModelTop> options) {
+public class ShopsActivityAdapter extends FirebaseRecyclerAdapter<CategoryModelTop, ShopsActivityAdapter.holder> {
+public ShopsActivityAdapter(@NonNull FirebaseRecyclerOptions<CategoryModelTop> options) {
         super(options);
         }
 
@@ -29,8 +29,8 @@ public StoreMainActivity2Adapter(@NonNull FirebaseRecyclerOptions<CategoryModelT
     @NonNull
     @Override
     public holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.shops_cardview_2,parent,false);
-        return new StoreMainActivity2Adapter.holder(view);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.shops_acitivity_cardview,parent,false);
+        return new ShopsActivityAdapter.holder(view);
     }
 
 

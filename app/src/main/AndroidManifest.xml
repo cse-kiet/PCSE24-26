@@ -11,7 +11,8 @@
         android:roundIcon="@drawable/playstore_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodyHome">
-        <activity android:name=".Shops_Activity"></activity>
+        <activity android:name=".SubCategoryPickYourFavourite"></activity>
+        <activity android:name=".Shops_Activity" />
         <activity android:name=".category_see_all" />
         <activity android:name=".MainActivity2">
             <intent-filter>
@@ -46,7 +47,6 @@
         <activity android:name=".TopCategories" />
         <activity android:name=".AllProduct" />
         <activity android:name=".YourMenu" />
-        <activity android:name=".OrderDetails" />
         <activity android:name=".SelectStore" />
         <activity android:name=".Individual_Product" />
         <activity

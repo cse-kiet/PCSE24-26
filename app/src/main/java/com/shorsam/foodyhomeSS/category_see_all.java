@@ -32,6 +32,8 @@ public class category_see_all extends AppCompatActivity {
         String category,UserID;
     FirebaseAuth Auth;
 
+
+
     FirebaseFirestore Store;
 
 
