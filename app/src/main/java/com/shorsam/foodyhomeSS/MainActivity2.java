@@ -127,9 +127,9 @@ public class MainActivity2 extends AppCompatActivity {
                         drawerLayout.closeDrawer(Gravity.LEFT);
                         break;
                     }
-                    case R.id.Drawer_Call_us:
+                   case R.id.Drawer_Call_us:
                     case R.id.Drawer_Chat_with_us: {
-                        Intent i = new Intent(MainActivity2.this, ContactUs.class);
+                        Intent i = new Intent(MainActivity2.this, category_see_all.class);
                         startActivity(i);
                         break;
                     }//                       int result = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE);

@@ -29,7 +29,7 @@ public StoreMainActivity2Adapter(@NonNull FirebaseRecyclerOptions<CategoryModelT
     @NonNull
     @Override
     public holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.category_cardview,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.shops_cardview_2,parent,false);
         return new StoreMainActivity2Adapter.holder(view);
     }
 
@@ -41,9 +41,9 @@ public StoreMainActivity2Adapter(@NonNull FirebaseRecyclerOptions<CategoryModelT
         TextView Category;
         public holder(@NonNull View itemView) {
             super(itemView);
-            Offer=itemView.findViewById(R.id.offers_category);
-            Category=itemView.findViewById(R.id.items_category);
-            Image=itemView.findViewById(R.id.image_category);
+            Offer=itemView.findViewById(R.id.TextView_PickYourFavourite);
+            Category=itemView.findViewById(R.id.Shops_Text_View);
+            Image=itemView.findViewById(R.id.ImageView_PickYourFavourite);
         }
     }
 }

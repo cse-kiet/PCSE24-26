@@ -1,7 +1,7 @@
 package com.shorsam.foodyhomeSS;
 
 public class CategoryModelTop {
-    String Name,Image;
+    String Name,Image,Discount;
     CategoryModelTop(){
 
     }
@@ -14,6 +14,14 @@ public class CategoryModelTop {
         Name = name;
     }
 
+//    public String getDiscount() {
+//        return Discount;
+//    }
+//
+//    public void setDiscount(String discount) {
+//        Discount = discount;}
+
+
     public String getImage() {
         return Image;
     }
@@ -22,7 +30,8 @@ public class CategoryModelTop {
         Image = image;
     }
 
-    public CategoryModelTop(String name, String image) {
+    public CategoryModelTop(String name, String image,String discount) {
+        Discount=discount;
         Name = name;
         Image = image;
     }
