@@ -124,7 +124,10 @@ public class MainActivity2 extends AppCompatActivity {
                         drawerLayout.closeDrawer(Gravity.LEFT);
                         break;
                     }
-                   case R.id.Drawer_Call_us:
+                   case R.id.Drawer_Call_us:{
+                       startActivity(new Intent(MainActivity2.this,IndividualProduct_2.class));
+                       break;
+                   }
                     case R.id.Drawer_Chat_with_us: {
                         Intent i = new Intent(MainActivity2.this, category_see_all.class);
                         startActivity(i);
