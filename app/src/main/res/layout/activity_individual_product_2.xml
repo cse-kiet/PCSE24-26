@@ -26,7 +26,7 @@
                 android:layout_height="match_parent">
 
                 <ImageButton
-                    android:id="@+id/imageButton"
+                    android:id="@+id/BackButton_IndividualProduct_ImageView"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="8dp"
@@ -37,7 +37,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
-                    android:id="@+id/imageButton2"
+                    android:id="@+id/YourOrders_IndividualProduct_ImageView"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginEnd="15dp"
@@ -48,29 +48,30 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
+                    android:id="@+id/Cart_IndividualProduct_ImageView"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginEnd="10dp"
                     android:background="?android:actionBarItemBackground"
                     android:src="@drawable/ic_baseline_shopping_bag_24"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+                    app:layout_constraintEnd_toStartOf="@+id/YourOrders_IndividualProduct_ImageView"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
         <com.denzcoskun.imageslider.ImageSlider
-            android:id="@+id/SliderView_Category_MainActivity2"
+            android:id="@+id/SliderView_IndividualProduct2"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="250dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginVertical="10dp"
             android:layout_marginTop="20dp"
             app:iss_auto_cycle="true"
             app:iss_corner_radius="20"
             app:iss_delay="0"
-            app:iss_period="2000"
+            app:iss_period="1500"
             app:iss_title_background="?actionBarItemBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -78,7 +79,7 @@
             app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/ProductName_IndividualProduct2_TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -94,10 +95,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SliderView_Category_MainActivity2" />
+            app:layout_constraintTop_toBottomOf="@+id/SliderView_IndividualProduct2" />
 
         <ImageView
-            android:id="@+id/Individual_Product_Star_1"
+            android:id="@+id/IndividualProduct2_Star_1"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center"
@@ -105,54 +106,54 @@
             android:layout_marginTop="10dp"
             android:src="@drawable/ic_baseline_star_24"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            app:layout_constraintTop_toBottomOf="@+id/ProductName_IndividualProduct2_TextView" />
 
         <ImageView
-            android:id="@+id/Individual_Product_Star_2"
+            android:id="@+id/IndividualProduct2_Star_2"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="2dp"
             android:layout_marginTop="10dp"
             android:src="@drawable/ic_baseline_star_24"
-            app:layout_constraintStart_toEndOf="@+id/Individual_Product_Star_1"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            app:layout_constraintStart_toEndOf="@+id/IndividualProduct2_Star_1"
+            app:layout_constraintTop_toBottomOf="@+id/ProductName_IndividualProduct2_TextView" />
 
         <ImageView
-            android:id="@+id/Individual_Product_Star_3"
+            android:id="@+id/IndividualProduct2_Star_3"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="2dp"
             android:layout_marginTop="10dp"
             android:src="@drawable/ic_baseline_star_24"
-            app:layout_constraintStart_toEndOf="@+id/Individual_Product_Star_2"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            app:layout_constraintStart_toEndOf="@+id/IndividualProduct2_Star_2"
+            app:layout_constraintTop_toBottomOf="@+id/ProductName_IndividualProduct2_TextView" />
 
         <ImageView
-            android:id="@+id/Individual_Product_Star_4"
+            android:id="@+id/IndividualProduct2_Star_4"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="2dp"
             android:layout_marginTop="10dp"
             android:src="@drawable/ic_baseline_star_24"
-            app:layout_constraintStart_toEndOf="@+id/Individual_Product_Star_3"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            app:layout_constraintStart_toEndOf="@+id/IndividualProduct2_Star_3"
+            app:layout_constraintTop_toBottomOf="@+id/ProductName_IndividualProduct2_TextView" />
 
         <ImageView
-            android:id="@+id/Individual_Product_Star_5"
+            android:id="@+id/IndividualProduct2_Star_5"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="2dp"
             android:layout_marginTop="10dp"
             android:src="@drawable/ic_baseline_star_24"
-            app:layout_constraintStart_toEndOf="@+id/Individual_Product_Star_4"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            app:layout_constraintStart_toEndOf="@+id/IndividualProduct2_Star_4"
+            app:layout_constraintTop_toBottomOf="@+id/ProductName_IndividualProduct2_TextView" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/ProductPrice_IndividualProduct2_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -164,10 +165,10 @@
             app:autoSizeMinTextSize="12sp"
             app:autoSizeTextType="uniform"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Individual_Product_Star_3" />
+            app:layout_constraintTop_toBottomOf="@+id/IndividualProduct2_Star_3" />
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/MRP_IndividualProduct2_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -178,9 +179,9 @@
             app:autoSizeMaxTextSize="12sp"
             app:autoSizeMinTextSize="10dp"
             app:autoSizeTextType="uniform"
-            app:layout_constraintEnd_toEndOf="@+id/textView9"
-            app:layout_constraintStart_toStartOf="@+id/textView9"
-            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+            app:layout_constraintEnd_toEndOf="@+id/ProductPrice_IndividualProduct2_TextView"
+            app:layout_constraintStart_toStartOf="@+id/ProductPrice_IndividualProduct2_TextView"
+            app:layout_constraintTop_toBottomOf="@+id/ProductPrice_IndividualProduct2_TextView" />
 
         <View
             android:layout_width="50dp"
@@ -188,14 +189,14 @@
             android:layout_marginBottom="5dp"
             android:background="#0AAE9E"
             android:rotation="-8"
-            app:layout_constraintBottom_toBottomOf="@+id/textView10"
-            app:layout_constraintEnd_toEndOf="@+id/textView10"
-            app:layout_constraintStart_toStartOf="@+id/textView10"
-            app:layout_constraintTop_toTopOf="@+id/textView10"
+            app:layout_constraintBottom_toBottomOf="@+id/MRP_IndividualProduct2_TextView"
+            app:layout_constraintEnd_toEndOf="@+id/MRP_IndividualProduct2_TextView"
+            app:layout_constraintStart_toStartOf="@+id/MRP_IndividualProduct2_TextView"
+            app:layout_constraintTop_toTopOf="@+id/MRP_IndividualProduct2_TextView"
             app:layout_constraintVertical_bias="0.652" />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/DeliveryStatus_IndividualProduct2_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -207,7 +208,7 @@
             app:autoSizeMinTextSize="8sp"
             app:autoSizeTextType="uniform"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+            app:layout_constraintTop_toBottomOf="@+id/MRP_IndividualProduct2_TextView" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView3"
@@ -216,9 +217,9 @@
             android:layout_marginStart="80dp"
             app:cardCornerRadius="50dp"
             app:cardElevation="5dp"
-            app:layout_constraintBottom_toTopOf="@+id/textView11"
-            app:layout_constraintStart_toEndOf="@+id/textView10"
-            app:layout_constraintTop_toTopOf="@+id/textView9">
+            app:layout_constraintBottom_toTopOf="@+id/DeliveryStatus_IndividualProduct2_TextView"
+            app:layout_constraintStart_toEndOf="@+id/MRP_IndividualProduct2_TextView"
+            app:layout_constraintTop_toTopOf="@+id/ProductPrice_IndividualProduct2_TextView">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -229,6 +230,7 @@
                 android:weightSum="2">
 
                 <TextView
+                    android:id="@+id/Discount_IndividualProduct2_TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -268,14 +270,14 @@
             app:cardCornerRadius="5dp"
             app:cardElevation="5dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8">
+            app:layout_constraintTop_toBottomOf="@+id/ProductName_IndividualProduct2_TextView">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/StoreName_IndividualProduct2_TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -293,7 +295,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/Timing_IndividualProduct2_TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -308,10 +310,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView12" />
+                    app:layout_constraintTop_toBottomOf="@+id/StoreName_IndividualProduct2_TextView" />
 
                 <ImageView
-                    android:id="@+id/imageView5"
+                    android:id="@+id/Store_Star1_IndividualProduct2_ImageView"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:layout_gravity="center"
@@ -319,53 +321,54 @@
                     android:layout_marginTop="2dp"
                     android:src="@drawable/ic_baseline_star_24"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                    app:layout_constraintTop_toBottomOf="@+id/Timing_IndividualProduct2_TextView" />
 
                 <ImageView
-                    android:id="@+id/imageView6"
+                    android:id="@+id/Store_Star2_IndividualProduct2_ImageView"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:layout_gravity="center"
-                    android:layout_marginStart="2dp"
+                    android:layout_marginStart="1dp"
                     android:layout_marginTop="2dp"
                     android:src="@drawable/ic_baseline_star_24"
-                    app:layout_constraintStart_toEndOf="@+id/imageView5"
-                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                    app:layout_constraintStart_toEndOf="@+id/Store_Star1_IndividualProduct2_ImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/Timing_IndividualProduct2_TextView" />
 
                 <ImageView
-                    android:id="@+id/imageView7"
+                    android:id="@+id/Store_Star3_IndividualProduct2_ImageView"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:layout_gravity="center"
-                    android:layout_marginStart="2dp"
+                    android:layout_marginStart="1dp"
                     android:layout_marginTop="2dp"
                     android:src="@drawable/ic_baseline_star_24"
-                    app:layout_constraintStart_toEndOf="@+id/imageView6"
-                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                    app:layout_constraintStart_toEndOf="@+id/Store_Star2_IndividualProduct2_ImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/Timing_IndividualProduct2_TextView" />
 
                 <ImageView
-                    android:id="@+id/imageView9"
+                    android:id="@+id/Store_Star4_IndividualProduct2_ImageView"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:layout_gravity="center"
-                    android:layout_marginStart="2dp"
+                    android:layout_marginStart="1dp"
                     android:layout_marginTop="2dp"
                     android:src="@drawable/ic_baseline_star_24"
-                    app:layout_constraintStart_toEndOf="@+id/imageView7"
-                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                    app:layout_constraintStart_toEndOf="@+id/Store_Star3_IndividualProduct2_ImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/Timing_IndividualProduct2_TextView" />
 
                 <ImageView
-                    android:id="@+id/imageView10"
+                    android:id="@+id/Store_Star5_IndividualProduct2_ImageView"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:layout_gravity="center"
-                    android:layout_marginStart="2dp"
+                    android:layout_marginStart="1dp"
                     android:layout_marginTop="2dp"
                     android:src="@drawable/ic_baseline_star_24"
-                    app:layout_constraintStart_toEndOf="@+id/imageView9"
-                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                    app:layout_constraintStart_toEndOf="@+id/Store_Star4_IndividualProduct2_ImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/Timing_IndividualProduct2_TextView" />
 
                 <TextView
+                    android:id="@+id/Store_DeliveryTime_IndividualProduct2_TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -382,13 +385,13 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+                    app:layout_constraintTop_toBottomOf="@+id/Store_Star5_IndividualProduct2_ImageView" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
+            android:id="@+id/AddToWhilist_IndividualProductFloatingActionButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
@@ -402,6 +405,7 @@
             tools:ignore="ContentDescription" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/Share_IndividualProduct_FloatingActionButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
@@ -410,7 +414,7 @@
             app:backgroundTint="@color/white"
             app:fabCustomSize="40dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/floatingActionButton"
+            app:layout_constraintTop_toBottomOf="@+id/AddToWhilist_IndividualProductFloatingActionButton"
             app:tint="#F44336"
             tools:ignore="ContentDescription" />
 
@@ -423,10 +427,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+            app:layout_constraintTop_toBottomOf="@+id/DeliveryStatus_IndividualProduct2_TextView" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/RML_RecyclerView_IndividualProduct2_ImageView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
@@ -445,10 +449,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+            app:layout_constraintTop_toBottomOf="@+id/RML_RecyclerView_IndividualProduct2_ImageView" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView2"
+            android:id="@+id/AddOnRecyclerView_IndividualProduct2_ImageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -467,7 +471,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView2" />
+            app:layout_constraintTop_toBottomOf="@+id/AddOnRecyclerView_IndividualProduct2_ImageView" />
 
         <TextView
             android:id="@+id/textView14"
@@ -483,7 +487,7 @@
             app:autoSizeMinTextSize="5sp"
             app:autoSizeTextType="uniform"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView2" />
+            app:layout_constraintTop_toBottomOf="@+id/AddOnRecyclerView_IndividualProduct2_ImageView" />
 
         <View
             android:layout_width="match_parent"
@@ -497,7 +501,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/Description_IndividualProduct2_ImageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
@@ -538,9 +542,10 @@ versions of Lorem Ipsum."
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+            app:layout_constraintTop_toBottomOf="@+id/Description_IndividualProduct2_ImageView" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecommendedProduct_IndividualProduct2_ImageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -549,7 +554,7 @@ versions of Lorem Ipsum."
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+            app:layout_constraintTop_toBottomOf="@+id/Description_IndividualProduct2_ImageView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

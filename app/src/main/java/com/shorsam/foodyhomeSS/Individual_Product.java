@@ -109,11 +109,11 @@ public class Individual_Product extends AppCompatActivity {
         RMLRecyclerView=findViewById(R.id.RML_RecyclerView);
         MRPView=findViewById(R.id.MRP_Individual_Product_View);
         AddOnTV=findViewById(R.id.TV_Choices_of_AddOn_IndividualActivity);
-        Star1=findViewById(R.id.Individual_Product_Star_1);
-        Star2=findViewById(R.id.Individual_Product_Star_2);
-        Star3=findViewById(R.id.Individual_Product_Star_3);
-        Star4=findViewById(R.id.Individual_Product_Star_4);
-        Star5=findViewById(R.id.Individual_Product_Star_5);
+        Star1=findViewById(R.id.IndividualProduct2_Star_1);
+        Star2=findViewById(R.id.IndividualProduct2_Star_2);
+        Star3=findViewById(R.id.IndividualProduct2_Star_3);
+        Star4=findViewById(R.id.IndividualProduct2_Star_4);
+        Star5=findViewById(R.id.IndividualProduct2_Star_5);
         RMLRecyclerView.setVisibility(View.VISIBLE);
         fillDetails();
 

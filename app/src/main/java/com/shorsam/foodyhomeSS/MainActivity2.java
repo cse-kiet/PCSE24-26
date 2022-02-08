@@ -70,7 +70,7 @@ public class MainActivity2 extends AppCompatActivity {
         TopCategoryRV = findViewById(R.id.TopCategory_RecyclerView_MainActivity2);
         PickYourCategoryRV = findViewById(R.id.PickYourCategory_RecyclerView_MainActivity2);
         MainScrollView = findViewById(R.id.MainScrollView_MainActivity2);
-        CategorySlider = findViewById(R.id.SliderView_Category_MainActivity2);
+        CategorySlider = findViewById(R.id.SliderView_IndividualProduct2);
         FavouriteFoodSlider=findViewById(R.id.SliderView_FavouriteFood_MainActivity2);
         FoodSlider=findViewById(R.id.SliderView_FoodItems_MainActivity2);
         PickYourFavouriteRV = findViewById(R.id.PickYourFavourite_RecyclerView_MainActivity2);
@@ -85,12 +85,21 @@ public class MainActivity2 extends AppCompatActivity {
         Auth = FirebaseAuth.getInstance();
         fillDifferentWorld();
         SetTopContentAnimation();
+        // sliders
         fillCategorySlider();
         fillFavouriteFoodSlider();
-         fillFoodItemsSlider();
+        fillFoodItemsSlider();
+        // Sliders
+
+        //RecyclerViews
         fillPickYourFavouriteRV();
         fillPickYourCategoryRV();
         fillPickYourShopRV();
+
+        //RecyclerViews
+
+
+
         TopCategoryRV_SeeAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -325,6 +334,7 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
 
+    @SuppressLint("ObsoleteSdkInt")
     private void SetTopContentAnimation() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             MainScrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
@@ -339,7 +349,7 @@ public class MainActivity2 extends AppCompatActivity {
                         SearchCardView.animate().translationY(-200).setDuration(200).start();
                         TopCategoryRV.animate().translationY(-200).setDuration(200).start();
                         TopBG.animate().translationY(-200).setDuration(200).start();
-                        MainScrollView.animate().yBy(-220).setDuration(200).start();
+                        MainScrollView.animate().translationY(-220).setDuration(200).start();
                         TopCategoryRV_SeeAll.animate().translationY(-200).setDuration(200).start();
                         TopShare.animate().translationY(-50).scaleY(0.9f).scaleX(0.9f).setDuration(200).start();
                         TopYourOrders.animate().translationY(-50).scaleY(0.9f).scaleX(0.9f).setDuration(200).start();
@@ -383,7 +393,7 @@ public class MainActivity2 extends AppCompatActivity {
                         SearchCardView.animate().translationY(0).translationX(0).start();
                         TopCategoryRV.animate().translationY(0).start();
                         TopBG.animate().translationY(0).start();
-                        MainScrollView.animate().yBy(220).setDuration(200).start();
+                        MainScrollView.animate().translationY(0).setDuration(200).start();
                         TopCategoryRV_SeeAll.animate().translationY(0).setDuration(200).start();
                         Up=0;
                     }
