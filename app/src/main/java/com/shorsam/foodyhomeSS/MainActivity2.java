@@ -51,9 +51,13 @@ public class MainActivity2 extends AppCompatActivity {
     ShopsActivityAdapter adapter3;
     ScrollView MainScrollView;
     List<SlideModel> sliderImages=new ArrayList<SlideModel>();
+    List<SlideModel> FoodItemImages=new ArrayList<SlideModel>();
+    List<SlideModel> CategoryImages=new ArrayList<SlideModel>();
     PickYourFavouriteAdapter adapter2;
-    ImageSlider CategorySlider;
+    ImageSlider CategorySlider ,FavouriteFoodSlider,FoodSlider;
     ArrayList<String> SliderDataList=new ArrayList<String>();
+    ArrayList<String> FoodDataList=new ArrayList<String>();
+    ArrayList<String> CategoryDataList=new ArrayList<String>();
     int Up=0,MenuState=0;
 
     @Override
@@ -67,6 +71,8 @@ public class MainActivity2 extends AppCompatActivity {
         PickYourCategoryRV = findViewById(R.id.PickYourCategory_RecyclerView_MainActivity2);
         MainScrollView = findViewById(R.id.MainScrollView_MainActivity2);
         CategorySlider = findViewById(R.id.SliderView_Category_MainActivity2);
+        FavouriteFoodSlider=findViewById(R.id.SliderView_FavouriteFood_MainActivity2);
+        FoodSlider=findViewById(R.id.SliderView_FoodItems_MainActivity2);
         PickYourFavouriteRV = findViewById(R.id.PickYourFavourite_RecyclerView_MainActivity2);
         drawerLayout = findViewById(R.id.drawer_layout_mainActivity_2);
         navigationView = findViewById(R.id.drawer_navigation_view_mainactivity_2);
@@ -79,7 +85,9 @@ public class MainActivity2 extends AppCompatActivity {
         Auth = FirebaseAuth.getInstance();
         fillDifferentWorld();
         SetTopContentAnimation();
-        fillSlider();
+        fillCategorySlider();
+        fillFavouriteFoodSlider();
+         fillFoodItemsSlider();
         fillPickYourFavouriteRV();
         fillPickYourCategoryRV();
         fillPickYourShopRV();
@@ -225,7 +233,7 @@ public class MainActivity2 extends AppCompatActivity {
         adapter2.startListening();
     }
 
-    private void fillSlider() {
+    private void fillCategorySlider() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference Trending_topic_1_reference = database.getReference().child("SliderHome");
         Trending_topic_1_reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -233,10 +241,10 @@ public class MainActivity2 extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
-                    SliderDataList.add(Objects.requireNonNull(dataSnapshot.child("HomePID").getValue()).toString());
-                    sliderImages.add(new SlideModel(Objects.requireNonNull(dataSnapshot.child("Image").getValue()).toString(), ScaleTypes.FIT));
+                    CategoryDataList.add(Objects.requireNonNull(dataSnapshot.child("HomePID").getValue()).toString());
+                    CategoryImages.add(new SlideModel(Objects.requireNonNull(dataSnapshot.child("Image").getValue()).toString(), ScaleTypes.FIT));
                 }
-                CategorySlider.setImageList(sliderImages,ScaleTypes.FIT);
+                CategorySlider.setImageList(CategoryImages,ScaleTypes.FIT);
                 CategorySlider.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onItemSelected(int i) {
@@ -255,6 +263,68 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
     }
+    private void fillFavouriteFoodSlider(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference Trending_topic_1_reference = database.getReference().child("SliderHome");
+        Trending_topic_1_reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                    SliderDataList.add(Objects.requireNonNull(dataSnapshot.child("HomePID").getValue()).toString());
+                    sliderImages.add(new SlideModel(Objects.requireNonNull(dataSnapshot.child("Image").getValue()).toString(), ScaleTypes.FIT));
+                }
+                FavouriteFoodSlider.setImageList(sliderImages,ScaleTypes.FIT);
+//                FavouriteFoodSlider.setItemClickListener(new ItemClickListener() {
+//                    @Override
+//                    public void onItemSelected(int i) {
+////                        ProductID= SliderDataList.get(i);
+////                        if (ProductID!=null){
+////                            SendProductID();
+////                        }
+//
+//                    }
+//                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    private void fillFoodItemsSlider(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference Trending_topic_1_reference = database.getReference().child("SliderHome");
+        Trending_topic_1_reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                    FoodDataList.add(Objects.requireNonNull(dataSnapshot.child("HomePID").getValue()).toString());
+                    FoodItemImages.add(new SlideModel(Objects.requireNonNull(dataSnapshot.child("Image").getValue()).toString(), ScaleTypes.FIT));
+                }
+                FoodSlider.setImageList(FoodItemImages,ScaleTypes.FIT);
+                FoodSlider.setItemClickListener(new ItemClickListener() {
+                    @Override
+                    public void onItemSelected(int i) {
+//                        ProductID= SliderDataList.get(i);
+//                        if (ProductID!=null){
+//                            SendProductID();
+//                        }
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
     private void SetTopContentAnimation() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             MainScrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {

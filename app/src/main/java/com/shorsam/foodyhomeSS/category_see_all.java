@@ -45,16 +45,16 @@ public class category_see_all extends AppCompatActivity {
         Auth=FirebaseAuth.getInstance();
         Store = FirebaseFirestore.getInstance();
         UserID=Objects.requireNonNull(Auth.getCurrentUser()).getUid();
-//        DocumentReference documentReference=Store.collection("Users").document(UserID);
-//        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-//            @Override
-//            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-//                assert value != null;
-//                if (value.getString("category") != null) {
-//                    category = Objects.requireNonNull(value.getString("category")).trim();
-//                }
-//            }
-//        });
+        DocumentReference documentReference=Store.collection("Users").document(UserID);
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                assert value != null;
+                if (value.getString("category") != null) {
+                    category = Objects.requireNonNull(value.getString("category")).trim();
+                }
+            }
+        });
         filling();
     }
 private void filling() {
