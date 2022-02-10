@@ -1,18 +1,36 @@
 package com.shorsam.foodyhomeSS;
 
 public class AllProductModel {
-    String Name,Image,MRP,Price,Rating,Discount;
+    String Name,Image,MRP,Price,Rating,Discount,Store,DeliveryStatus;
     AllProductModel(){
 
     }
 
-    public AllProductModel(String name, String image, String MRP, String price, String rating, String discount) {
+    public String getStore() {
+        return Store;
+    }
+
+    public void setStore(String store) {
+        Store = store;
+    }
+
+    public String getDeliveryStatus() {
+        return DeliveryStatus;
+    }
+
+    public void setDeliveryStatus(String deliveryStatus) {
+        DeliveryStatus = deliveryStatus;
+    }
+
+    public AllProductModel(String name, String image, String MRP, String price, String rating, String discount, String store, String deliveryStatus) {
         Name = name;
         Image = image;
         this.MRP = MRP;
         Price = price;
         Rating = rating;
         Discount = discount;
+        DeliveryStatus=deliveryStatus;
+        Store=store;
     }
 
     public String getName() {

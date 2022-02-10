@@ -2,7 +2,7 @@ package com.shorsam.foodyhomeSS;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,7 +23,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firestore.v1.StructuredQuery;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +35,8 @@ public class IndividualProduct_2 extends AppCompatActivity implements View.OnCli
     ImageView Back,Cart,Orders;
     RecyclerView RML_RV,AddOnRV,RecommendedRV;
     RMLAdapter AdapterRML;
+    AllProductAdapter RecommendedAdapter;
+    AddOnRecyclerViewAdapter AddOnAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +48,8 @@ public class IndividualProduct_2 extends AppCompatActivity implements View.OnCli
         Cart=findViewById(R.id.Cart_IndividualProduct_ImageView);
         Orders=findViewById(R.id.YourOrders_IndividualProduct_ImageView);
         RML_RV=findViewById(R.id.RML_RecyclerView_IndividualProduct2_ImageView);
+        RecommendedRV=findViewById(R.id.RecommendedProduct_IndividualProduct2_RecyclerView);
+        AddOnRV=findViewById(R.id.AddOnRecyclerView_IndividualProduct2_ImageView);
         WishList.setOnClickListener(this);
         Share.setOnClickListener(this);
         Back.setOnClickListener(this);
@@ -56,7 +59,47 @@ public class IndividualProduct_2 extends AppCompatActivity implements View.OnCli
 
         fillSlider();
         fillRMLRecyclerView();
+        fillAddOnRV();
+        fillRecommendedRV();
     }
+
+    private void fillRecommendedRV() {
+        RecommendedRV.setNestedScrollingEnabled(false);
+        FirebaseRecyclerOptions<AllProductModel> options =
+                new FirebaseRecyclerOptions.Builder<AllProductModel>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Products"), AllProductModel.class)
+                        .build();
+        RecommendedAdapter = new AllProductAdapter(options);
+        RecommendedRV.setLayoutManager(new GridLayoutManager(this, 2));
+        RecommendedRV.setAdapter(RecommendedAdapter);
+        RecommendedAdapter.startListening();
+        RecommendedAdapter.setOnItemCLickListener(new AllProductAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DataSnapshot dataSnapshot, int position) {
+                Toast.makeText(IndividualProduct_2.this, "Changing Details", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void fillAddOnRV() {
+        AddOnRV.setNestedScrollingEnabled(false);
+        FirebaseRecyclerOptions<AddOnModel> options =
+                new FirebaseRecyclerOptions.Builder<AddOnModel>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Products").child("035").child("cheesing"), AddOnModel.class)
+                        .build();
+        AddOnAdapter = new AddOnRecyclerViewAdapter(options);
+        AddOnRV.setLayoutManager(new LinearLayoutManager(this));
+        AddOnRV.setAdapter(AddOnAdapter);
+        AddOnAdapter.startListening();
+//        AddOnAdapter.setOnItemCLickListener(new AllProductAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(DataSnapshot dataSnapshot, int position) {
+//                Toast.makeText(IndividualProduct_2.this, "Changing Details", Toast.LENGTH_SHORT).show();
+////
+//            }
+//        });
+    }
+
     private void fillRMLRecyclerView() {
 //        if (HomePID!=null) {
             FirebaseRecyclerOptions<RegularModel> options =

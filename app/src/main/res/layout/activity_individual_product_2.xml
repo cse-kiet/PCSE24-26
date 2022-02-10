@@ -14,7 +14,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             app:cardElevation="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -23,6 +23,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
+                android:background="#DCAE11"
                 android:layout_height="match_parent">
 
                 <ImageButton
@@ -474,11 +475,12 @@
             app:layout_constraintTop_toBottomOf="@+id/AddOnRecyclerView_IndividualProduct2_ImageView" />
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/AddOn_Price_IndividualProduct2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
+            android:textStyle="bold"
             android:fontFamily="@font/amaranth_italic"
             android:gravity="center_vertical"
             android:text="Description"
@@ -498,7 +500,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+            app:layout_constraintTop_toBottomOf="@+id/AddOn_Price_IndividualProduct2" />
 
         <TextView
             android:id="@+id/Description_IndividualProduct2_ImageView"
@@ -531,7 +533,7 @@ versions of Lorem Ipsum."
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+            app:layout_constraintTop_toBottomOf="@+id/AddOn_Price_IndividualProduct2" />
 
         <View
 
@@ -545,11 +547,12 @@ versions of Lorem Ipsum."
             app:layout_constraintTop_toBottomOf="@+id/Description_IndividualProduct2_ImageView" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/RecommendedProduct_IndividualProduct2_ImageView"
+            android:id="@+id/RecommendedProduct_IndividualProduct2_RecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:orientation="vertical"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
