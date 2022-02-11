@@ -39,7 +39,7 @@
             <TextView
                 android:id="@+id/Shops_Text_View"
                 android:layout_width="80dp"
-                android:layout_height="20dp"
+                android:layout_height="wrap_content"
                 android:background="@color/Spanish_Yellow"
                 android:fontFamily="serif"
                 android:paddingLeft="10dp"

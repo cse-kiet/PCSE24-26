@@ -13,7 +13,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class SelectStore extends AppCompatActivity {
+public class  SelectStore extends AppCompatActivity {
     RecyclerView SelectStoreRV;
     SelectStoreAdapter adapter;
     LoadingDialog loadingDialog;
