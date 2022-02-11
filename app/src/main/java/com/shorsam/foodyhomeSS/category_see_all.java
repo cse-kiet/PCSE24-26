@@ -29,9 +29,8 @@ import java.util.Objects;
 public class category_see_all extends AppCompatActivity {
     RecyclerView recyclerView;
     category_see_all_adapter adapter;
-        String category,UserID;
+    String category, UserID;
     FirebaseAuth Auth;
-
 
 
     FirebaseFirestore Store;
@@ -42,52 +41,54 @@ public class category_see_all extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_see_all);
         recyclerView = findViewById(R.id.see_all_RecyclerView);
-        Auth=FirebaseAuth.getInstance();
+        Auth = FirebaseAuth.getInstance();
         Store = FirebaseFirestore.getInstance();
-        UserID=Objects.requireNonNull(Auth.getCurrentUser()).getUid();
-        DocumentReference documentReference=Store.collection("Users").document(UserID);
-        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                assert value != null;
-                if (value.getString("category") != null) {
-                    category = Objects.requireNonNull(value.getString("category")).trim();
-                }
-            }
-        });
-        filling();
+        UserID = Objects.requireNonNull(Auth.getCurrentUser()).getUid();
+//        DocumentReference documentReference = Store.collection("Users").document(UserID);
+//        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+//            @Override
+//            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+//                assert value != null;
+//                if (value.getString("category") != null) {
+//                    category = Objects.requireNonNull(value.getString("category")).trim();
+//                }
+//            }
+//        });
+//        filling();
     }
-private void filling() {
-    FirebaseRecyclerOptions<Category_See_ALL_Model> options =
-            new FirebaseRecyclerOptions.Builder<Category_See_ALL_Model>()
-                    .setQuery(FirebaseDatabase.getInstance().getReference().child("Categories"), Category_See_ALL_Model.class)
-                    .build();
-    adapter = new category_see_all_adapter(options);
-    LinearLayoutManager layoutManager = new LinearLayoutManager(category_see_all.this);
-    recyclerView.setLayoutManager(layoutManager);
-    recyclerView.setAdapter(adapter);
-    adapter.startListening();
-    adapter.setOnItemCLickListener(new category_see_all_adapter.OnItemClickListener() {
-        @Override
-        public void onItemClick(DataSnapshot dataSnapshot, int position) {
-            category = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString().toLowerCase();
-            Map<String, Object> user = new HashMap<>();
-            user.put("category", category);
-            String UserId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-            DocumentReference documentReference = Store.collection("Users").document(UserId);
-            documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+    private void filling() {
+//        if (category != null) {
+            FirebaseRecyclerOptions<Category_See_ALL_Model> options =
+                    new FirebaseRecyclerOptions.Builder<Category_See_ALL_Model>()
+                            .setQuery(FirebaseDatabase.getInstance().getReference().child("Categories"), Category_See_ALL_Model.class)
+                            .build();
+            adapter = new category_see_all_adapter(options);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(category_see_all.this);
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(adapter);
+            adapter.startListening();
+            adapter.setOnItemCLickListener(new category_see_all_adapter.OnItemClickListener() {
                 @Override
-                public void onSuccess(Void aVoid) {
-                    startActivity(new Intent(category_see_all.this, Shops_Activity.class));
+                public void onItemClick(DataSnapshot dataSnapshot, int position) {
+                    category = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString().toLowerCase();
+                    Map<String, Object> user = new HashMap<>();
+                    user.put("category", category);
+                    String UserId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+                    DocumentReference documentReference = Store.collection("Users").document(UserId);
+                    documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            startActivity(new Intent(category_see_all.this, Shops_Activity.class));
+                        }
+
+                    });
                 }
-
             });
+
         }
-    });
 
-}
-
-}
-
+    }
+//}
 
 

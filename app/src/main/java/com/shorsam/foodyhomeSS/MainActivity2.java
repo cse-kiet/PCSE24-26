@@ -11,15 +11,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.denzcoskun.imageslider.ImageSlider;
@@ -27,6 +31,7 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.interfaces.ItemClickListener;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -34,30 +39,41 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
-public class MainActivity2 extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity implements View.OnClickListener {
     DrawerLayout drawerLayout;
     FirebaseAuth Auth;
+    FirebaseFirestore store;
     NavigationView navigationView;
     ImageView TopBG,TopToggle;
-    ImageButton TopCategoryRV_SeeAll,TopShare,TopYourOrders;
+    ImageButton TopShare,TopYourOrders;
     CardView SearchCardView;
     RecyclerView TopCategoryRV,PickYourFavouriteRV,ShopRecyclerView,PickYourCategoryRV;
     CategoryTopAdapter adapter;
     ShopsActivityAdapter adapter3;
+    ImageButton All_Shops_See_All;
     ScrollView MainScrollView;
     List<SlideModel> sliderImages=new ArrayList<SlideModel>();
     List<SlideModel> FoodItemImages=new ArrayList<SlideModel>();
     List<SlideModel> CategoryImages=new ArrayList<SlideModel>();
+    TextView Pick_Your_Favourite_See_All;
     PickYourFavouriteAdapter adapter2;
     ImageSlider CategorySlider ,FavouriteFoodSlider,FoodSlider;
     ArrayList<String> SliderDataList=new ArrayList<String>();
     ArrayList<String> FoodDataList=new ArrayList<String>();
     ArrayList<String> CategoryDataList=new ArrayList<String>();
+    String category;
     int Up=0,MenuState=0;
 
     @Override
@@ -75,14 +91,17 @@ public class MainActivity2 extends AppCompatActivity {
         FoodSlider=findViewById(R.id.SliderView_FoodItems_MainActivity2);
         PickYourFavouriteRV = findViewById(R.id.PickYourFavourite_RecyclerView_MainActivity2);
         drawerLayout = findViewById(R.id.drawer_layout_mainActivity_2);
+        All_Shops_See_All=findViewById(R.id.All_Shops_SeeAll);
+        Pick_Your_Favourite_See_All=findViewById(R.id.PicK_your_Favourite_See_All);
         navigationView = findViewById(R.id.drawer_navigation_view_mainactivity_2);
         ShopRecyclerView = findViewById(R.id.PickYourStore_RecyclerView_MainActivity2);
-        TopCategoryRV_SeeAll=findViewById(R.id.TopCategoryRV_SeeAll_ImageButton);
+
         TopYourOrders=findViewById(R.id.TopYourOrdersButton_ImageButton_MainActivity2);
         TopShare=findViewById(R.id.TopShareButton_ImageButton_MainActivity2);
 
         ShopRecyclerView.setNestedScrollingEnabled(false);
         Auth = FirebaseAuth.getInstance();
+        store=FirebaseFirestore.getInstance();
         fillDifferentWorld();
         SetTopContentAnimation();
         // sliders
@@ -97,13 +116,14 @@ public class MainActivity2 extends AppCompatActivity {
         fillPickYourShopRV();
 
         //RecyclerViews
+        All_Shops_See_All.setOnClickListener(this);
+Pick_Your_Favourite_See_All.setOnClickListener(this);
 
 
-
-        TopCategoryRV_SeeAll.setOnClickListener(new View.OnClickListener() {
+        All_Shops_See_All.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               TopCategoryRV_SeeAll.animate().scaleY(0.8f).scaleX(0.8f).setDuration(100).start();
+               All_Shops_See_All.animate().scaleY(0.8f).scaleX(0.8f).setDuration(100).start();
                new CountDownTimer(100,100){
 
                    @Override
@@ -113,7 +133,7 @@ public class MainActivity2 extends AppCompatActivity {
 
                    @Override
                    public void onFinish() {
-                       TopCategoryRV_SeeAll.animate().scaleY(1f).scaleX(1f).setDuration(100).start();
+                       All_Shops_See_All.animate().scaleY(1f).scaleX(1f).setDuration(100).start();
                    }
                }.start();
 //
@@ -146,9 +166,9 @@ public class MainActivity2 extends AppCompatActivity {
                        break;
                    }
                     case R.id.Drawer_Chat_with_us: {
-                        Intent i = new Intent(MainActivity2.this, category_see_all.class);
-                        startActivity(i);
-                        break;
+//                        Intent i = new Intent(MainActivity2.this, Shops_Activity.class);
+//                        startActivity(i);
+//                        break;
                     }//                       int result = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE);
 //                        if (result == PackageManager.PERMISSION_GRANTED) {
 //                            Intent call=new Intent(Intent.ACTION_CALL);
@@ -211,7 +231,7 @@ public class MainActivity2 extends AppCompatActivity {
     private void fillPickYourShopRV() {
         FirebaseRecyclerOptions<CategoryModelTop> options =
                 new FirebaseRecyclerOptions.Builder<CategoryModelTop>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("DifferentTreat"), CategoryModelTop.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference("DifferentTreat"), CategoryModelTop.class)
                         .build();
         adapter3= new ShopsActivityAdapter(options);
         ShopRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -234,12 +254,21 @@ public class MainActivity2 extends AppCompatActivity {
     private void fillPickYourFavouriteRV() {
         FirebaseRecyclerOptions<CategoryModelTop> options =
                 new FirebaseRecyclerOptions.Builder<CategoryModelTop>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("DifferentTreat"), CategoryModelTop.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Products"), CategoryModelTop.class)
                         .build();
         adapter2= new PickYourFavouriteAdapter(options);
         PickYourFavouriteRV.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL,false));
         PickYourFavouriteRV.setAdapter(adapter2);
         adapter2.startListening();
+        adapter2.setOnItemCLickListener(new PickYourFavouriteAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DataSnapshot dataSnapshot, int position) {
+                category = Objects.requireNonNull(dataSnapshot.child("Category").getValue()).toString();
+                SaveSharedPreferences();
+                startActivity(new Intent(MainActivity2.this,SubCategoryPickYourFavourite.class));
+            }
+        });
+
     }
 
     private void fillCategorySlider() {
@@ -265,6 +294,10 @@ public class MainActivity2 extends AppCompatActivity {
                     }
                 });
             }
+
+
+//            @SuppressLint("NonConstantResourceId")
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -350,7 +383,7 @@ public class MainActivity2 extends AppCompatActivity {
                         TopCategoryRV.animate().translationY(-200).setDuration(200).start();
                         TopBG.animate().translationY(-200).setDuration(200).start();
                         MainScrollView.animate().translationY(-220).setDuration(200).start();
-                        TopCategoryRV_SeeAll.animate().translationY(-200).setDuration(200).start();
+                        All_Shops_See_All.animate().translationY(-200).setDuration(200).start();
                         TopShare.animate().translationY(-50).scaleY(0.9f).scaleX(0.9f).setDuration(200).start();
                         TopYourOrders.animate().translationY(-50).scaleY(0.9f).scaleX(0.9f).setDuration(200).start();
 
@@ -394,7 +427,7 @@ public class MainActivity2 extends AppCompatActivity {
                         TopCategoryRV.animate().translationY(0).start();
                         TopBG.animate().translationY(0).start();
                         MainScrollView.animate().translationY(0).setDuration(200).start();
-                        TopCategoryRV_SeeAll.animate().translationY(0).setDuration(200).start();
+                        All_Shops_See_All.animate().translationY(0).setDuration(200).start();
                         Up=0;
                     }
                 }
@@ -405,17 +438,80 @@ public class MainActivity2 extends AppCompatActivity {
     private void fillDifferentWorld() {
         FirebaseRecyclerOptions<CategoryModelTop> options =
                 new FirebaseRecyclerOptions.Builder<CategoryModelTop>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("DifferentTreat"), CategoryModelTop.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference("Categories"), CategoryModelTop.class)
                         .build();
         adapter= new CategoryTopAdapter(options);
         TopCategoryRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
         TopCategoryRV.setAdapter(adapter);
         adapter.startListening();
-//        adapter.setOnItemCLickListener(new IndividualCategoryAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(DataSnapshot dataSnapshot, int position) {
+        adapter.setOnItemCLickListener(new CategoryTopAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DataSnapshot dataSnapshot, int position) {
+
+
+
+            category = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
+                SaveSharedPreferences();
+//                Toast.makeText(MainActivity2.this, "" +category, Toast.LENGTH_SHORT).show();
+//            Map<String, Object> user = new HashMap<>();
+//            user.put("category", category);
+//            String UserId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+//            DocumentReference documentReference = store.collection("Users").document(UserId);
+//            documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                @Override
+//                public void onSuccess(Void aVoid) {
+                    startActivity(new Intent(MainActivity2.this, Shops_Activity.class));
+//                }
 //
-//            }
-//        });
+//           });
+       }
+  });
+
+}
+    private void SaveSharedPreferences() {
+        SharedPreferences sharedPreferences=getSharedPreferences("Shared Preferences",MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor=sharedPreferences.edit();
+//        Gson gson=new Gson();
+//        String json=gson.toJson(PList);
+        editor.putString("category",category);
+//        editor.putString("PList",json);
+        editor.apply();
+
+    }
+    private void LoadSharedPreferences(){
+        SharedPreferences sharedPreferences=getSharedPreferences("Shared Preferences",MODE_PRIVATE);
+        String ABC=sharedPreferences.getString("category","");
+//        Gson gson=new Gson();
+//        String jsonString=sharedPreferences.getString("PList","");
+//        String jsonString2=sharedPreferences.getString("AddOns","");
+//        Type type=new TypeToken<ArrayList<String>>() {}.getType();
+////        PList=gson.fromJson(jsonString,type);
+////        AddOns=gson.fromJson(jsonString2,type);
+////        if (AddOns==null){
+////            AddOns=new ArrayList<>();
+////        }
+////        if (PList==null){
+////            PList=new ArrayList<>();
+////        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()) {
+            case R.id.All_Shops_SeeAll: {
+                category = " ";
+                SaveSharedPreferences();
+                Intent i = new Intent(MainActivity2.this, Shops_Activity.class);
+                startActivity(i);
+                break;
+            }
+            case R.id.PicK_your_Favourite_See_All:{
+                category=" ";
+                SaveSharedPreferences();
+                Intent i = new Intent(MainActivity2.this,SubCategoryPickYourFavourite.class);
+                startActivity(i);
+                break;
+            }
+        }
     }
 }

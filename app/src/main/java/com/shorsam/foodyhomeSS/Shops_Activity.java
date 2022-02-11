@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,35 +35,53 @@ public class Shops_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_shops_);
         recyclerview=findViewById(R.id.Shops_Recycler_View);
         auth=FirebaseAuth.getInstance();
-        store=FirebaseFirestore.getInstance();
-        userid= Objects.requireNonNull(auth.getCurrentUser().getUid());
-        DocumentReference documentReference=store.collection("Users").document(userid);
-        ListenerRegistration listenerRegistration = documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                assert value != null;
-                if (value.getString("category") != null) {
-                    category = Objects.requireNonNull(value.getString("category")).trim();
-                }
-            }
-        });
+//        store=FirebaseFirestore.getInstance();
+//        userid= Objects.requireNonNull(auth.getCurrentUser().getUid());
+//        DocumentReference documentReference=store.collection("Users").document(userid);
+//        ListenerRegistration listenerRegistration = documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+//            @Override
+//            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+//                assert value != null;
+//                if (value.getString("category") != null) {
+//                    category = Objects.requireNonNull(value.getString("category")).trim();
+//                }
+//            }
+//        });
+        LoadSharedPreferences();
         fillRecyclerView();
 
 
     }
+    private void LoadSharedPreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences("Shared Preferences", MODE_PRIVATE);
+         category = sharedPreferences.getString("category", "");
+        Toast.makeText(Shops_Activity.this, ""+category, Toast.LENGTH_SHORT).show();
+    }
     private void fillRecyclerView() {
+if( category!= " ") {
 
+    FirebaseRecyclerOptions<CategoryModelTop> options =
+            new FirebaseRecyclerOptions.Builder<CategoryModelTop>()
+                    .setQuery(FirebaseDatabase.getInstance().getReference().child("AllStores").orderByChild("Category").startAt(category).endAt(category+"\uf8ff"), CategoryModelTop.class)
+                    .build();
+    adapter = new ShopsActivityAdapter(options);
+    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(Shops_Activity.this, 2);
+    recyclerview.setLayoutManager(layoutManager);
+    recyclerview.setAdapter(adapter);
+    adapter.startListening();
 
-            FirebaseRecyclerOptions<CategoryModelTop> options =
-                    new FirebaseRecyclerOptions.Builder<CategoryModelTop>()
-                            .setQuery(FirebaseDatabase.getInstance().getReference().child("PizzaTreat"), CategoryModelTop.class)
-                            .build();
-            adapter = new ShopsActivityAdapter(options);
-            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(Shops_Activity.this, 2);
-            recyclerview.setLayoutManager(layoutManager);
-            recyclerview.setAdapter(adapter);
-            adapter.startListening();
+}
+else{
+    FirebaseRecyclerOptions<CategoryModelTop> options =
+            new FirebaseRecyclerOptions.Builder<CategoryModelTop>()
+                    .setQuery(FirebaseDatabase.getInstance().getReference("AllStores"), CategoryModelTop.class)
+                    .build();
+    adapter = new ShopsActivityAdapter(options);
+    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(Shops_Activity.this, 2);
+    recyclerview.setLayoutManager(layoutManager);
+    recyclerview.setAdapter(adapter);
+    adapter.startListening();
 
-
+}
     }
 }

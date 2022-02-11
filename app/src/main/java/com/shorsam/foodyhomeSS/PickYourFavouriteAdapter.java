@@ -12,9 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
 
 public class PickYourFavouriteAdapter extends FirebaseRecyclerAdapter<CategoryModelTop,PickYourFavouriteAdapter.myViewHolder> {
-
+    private static PickYourFavouriteAdapter.OnItemClickListener listener;
     public PickYourFavouriteAdapter(@NonNull FirebaseRecyclerOptions<CategoryModelTop> options) {
         super(options);
     }
@@ -24,7 +25,13 @@ public class PickYourFavouriteAdapter extends FirebaseRecyclerAdapter<CategoryMo
         holder.Name.setText(model.getName());
         Glide.with(holder.Image.getContext()).load(model.getImage()).into(holder.Image);
     }
+    public interface OnItemClickListener{
+        void onItemClick(DataSnapshot dataSnapshot, int position);
+    }
+    public void setOnItemCLickListener(PickYourFavouriteAdapter.OnItemClickListener listener){
+        PickYourFavouriteAdapter.listener =listener;
 
+    }
     @NonNull
     @Override
     public PickYourFavouriteAdapter.myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -32,13 +39,23 @@ public class PickYourFavouriteAdapter extends FirebaseRecyclerAdapter<CategoryMo
         return new myViewHolder(view);
     }
 
-    public static class myViewHolder extends RecyclerView.ViewHolder {
+    public  class myViewHolder extends RecyclerView.ViewHolder {
         TextView Name;
         ImageView Image;
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
             Name=itemView.findViewById(R.id.TextView_PickYourFavourite);
             Image=itemView.findViewById(R.id.ImageView_PickYourFavourite);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position!=RecyclerView.NO_POSITION && listener!=null){
+                        listener.onItemClick(getSnapshots().getSnapshot(position),position);
+
+                    }
+                }
+            });
         }
     }
 }

@@ -6,4 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".SubCategoryPickYourFavourite">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/SubCategory_Pick_Your_Favourite_RV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
