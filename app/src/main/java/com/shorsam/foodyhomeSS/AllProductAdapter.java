@@ -41,9 +41,12 @@ public class AllProductAdapter extends FirebaseRecyclerAdapter<AllProductModel,A
         holder.Price.setText(model.getPrice());
         holder.Discount.setText(model.getDiscount());
         holder.MRP.setText(model.getMRP());
-        holder.Store.setText(model.getStore());
         holder.DeliveryStatus.setText(model.getDeliveryStatus());
-        Glide.with(holder.Image.getContext()).load(model.getImage()).into(holder.Image);
+        if (model.getImage()!=null){
+            Glide.with(holder.Image.getContext()).load(model.getImage()).into(holder.Image);
+        }
+        holder.Store.setText(model.getStoreName());
+
 //        holder.Rating.setText(model.getRating());
         SRating= model.getRating();
         SRating=SRating.replace("+","");
@@ -55,19 +58,39 @@ public class AllProductAdapter extends FirebaseRecyclerAdapter<AllProductModel,A
         if (FRating<=0.5){
             Star1.setImageResource(R.drawable.ic_baseline_star_half_24);
             Star1.setVisibility(View.VISIBLE);
+            Star2.setVisibility(View.INVISIBLE);
+            Star3.setVisibility(View.INVISIBLE);
+            Star4.setVisibility(View.INVISIBLE);
+            Star5.setVisibility(View.INVISIBLE);
         }
         if (FRating<=1.0 && FRating>0.5){
             Star1.setVisibility(View.VISIBLE);
+            Star2.setVisibility(View.INVISIBLE);
+            Star3.setVisibility(View.INVISIBLE);
+            Star4.setVisibility(View.INVISIBLE);
+            Star5.setVisibility(View.INVISIBLE);
+            Star1.setImageResource(R.drawable.ic_baseline_star_24);
         }
         if (FRating<=1.5 && FRating>1.0){
 
             Star1.setVisibility(View.VISIBLE);
             Star2.setVisibility(View.VISIBLE);
             Star2.setImageResource(R.drawable.ic_baseline_star_half_24);
+
+            Star3.setVisibility(View.INVISIBLE);
+            Star4.setVisibility(View.INVISIBLE);
+            Star5.setVisibility(View.INVISIBLE);
+            Star1.setImageResource(R.drawable.ic_baseline_star_24);
+
         }
         if (FRating<=2.0 && FRating>1.5){
             Star2.setVisibility(View.VISIBLE);
             Star1.setVisibility(View.VISIBLE);
+            Star3.setVisibility(View.INVISIBLE);
+            Star4.setVisibility(View.INVISIBLE);
+            Star5.setVisibility(View.INVISIBLE);
+            Star1.setImageResource(R.drawable.ic_baseline_star_24);
+            Star2.setImageResource(R.drawable.ic_baseline_star_24);
         }
         if (FRating<=2.5 && FRating>2.0){
 
@@ -75,12 +98,24 @@ public class AllProductAdapter extends FirebaseRecyclerAdapter<AllProductModel,A
             Star2.setVisibility(View.VISIBLE);
             Star3.setVisibility(View.VISIBLE);
             Star3.setImageResource(R.drawable.ic_baseline_star_half_24);
+
+            Star4.setVisibility(View.INVISIBLE);
+            Star5.setVisibility(View.INVISIBLE);
+            Star1.setImageResource(R.drawable.ic_baseline_star_24);
+            Star2.setImageResource(R.drawable.ic_baseline_star_24);
+
         }
         if (FRating<=3.0 && FRating>2.5){
 
             Star1.setVisibility(View.VISIBLE);
             Star2.setVisibility(View.VISIBLE);
             Star3.setVisibility(View.VISIBLE);
+            Star4.setVisibility(View.INVISIBLE);
+            Star5.setVisibility(View.INVISIBLE);
+            Star1.setImageResource(R.drawable.ic_baseline_star_24);
+            Star2.setImageResource(R.drawable.ic_baseline_star_24);
+            Star3.setImageResource(R.drawable.ic_baseline_star_24);
+
         }
         if (FRating<=3.5 && FRating>3.0){
 
@@ -89,6 +124,12 @@ public class AllProductAdapter extends FirebaseRecyclerAdapter<AllProductModel,A
             Star3.setVisibility(View.VISIBLE);
             Star4.setVisibility(View.VISIBLE);
             Star4.setImageResource(R.drawable.ic_baseline_star_half_24);
+
+            Star5.setVisibility(View.INVISIBLE);
+            Star1.setImageResource(R.drawable.ic_baseline_star_24);
+            Star2.setImageResource(R.drawable.ic_baseline_star_24);
+            Star3.setImageResource(R.drawable.ic_baseline_star_24);
+
         }
         if (FRating<=4.0 && FRating>3.5){
 
@@ -96,6 +137,12 @@ public class AllProductAdapter extends FirebaseRecyclerAdapter<AllProductModel,A
             Star2.setVisibility(View.VISIBLE);
             Star3.setVisibility(View.VISIBLE);
             Star4.setVisibility(View.VISIBLE);
+
+            Star5.setVisibility(View.INVISIBLE);
+            Star1.setImageResource(R.drawable.ic_baseline_star_24);
+            Star2.setImageResource(R.drawable.ic_baseline_star_24);
+            Star3.setImageResource(R.drawable.ic_baseline_star_24);
+            Star4.setImageResource(R.drawable.ic_baseline_star_24);
         }
         if (FRating<=4.5 && FRating>4.0){
 
@@ -105,6 +152,10 @@ public class AllProductAdapter extends FirebaseRecyclerAdapter<AllProductModel,A
             Star4.setVisibility(View.VISIBLE);
             Star5.setVisibility(View.VISIBLE);
             Star5.setImageResource(R.drawable.ic_baseline_star_half_24);
+            Star1.setImageResource(R.drawable.ic_baseline_star_24);
+            Star2.setImageResource(R.drawable.ic_baseline_star_24);
+            Star3.setImageResource(R.drawable.ic_baseline_star_24);
+            Star4.setImageResource(R.drawable.ic_baseline_star_24);
         }
 
     }
