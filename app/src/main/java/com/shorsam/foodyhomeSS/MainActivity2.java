@@ -76,7 +76,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     ArrayList<String> SliderDataList=new ArrayList<String>();
     ArrayList<String> FoodDataList=new ArrayList<String>();
     ArrayList<String> CategoryDataList=new ArrayList<String>();
-    String category;
+    String category,HomePID;
     int Up=0,MenuState=0;
 
     @Override
@@ -149,6 +149,8 @@ Pick_Your_Favourite_See_All.setOnClickListener(this);
                         break;
                     }
                    case R.id.Drawer_Call_us:{
+                       HomePID="001";
+                       SaveSharedPreferences();
                        startActivity(new Intent(MainActivity2.this,IndividualProduct_2.class));
                        break;
                    }
@@ -469,6 +471,7 @@ Pick_Your_Favourite_See_All.setOnClickListener(this);
 //        Gson gson=new Gson();
 //        String json=gson.toJson(PList);
         editor.putString("category",category);
+        editor.putString("HomePID",HomePID);
 //        editor.putString("PList",json);
         editor.apply();
 
@@ -490,6 +493,7 @@ Pick_Your_Favourite_See_All.setOnClickListener(this);
 ////        }
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch(v.getId()) {

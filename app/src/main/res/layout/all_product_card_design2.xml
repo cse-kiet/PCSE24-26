@@ -25,7 +25,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView8"
+                android:id="@+id/AllProduct2_Product_Image_ImageView"
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_marginHorizontal="10dp"
@@ -37,7 +37,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/AllProduct2_Product_Name_TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
@@ -52,10 +52,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+                app:layout_constraintTop_toBottomOf="@+id/AllProduct2_Product_Image_ImageView" />
 
             <ImageView
-                android:id="@+id/Store_Star1_IndividualProduct2_ImageView"
+                android:id="@+id/AllProduct2_Product_Star1_ImageView"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_gravity="center"
@@ -63,55 +63,56 @@
                 android:layout_marginTop="2dp"
                 android:src="@drawable/ic_baseline_star_24"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
+                app:layout_constraintTop_toBottomOf="@+id/AllProduct2_Product_Name_TextView" />
 
             <ImageView
 
-                android:id="@+id/imageView11"
+                android:id="@+id/AllProduct2_Product_Star2_ImageView"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="2dp"
                 android:src="@drawable/ic_baseline_star_24"
-                app:layout_constraintStart_toEndOf="@+id/Store_Star1_IndividualProduct2_ImageView"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
+                app:layout_constraintStart_toEndOf="@+id/AllProduct2_Product_Star1_ImageView"
+                app:layout_constraintTop_toBottomOf="@+id/AllProduct2_Product_Name_TextView" />
 
             <ImageView
-                android:id="@+id/imageView12"
+                android:id="@+id/AllProduct2_Product_Star3_ImageView"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="2dp"
                 android:src="@drawable/ic_baseline_star_24"
-                app:layout_constraintStart_toEndOf="@+id/imageView11"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
+                app:layout_constraintStart_toEndOf="@+id/AllProduct2_Product_Star2_ImageView"
+                app:layout_constraintTop_toBottomOf="@+id/AllProduct2_Product_Name_TextView" />
 
             <ImageView
-                android:id="@+id/imageView13"
+                android:id="@+id/AllProduct2_Product_Star4_ImageView"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="2dp"
                 android:src="@drawable/ic_baseline_star_24"
-                app:layout_constraintStart_toEndOf="@+id/imageView12"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
+                app:layout_constraintStart_toEndOf="@+id/AllProduct2_Product_Star3_ImageView"
+                app:layout_constraintTop_toBottomOf="@+id/AllProduct2_Product_Name_TextView" />
 
             <ImageView
 
+                android:id="@+id/AllProduct2_Product_Star5_ImageView"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="2dp"
                 android:src="@drawable/ic_baseline_star_24"
-                app:layout_constraintStart_toEndOf="@+id/imageView13"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
+                app:layout_constraintStart_toEndOf="@+id/AllProduct2_Product_Star4_ImageView"
+                app:layout_constraintTop_toBottomOf="@+id/AllProduct2_Product_Name_TextView" />
 
             <TextView
-                android:id="@+id/ProductPrice_IndividualProduct2_TextView"
+                android:id="@+id/AllProduct2_Product_Price_TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
@@ -123,10 +124,10 @@
                 app:autoSizeMinTextSize="12sp"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView12" />
+                app:layout_constraintTop_toBottomOf="@+id/AllProduct2_Product_Star3_ImageView" />
 
             <TextView
-                android:id="@+id/MRP_IndividualProduct2_TextView"
+                android:id="@+id/AllProduct2_Product_MRP_TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -137,9 +138,9 @@
                 app:autoSizeMaxTextSize="12sp"
                 app:autoSizeMinTextSize="10dp"
                 app:autoSizeTextType="uniform"
-                app:layout_constraintEnd_toEndOf="@+id/ProductPrice_IndividualProduct2_TextView"
-                app:layout_constraintStart_toStartOf="@+id/ProductPrice_IndividualProduct2_TextView"
-                app:layout_constraintTop_toBottomOf="@+id/ProductPrice_IndividualProduct2_TextView" />
+                app:layout_constraintEnd_toEndOf="@+id/AllProduct2_Product_Price_TextView"
+                app:layout_constraintStart_toStartOf="@+id/AllProduct2_Product_Price_TextView"
+                app:layout_constraintTop_toBottomOf="@+id/AllProduct2_Product_Price_TextView" />
 
             <View
                 android:layout_width="50dp"
@@ -147,14 +148,14 @@
                 android:layout_marginBottom="5dp"
                 android:background="#0AAE9E"
                 android:rotation="-8"
-                app:layout_constraintBottom_toBottomOf="@+id/MRP_IndividualProduct2_TextView"
-                app:layout_constraintEnd_toEndOf="@+id/MRP_IndividualProduct2_TextView"
-                app:layout_constraintStart_toStartOf="@+id/MRP_IndividualProduct2_TextView"
-                app:layout_constraintTop_toTopOf="@+id/MRP_IndividualProduct2_TextView"
+                app:layout_constraintBottom_toBottomOf="@+id/AllProduct2_Product_MRP_TextView"
+                app:layout_constraintEnd_toEndOf="@+id/AllProduct2_Product_MRP_TextView"
+                app:layout_constraintStart_toStartOf="@+id/AllProduct2_Product_MRP_TextView"
+                app:layout_constraintTop_toTopOf="@+id/AllProduct2_Product_MRP_TextView"
                 app:layout_constraintVertical_bias="0.652" />
 
             <TextView
-                android:id="@+id/DeliveryStatus_IndividualProduct2_TextView"
+                android:id="@+id/AllProduct2_Product_DeliveryStatus_TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
@@ -165,7 +166,7 @@
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/MRP_IndividualProduct2_TextView" />
+                app:layout_constraintTop_toBottomOf="@+id/AllProduct2_Product_MRP_TextView" />
 
 
             <LinearLayout
@@ -179,7 +180,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/DeliveryStatus_IndividualProduct2_TextView">
+                app:layout_constraintTop_toBottomOf="@+id/AllProduct2_Product_DeliveryStatus_TextView">
 
                 <TextView
                     android:id="@+id/textView17"
@@ -197,6 +198,7 @@
                     app:autoSizeTextType="uniform" />
 
                 <TextView
+                    android:id="@+id/AllProduct2_Product_StoreName_TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginVertical="3dp"
@@ -217,10 +219,10 @@
                 android:layout_height="50dp"
                 app:cardCornerRadius="50dp"
                 app:cardElevation="5dp"
-                app:layout_constraintBottom_toTopOf="@+id/DeliveryStatus_IndividualProduct2_TextView"
+                app:layout_constraintBottom_toTopOf="@+id/AllProduct2_Product_DeliveryStatus_TextView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/MRP_IndividualProduct2_TextView"
-                app:layout_constraintTop_toTopOf="@+id/ProductPrice_IndividualProduct2_TextView">
+                app:layout_constraintStart_toEndOf="@+id/AllProduct2_Product_MRP_TextView"
+                app:layout_constraintTop_toTopOf="@+id/AllProduct2_Product_Price_TextView">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -231,6 +233,7 @@
                     android:weightSum="2">
 
                     <TextView
+                        android:id="@+id/AllProduct2_Product_Discount_TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
