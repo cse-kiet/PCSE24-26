@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -27,7 +30,7 @@ public class Shops_Activity extends AppCompatActivity {
    FirebaseFirestore store;
     FirebaseAuth auth;
 
-    String userid,category;
+    String category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,18 +38,7 @@ public class Shops_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_shops_);
         recyclerview=findViewById(R.id.Shops_Recycler_View);
         auth=FirebaseAuth.getInstance();
-//        store=FirebaseFirestore.getInstance();
-//        userid= Objects.requireNonNull(auth.getCurrentUser().getUid());
-//        DocumentReference documentReference=store.collection("Users").document(userid);
-//        ListenerRegistration listenerRegistration = documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-//            @Override
-//            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-//                assert value != null;
-//                if (value.getString("category") != null) {
-//                    category = Objects.requireNonNull(value.getString("category")).trim();
-//                }
-//            }
-//        });
+
         LoadSharedPreferences();
         fillRecyclerView();
 
@@ -55,7 +47,7 @@ public class Shops_Activity extends AppCompatActivity {
     private void LoadSharedPreferences() {
         SharedPreferences sharedPreferences = getSharedPreferences("Shared Preferences", MODE_PRIVATE);
          category = sharedPreferences.getString("category", "");
-        Toast.makeText(Shops_Activity.this, ""+category, Toast.LENGTH_SHORT).show();
+
     }
     private void fillRecyclerView() {
 if( category!= " ") {
@@ -81,7 +73,24 @@ else{
     recyclerview.setLayoutManager(layoutManager);
     recyclerview.setAdapter(adapter);
     adapter.startListening();
-
+adapter.setOnItemCLickListener(new ShopsActivityAdapter.OnItemClickListener() {
+    @Override
+    public void onItemClick(DataSnapshot dataSnapshot, int position) {
+        category = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
+        SaveSharedPreferences();
+        startActivity(new Intent(Shops_Activity.this,Alll_Product_2.class));
+    }
+});
 }
+    }
+    private void SaveSharedPreferences() {
+        SharedPreferences sharedPreferences=getSharedPreferences("Shared Preferences",MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor=sharedPreferences.edit();
+//        Gson gson=new Gson();
+//        String json=gson.toJson(PList);
+        editor.putString("category",category);
+//        editor.putString("PList",json);
+        editor.apply();
+
     }
 }

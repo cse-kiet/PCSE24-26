@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.widget.ImageView;
@@ -29,11 +31,11 @@ import java.util.Objects;
 public class category_see_all extends AppCompatActivity {
     RecyclerView recyclerView;
     category_see_all_adapter adapter;
-    String category, UserID;
+    String Category;
     FirebaseAuth Auth;
 
 
-    FirebaseFirestore Store;
+
 
 
     @Override
@@ -42,8 +44,8 @@ public class category_see_all extends AppCompatActivity {
         setContentView(R.layout.activity_category_see_all);
         recyclerView = findViewById(R.id.see_all_RecyclerView);
         Auth = FirebaseAuth.getInstance();
-        Store = FirebaseFirestore.getInstance();
-        UserID = Objects.requireNonNull(Auth.getCurrentUser()).getUid();
+        LoadSharedPreferences();
+        filling();
 //        DocumentReference documentReference = Store.collection("Users").document(UserID);
 //        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
 //            @Override
@@ -56,9 +58,12 @@ public class category_see_all extends AppCompatActivity {
 //        });
 //        filling();
     }
-
+    private void LoadSharedPreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences("Shared Preferences", MODE_PRIVATE);
+        Category = sharedPreferences.getString("category", "");
+    }
     private void filling() {
-//        if (category != null) {
+        if (Category == " ") {
             FirebaseRecyclerOptions<Category_See_ALL_Model> options =
                     new FirebaseRecyclerOptions.Builder<Category_See_ALL_Model>()
                             .setQuery(FirebaseDatabase.getInstance().getReference().child("Categories"), Category_See_ALL_Model.class)
@@ -71,23 +76,26 @@ public class category_see_all extends AppCompatActivity {
             adapter.setOnItemCLickListener(new category_see_all_adapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(DataSnapshot dataSnapshot, int position) {
-                    category = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString().toLowerCase();
-                    Map<String, Object> user = new HashMap<>();
-                    user.put("category", category);
-                    String UserId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-                    DocumentReference documentReference = Store.collection("Users").document(UserId);
-                    documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            startActivity(new Intent(category_see_all.this, Shops_Activity.class));
-                        }
+                    Category = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
+                    SaveSharedPreferences();
+                    startActivity(new Intent(category_see_all.this ,Shops_Activity.class));
 
-                    });
                 }
-            });
+                    });
 
-        }
 
+            }
+    }
+    private void SaveSharedPreferences() {
+        SharedPreferences sharedPreferences=getSharedPreferences("Shared Preferences",MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor=sharedPreferences.edit();
+//        Gson gson=new Gson();
+//        String json=gson.toJson(PList);
+        editor.putString("category",Category);
+//        editor.putString("PList",json);
+        editor.apply();
+
+    }
     }
 //}
 

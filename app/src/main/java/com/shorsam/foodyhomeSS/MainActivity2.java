@@ -56,13 +56,16 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     FirebaseAuth Auth;
     FirebaseFirestore store;
     NavigationView navigationView;
-    ImageView TopBG,TopToggle;
+    ImageView TopBG,TopToggle,All_Category_See_All;
     ImageButton TopShare,TopYourOrders;
     CardView SearchCardView;
     RecyclerView TopCategoryRV,PickYourFavouriteRV,ShopRecyclerView,PickYourCategoryRV;
     CategoryTopAdapter adapter;
-    ShopsActivityAdapter adapter3;
-    ImageButton All_Shops_See_All;
+
+    ShopsMainActivity2Adapter adapter3;
+
+
+    TextView All_Shops_SeeAll;
     ScrollView MainScrollView;
     List<SlideModel> sliderImages=new ArrayList<SlideModel>();
     List<SlideModel> FoodItemImages=new ArrayList<SlideModel>();
@@ -91,7 +94,8 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         FoodSlider=findViewById(R.id.SliderView_FoodItems_MainActivity2);
         PickYourFavouriteRV = findViewById(R.id.PickYourFavourite_RecyclerView_MainActivity2);
         drawerLayout = findViewById(R.id.drawer_layout_mainActivity_2);
-        All_Shops_See_All=findViewById(R.id.All_Shops_SeeAll);
+        All_Category_See_All=findViewById(R.id.All_Category_See_All);
+        All_Shops_SeeAll=findViewById(R.id.All_Shops_See_All);
         Pick_Your_Favourite_See_All=findViewById(R.id.PicK_your_Favourite_See_All);
         navigationView = findViewById(R.id.drawer_navigation_view_mainactivity_2);
         ShopRecyclerView = findViewById(R.id.PickYourStore_RecyclerView_MainActivity2);
@@ -116,29 +120,12 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         fillPickYourShopRV();
 
         //RecyclerViews
-        All_Shops_See_All.setOnClickListener(this);
+        All_Shops_SeeAll.setOnClickListener(this);
+        All_Category_See_All.setOnClickListener(this);
 Pick_Your_Favourite_See_All.setOnClickListener(this);
 
 
-        All_Shops_See_All.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               All_Shops_See_All.animate().scaleY(0.8f).scaleX(0.8f).setDuration(100).start();
-               new CountDownTimer(100,100){
 
-                   @Override
-                   public void onTick(long millisUntilFinished) {
-
-                   }
-
-                   @Override
-                   public void onFinish() {
-                       All_Shops_See_All.animate().scaleY(1f).scaleX(1f).setDuration(100).start();
-                   }
-               }.start();
-//
-            }
-        });
 
         TopToggle.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("RtlHardcoded")
@@ -231,12 +218,20 @@ Pick_Your_Favourite_See_All.setOnClickListener(this);
     private void fillPickYourShopRV() {
         FirebaseRecyclerOptions<CategoryModelTop> options =
                 new FirebaseRecyclerOptions.Builder<CategoryModelTop>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference("DifferentTreat"), CategoryModelTop.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference("AllStores"), CategoryModelTop.class)
                         .build();
-        adapter3= new ShopsActivityAdapter(options);
+        adapter3= new ShopsMainActivity2Adapter(options);
         ShopRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         ShopRecyclerView.setAdapter(adapter3);
         adapter3.startListening();
+        adapter3.setOnItemCLickListener(new ShopsMainActivity2Adapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DataSnapshot dataSnapshot, int position) {
+                category = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
+                SaveSharedPreferences();
+                startActivity(new Intent(MainActivity2.this,Alll_Product_2.class));
+            }
+        });
     }
 
     private void fillPickYourCategoryRV() {
@@ -383,7 +378,7 @@ Pick_Your_Favourite_See_All.setOnClickListener(this);
                         TopCategoryRV.animate().translationY(-200).setDuration(200).start();
                         TopBG.animate().translationY(-200).setDuration(200).start();
                         MainScrollView.animate().translationY(-220).setDuration(200).start();
-                        All_Shops_See_All.animate().translationY(-200).setDuration(200).start();
+                        All_Category_See_All.animate().translationY(-200).setDuration(200).start();
                         TopShare.animate().translationY(-50).scaleY(0.9f).scaleX(0.9f).setDuration(200).start();
                         TopYourOrders.animate().translationY(-50).scaleY(0.9f).scaleX(0.9f).setDuration(200).start();
 
@@ -427,7 +422,7 @@ Pick_Your_Favourite_See_All.setOnClickListener(this);
                         TopCategoryRV.animate().translationY(0).start();
                         TopBG.animate().translationY(0).start();
                         MainScrollView.animate().translationY(0).setDuration(200).start();
-                        All_Shops_See_All.animate().translationY(0).setDuration(200).start();
+                        All_Category_See_All.animate().translationY(0).setDuration(200).start();
                         Up=0;
                     }
                 }
@@ -498,10 +493,30 @@ Pick_Your_Favourite_See_All.setOnClickListener(this);
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
-            case R.id.All_Shops_SeeAll: {
+            case R.id.All_Shops_See_All: {
                 category = " ";
                 SaveSharedPreferences();
                 Intent i = new Intent(MainActivity2.this, Shops_Activity.class);
+                startActivity(i);
+                break;
+            }
+            case R.id.All_Category_See_All: {
+                All_Category_See_All.animate().scaleY(0.8f).scaleX(0.8f).setDuration(100).start();
+                new CountDownTimer(100,100){
+
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        All_Category_See_All.animate().scaleY(1f).scaleX(1f).setDuration(100).start();
+                    }
+                }.start();
+                category = " ";
+                SaveSharedPreferences();
+                Intent i = new Intent(MainActivity2.this, category_see_all.class);
                 startActivity(i);
                 break;
             }

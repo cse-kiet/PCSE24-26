@@ -27,7 +27,7 @@
 
 
             <ImageView
-                android:id="@+id/image_category"
+                android:id="@+id/image_Shops"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="center"
@@ -40,7 +40,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/items_category"
+                android:id="@+id/Name_Shops"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:background="@drawable/gradientcategory"
@@ -57,7 +57,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/offers_category"
+                android:id="@+id/offers_Shops"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:background="#85F6E33F"

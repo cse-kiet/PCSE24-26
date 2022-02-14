@@ -11,7 +11,8 @@
         android:roundIcon="@drawable/playstore_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodyHome">
-        <activity android:name=".IndividualProduct_2"></activity>
+        <activity android:name=".Alll_Product_2"></activity>
+        <activity android:name=".IndividualProduct_2" />
         <activity android:name=".SubCategoryPickYourFavourite" />
         <activity android:name=".Shops_Activity" />
         <activity android:name=".category_see_all" />
